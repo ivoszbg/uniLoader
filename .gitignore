@@ -1,0 +1,6 @@
+uniLoader
+*.o
+asm/*.o
+asm/linker.lds
+board/*/*.o
+soc/*/*.o
