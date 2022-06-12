@@ -32,6 +32,11 @@ ifeq ($(SOC),exynos8895)
 brand_name=exynos
 endif
 
+# Apple
+ifeq ($(SOC),t7000)
+brand_name=apple
+endif
+
 all: $(brand_name)/$(SOC).o copy-soc
 
 copy-soc:
