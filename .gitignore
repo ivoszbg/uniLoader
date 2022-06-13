@@ -4,3 +4,4 @@ asm/*.o
 asm/linker.lds
 board/*/*.o
 soc/*/*.o
+lib/*/*.o

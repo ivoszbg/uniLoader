@@ -43,8 +43,8 @@ OBJ  =	main.o \
 uniLoader: uniLoader.o
 	$(OBJCPY) -O binary $< $@
 
-uniLoader.o: copy-board-config $(OBJ) asm/linker.lds build-board build-soc
-	$(LD) $(OBJ) board.o soc.o -o $@ --script=asm/linker.lds
+uniLoader.o: copy-board-config $(OBJ) asm/linker.lds build-board build-soc build-lib
+	$(LD) $(OBJ) board.o soc.o lib/simplefb/simplefb.o -o $@ --script=asm/linker.lds
 
 asm/linker.lds: asm/linker.lds.S $(KERNEL_PATH)
 	$(CPP) $< -DKERNEL_PATH=$(KERNEL_PATH) -DDTB_PATH=$(DTB_PATH) -P -o $@
@@ -55,8 +55,11 @@ build-board:
 build-soc:
 	cd soc && make
 
+build-lib:
+	cd lib && make
+
 copy-board-config:
 	cp include/board/board-$(board_codename).h include/board-config.h
 
 clean:
-	-rm *.o asm/linker.lds asm/Start.o uniLoader board/*/*.o include/board-config.h soc/*/*.o
+	-rm *.o asm/linker.lds asm/Start.o uniLoader board/*/*.o include/board-config.h soc/*/*.o lib/*/*.o

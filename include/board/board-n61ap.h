@@ -10,4 +10,10 @@
 #define PAYLOAD_ENTRY		0x830000000
 #define PAYLOAD_SIZE		0x2000000
 
+#define FRAMEBUFFER_BASE       0x83e900000
+/* Width is offsetted by 2 */
+#define FRAMEBUFFER_WIDTH      752
+#define FRAMEBUFFER_HEIGHT     1334
+#define FRAMEBUFFER_STRIDE     4
+
 #endif // BOARD_N61AP_H_

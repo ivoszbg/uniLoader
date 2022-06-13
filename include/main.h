@@ -10,6 +10,9 @@ extern void load_kernel(void* dtb, void* x1, void* x2, void* x3, void* kernel);
 extern void soc_init(void);
 extern void board_init(void);
 
+extern void draw_text(volatile char *fb, char *text, int textX, int textY);
+extern void debug_printfb(volatile char *fb, char *text, int textX, int width, int stride);
+
 /* Define our own 128 bit memcpy */
 void memcpy(void *dest, void *src, int size)
 {
