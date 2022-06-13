@@ -8,6 +8,5 @@
 
 /* TODO: Adjust PAYLOAD_ENTRY */
 #define PAYLOAD_ENTRY		0x830000000
-#define PAYLOAD_SIZE		0x2000000
 
 #endif // BOARD_N61AP_H_

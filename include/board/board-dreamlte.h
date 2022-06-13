@@ -7,6 +7,5 @@
 #define BOARD_DREAMLTE_H_
 
 #define PAYLOAD_ENTRY		0x90000000
-#define PAYLOAD_SIZE		0x2000000
 
 #endif // BOARD_DREAMLTE_H_

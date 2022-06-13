@@ -7,12 +7,14 @@
 /* Device specific board config, copied in runtime */
 #include <board-config.h>
 
+extern unsigned long kernel_size;
+
 void main(void* dt, void* kernel) {
 	/* Initialize SoC and Board specific peripherals/quirks */
 	soc_init();
 	board_init();
 
 	/* Copy kernel to memory and boot  */
-	memcpy((void*)PAYLOAD_ENTRY, kernel, PAYLOAD_SIZE);
-	load_kernel(dt, 0, 0, 0, (void*)PAYLOAD_ENTRY);	
+	memcpy((void*)PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
+	load_kernel(dt, 0, 0, 0, (void*)PAYLOAD_ENTRY);
 }
