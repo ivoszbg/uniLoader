@@ -39,6 +39,11 @@ ifeq ($(SOC),t7000)
 brand_name=apple
 endif
 
+# Generic
+ifeq ($(SOC),generic)
+brand_name=generic
+endif
+
 all: $(brand_name)/$(SOC).o copy-soc
 
 copy-soc:
