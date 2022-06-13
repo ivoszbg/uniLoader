@@ -5,6 +5,7 @@
 
     adr	x0, dtb
     adr	x1, kernel
+    adrp x2, end
     b main
 
 .global load_kernel

@@ -6,6 +6,8 @@
 #ifndef MAIN_H_   /* Include guard */
 #define MAIN_H_
 
+#define SZ_2M				0x00200000
+
 extern void load_kernel(void* dtb, void* x1, void* x2, void* x3, void* kernel);
 extern void soc_init(void);
 extern void board_init(void);
