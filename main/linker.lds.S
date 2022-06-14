@@ -13,7 +13,7 @@ INPUT(DTB_PATH)
 SECTIONS
 {
 	.boot : {
-		asm/Start.o
+		main/Start.o
 	}
 
 	.dtb ALIGN(0x1000) : {

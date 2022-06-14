@@ -1,0 +1,56 @@
+menu "Device Support"
+
+	config APPLE_N61AP
+		bool "Support for Apple iPhone 6"
+		default n
+		depends on APPLE_T7000
+		help
+		  Say Y if you want to include support for iPhone 6
+
+
+	config SAMSUNG_DREAMLTE
+		bool "Support for Samsung Galaxy S8"
+		default n
+		depends on EXYNOS_8895
+		#select EXYNOS_8895
+		help
+		  Say Y if you want to include support for Samsung Galaxy S8
+
+endmenu
+
+menu "Device Specific Addresses"
+
+	config PAYLOAD_ENTRY
+		hex "Payload Entry Address"
+		default 0x830000000 if APPLE_N61AP
+		default 0x090000000 if SAMSUNG_DREAMLTE
+
+	config PAYLOAD_SIZE
+		hex "Payload Size"
+		default 0x2000000
+
+	config FRAMEBUFFER_BASE
+		hex "Framebuffer Base Address (for SimpleFB)"
+		depends on SIMPLE_FB
+		default 0x83e900000 if APPLE_N61AP
+		default 0x0cc000000 if SAMSUNG_DREAMLTE
+
+	config FRAMEBUFFER_WIDTH
+		int "Framebuffer Width (for SimpleFB)"
+		depends on SIMPLE_FB
+		default 752 if APPLE_N61AP
+		default 1440 if SAMSUNG_DREAMLTE
+
+	config FRAMEBUFFER_HEIGHT
+		int "Framebuffer Height (for SimpleFB)"
+		depends on SIMPLE_FB
+		default 1334 if APPLE_N61AP
+		default 2960 if SAMSUNG_DREAMLTE
+		
+	config FRAMEBUFFER_STRIDE
+		int "Framebuffer Stride (for SimpleFB)"
+		depends on SIMPLE_FB
+		default 4 if APPLE_N61AP
+		default 4 if SAMSUNG_DREAMLTE
+
+endmenu

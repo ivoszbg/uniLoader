@@ -1,0 +1,15 @@
+/*
+ * Automatically generated C config: don't edit
+ * uniLoader Configuration
+ */
+#define CONFIG_PAYLOAD_SIZE 0x2000000
+#define CONFIG_PAYLOAD_ENTRY 0x090000000
+#define CONFIG_EXYNOS 1
+#define CONFIG_SIMPLE_FB 1
+#define CONFIG_EXYNOS_8895 1
+#define CONFIG_SAMSUNG_DREAMLTE 1
+#define CONFIG_FRAMEBUFFER_STRIDE 4
+#define CONFIG_FRAMEBUFFER_WIDTH 1440
+#define CONFIG_FRAMEBUFFER_HEIGHT 2960
+#define CONFIG_FRAMEBUFFER_BASE 0xcc000000
+#define CONFIG_CROSS_COMPILE "aarch64-linux-gnu-"

@@ -1,0 +1,26 @@
+config APPLE_SILICON
+	bool
+	default n
+
+config EXYNOS
+	bool
+	default n
+
+choice
+	prompt "SoC Support"
+
+	config APPLE_T7000
+		bool "Support for Apple T7000"
+		default n
+		select APPLE_SILICON
+		help
+		  Say Y if your device uses Apple T7000 SoC
+
+	config EXYNOS_8895
+		bool "Support for Exynos 8895"
+		default n
+		select EXYNOS
+		help
+		  Say Y if your device uses Samsung Exynos8895 SoC
+endchoice
+

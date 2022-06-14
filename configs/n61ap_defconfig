@@ -1,0 +1,2 @@
+CONFIG_CROSS_COMPILE="aarch64-linux-gnu"
+CONFIG_APPLE_N61AP=y
