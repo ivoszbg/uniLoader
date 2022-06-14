@@ -8,8 +8,6 @@
 #include <lib/simplefb.h>
 #include <lib/font.h>
 
-int debug_linecount = 0;
-
 void clean_fb(volatile char *fb, char *text, int width, int height, int stride) {
 	for (volatile char *addr = fb; addr < fb + (width * height * stride); addr += stride)
 		*(int*) (addr) = 0x0;
@@ -59,17 +57,6 @@ void draw_text(volatile char *fb, char *text, int textX, int textY, int width, i
 			}
 		}
 	}
-}
-
-void debug_printfb(volatile char *fb, char *text, int textX, int width, int stride) {
-	/* IMPORTANT: Limit the linecount */
-	if(debug_linecount > 100 || debug_linecount < 0)
-		debug_linecount = 0;
-
-	draw_text(fb, "[uniLoader] ", textX, (20 + (debug_linecount * 30)), width, stride);
-	draw_text(fb, text, textX + 96, (20 + (debug_linecount * 30)), width, stride);
-
-	debug_linecount++;
 }
 
 /* Helper functions */ 
