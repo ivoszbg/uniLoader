@@ -11,4 +11,6 @@ lib/*.a*
 .config*
 *.cmd
 */*.cmd
-
+include/config/auto.conf
+include/generated/autoconf.h
+include/config
