@@ -25,4 +25,6 @@ SECTIONS
 		kernel = .;
 		KERNEL_PATH
 	}
+
+	kernel_size = SIZEOF(.kernel);
 }

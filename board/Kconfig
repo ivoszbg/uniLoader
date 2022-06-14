@@ -31,10 +31,6 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_DREAMLTE
 		default 0x090000000 if SAMSUNG_STARLTE
 
-	config PAYLOAD_SIZE
-		hex "Payload Size"
-		default 0x2000000
-
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
 		depends on SIMPLE_FB

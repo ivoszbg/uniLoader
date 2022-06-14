@@ -23,6 +23,6 @@ void main(void* dt, void* kernel) {
 	#ifdef CONFIG_SIMPLE_FB
 	debug_printfb((char*)CONFIG_FRAMEBUFFER_BASE, "Booting linux...", 0, CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
 	#endif
-	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, CONFIG_PAYLOAD_SIZE);
+	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
 	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);	
 }
