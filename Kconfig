@@ -4,13 +4,35 @@
 #
 mainmenu "uniLoader Configuration"
 
-config CROSS_COMPILE
-	string "Cross-compiler tool prefix"
-	help
-	  Same as running 'make CROSS_COMPILE=prefix-' but stored for
-	  default make runs in this kernel build directory.  You don't
-	  need to set this unless you want the configured kernel build
-	  directory to select the cross-compiler automatically.
+menu "Building options"
+	config CROSS_COMPILE
+		string "Cross-compiler tool prefix"
+		help
+		  Same as running 'make CROSS_COMPILE=prefix-' but stored for
+		  default make runs in this kernel build directory.  You don't
+		  need to set this unless you want the configured kernel build
+		  directory to select the cross-compiler automatically.
+
+	config EMBED_LINUX
+		bool "Embed linux kernel and device tree"
+		default y
+		help
+		  Select this if you want uniLoader to load a linux kernel and device tree
+
+	config KERNEL_PATH
+		string "Path to kernel image"
+		depends on EMBED_LINUX
+		default blob/Image
+		help
+		  Path to the kernel, which is going to get embedded to uniLoader
+
+	config DT_PATH
+		string "Path to device tree image"
+		depends on EMBED_LINUX
+		default blob/dtb
+		help
+		  Path to the device tree, which is going to get embedded to uniLoader
+endmenu
 
 source "lib/Kconfig"
 

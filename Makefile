@@ -1,11 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0
 
-#
-# Defaut values
-#
-KERNEL_PATH?=blob/Image
-DTB_PATH?=blob/dtb
-
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
 # More info can be located in ./README
@@ -106,6 +100,8 @@ VPATH		:= $(srctree)
 export srctree objtree VPATH
 
 CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
+KERNEL_PATH	?= $(CONFIG_KERNEL_PATH:"%"=%)
+DT_PATH	?= $(CONFIG_DT_PATH:"%"=%)
 
 KCONFIG_CONFIG	?= .config
 export KCONFIG_CONFIG
@@ -362,7 +358,7 @@ quiet_cmd_uniLoader = LD      $@.o
       cmd_uniLoader = $(LD) $(main-y) $(uniLoader-libs) -o $@.o --script=main/linker.lds
 
 main/linker.lds: main/linker.lds.S $(KERNEL_PATH)
-	$(CPP) $< -DKERNEL_PATH=$(KERNEL_PATH) -DDTB_PATH=$(DTB_PATH) -P -o $@
+	$(CPP) $< -DKERNEL_PATH=$(KERNEL_PATH) -DDTB_PATH=$(DT_PATH) -P -o $@
 
 uniLoader: $(uniLoader-all)
 	$(call if_changed,uniLoader)
@@ -384,7 +380,6 @@ $(sort $(uniLoader-all)): $(uniLoader-dirs) ;
 PHONY += $(uniLoader-dirs)
 $(uniLoader-dirs): scripts_basic
 	$(Q)$(MAKE) $(build)=$@
-
 
 ###
 # Cleaning is done on three levels.
@@ -416,7 +411,7 @@ clean: $(clean-dirs)
 	$(call cmd,rmfiles)
 	@find . $(RCS_FIND_IGNORE) \
 		\( -name '*.[oas]' -o -name '.*.cmd' \
-		-o -name '.*.d' -o -name '.*.tmp' -o -name '*.mod.c' \
+		-o -name '.*.d' -o -name '.*.tmp' -o -name '*.mod.c' -o -name '*.lds' \
 		-o -name modules.builtin -o -name '.tmp_*.o.*' \
 		-o -name '*.gcno' \) -type f -print | xargs rm -f
 
