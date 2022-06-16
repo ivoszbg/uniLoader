@@ -10,6 +10,7 @@
 # o  use make's built-in rules and variables
 #    (this increases performance and avoids hard-to-debug behaviour);
 # o  print "Entering directory ...";
+ARCH ?= aarch64
 MAKEFLAGS += -rR --no-print-directory
 
 # To put more focus on warnings, be less verbose as default
@@ -334,14 +335,15 @@ endif # $(dot-config)
 # command line.
 # This allow a user to issue only 'make' to build a kernel including modules
 # Defaults to vmlinux, but the arch makefile usually adds further targets
-all: main/linker.lds uniLoader
+all: arch/$(ARCH)/linker.lds uniLoader
 
 # List of main executables
 main-y		:= main/main.o
-main-y		+= main/Start.o
+main-y		+= arch/$(ARCH)/Start.o
 
 # Object directories
 objs-y		:= main
+objs-y		+= arch
 libs-y		:= soc
 libs-y		+= board
 libs-y		+= lib
@@ -355,9 +357,9 @@ uniLoader-all	:= $(uniLoader-objs) $(uniLoader-libs)
 # Do modpost on a prelinked vmlinux. The finally linked vmlinux has
 # relevant sections renamed as per the linker script.
 quiet_cmd_uniLoader = LD      $@.o
-      cmd_uniLoader = $(LD) $(main-y) $(uniLoader-libs) -o $@.o --script=main/linker.lds
+      cmd_uniLoader = $(LD) $(main-y) $(uniLoader-libs) -o $@.o --script=arch/$(ARCH)/linker.lds
 
-main/linker.lds: main/linker.lds.S $(KERNEL_PATH)
+arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(KERNEL_PATH)
 	$(CPP) $< -DKERNEL_PATH=$(KERNEL_PATH) -DDTB_PATH=$(DT_PATH) -P -o $@
 
 uniLoader: $(uniLoader-all)

@@ -1,7 +1,7 @@
 uniLoader
 *.o
 main/*.o
-main/linker.lds
+arch/aarch64/linker.lds
 board/*/*.o*
 board/*.a*
 soc/*/*.o*
