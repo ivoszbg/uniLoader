@@ -7,6 +7,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for iPhone 6
 
+	config SAMSUNG_NOBLELTE
+		bool "Support for Samsung Galaxy Note5"
+		default n
+		depends on EXYNOS_7420
+		help
+		  Say Y if you want to include support for Samsung Galaxy Note5
+
 	config SAMSUNG_JACKPOTLTE
 		bool "Support for Samsung Galaxy A8 (2018)"
 		default n
@@ -35,6 +42,7 @@ menu "Device Specific Addresses"
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
 		default 0x830000000 if APPLE_N61AP
+		default 0x050000000 if SAMSUNG_NOBLELTE
 		default 0x090000000 if SAMSUNG_JACKPOTLTE
 		default 0x090000000 if SAMSUNG_DREAMLTE
 		default 0x090000000 if SAMSUNG_STARLTE
@@ -43,6 +51,7 @@ menu "Device Specific Addresses"
 		hex "Framebuffer Base Address (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 0x83e900000 if APPLE_N61AP
+		default 0x0e2a00000 if SAMSUNG_NOBLELTE
 		default 0x0ec000000 if SAMSUNG_JACKPOTLTE
 		default 0x0cc000000 if SAMSUNG_DREAMLTE
 		default 0x0cc000000 if SAMSUNG_STARLTE
@@ -51,6 +60,7 @@ menu "Device Specific Addresses"
 		int "Framebuffer Width (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 752 if APPLE_N61AP
+		default 1440 if SAMSUNG_NOBLELTE
 		default 1080 if SAMSUNG_JACKPOTLTE
 		default 1440 if SAMSUNG_DREAMLTE
 		default 1440 if SAMSUNG_STARLTE
@@ -59,6 +69,7 @@ menu "Device Specific Addresses"
 		int "Framebuffer Height (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 1334 if APPLE_N61AP
+		default 2560 if SAMSUNG_NOBLELTE
 		default 2220 if SAMSUNG_JACKPOTLTE
 		default 2960 if SAMSUNG_DREAMLTE
 		default 2960 if SAMSUNG_STARLTE
@@ -67,6 +78,7 @@ menu "Device Specific Addresses"
 		int "Framebuffer Stride (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 4 if APPLE_N61AP
+		default 4 if SAMSUNG_NOBLELTE
 		default 4 if SAMSUNG_JACKPOTLTE
 		default 4 if SAMSUNG_DREAMLTE
 		default 4 if SAMSUNG_STARLTE

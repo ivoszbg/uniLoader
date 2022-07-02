@@ -16,6 +16,12 @@ choice
 		help
 		  Say Y if your device uses Apple T7000 SoC
 
+	config EXYNOS_7420
+		bool "Support for Exynos 7420"
+		default n
+		select EXYNOS
+		help
+		  Say Y if your device uses Samsung Exynos7420 SoC
 
 	config EXYNOS_7885
 		bool "Support for Exynos 7885"
