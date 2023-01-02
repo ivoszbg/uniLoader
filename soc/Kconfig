@@ -37,5 +37,11 @@ choice
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos9810 SoC
+	
+	config EXYNOS_9810
+                bool "Support for Exynos 9810"
+                default n
+                select EXYNOS
+                help
+                  Say Y if your device uses Samsung Exynos9810 SoC
 endchoice
-
