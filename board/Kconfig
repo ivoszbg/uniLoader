@@ -34,6 +34,13 @@ menu "Device Support"
 		depends on EXYNOS_9810
 		help
 		  Say Y if you want to include support for Samsung Galaxy S9
+	
+        config SAMSUNG_D2S
+                bool "Support for Samsung Galaxy Note 10+"
+                default n
+                depends on EXYNOS_9825
+                help
+                  Say Y if you want to include support for Samsung Galaxy Note 10+
 
 endmenu
 
@@ -46,7 +53,7 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_JACKPOTLTE
 		default 0x090000000 if SAMSUNG_DREAMLTE
 		default 0x090000000 if SAMSUNG_STARLTE
-
+		default 0x090000000 if SAMSUNG_D2S
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
 		depends on SIMPLE_FB
@@ -55,7 +62,8 @@ menu "Device Specific Addresses"
 		default 0x0ec000000 if SAMSUNG_JACKPOTLTE
 		default 0x0cc000000 if SAMSUNG_DREAMLTE
 		default 0x0cc000000 if SAMSUNG_STARLTE
-
+		default 0x0ca000000 if SAMSUNG_D2S
+	
 	config FRAMEBUFFER_WIDTH
 		int "Framebuffer Width (for SimpleFB)"
 		depends on SIMPLE_FB
@@ -64,7 +72,8 @@ menu "Device Specific Addresses"
 		default 1080 if SAMSUNG_JACKPOTLTE
 		default 1440 if SAMSUNG_DREAMLTE
 		default 1440 if SAMSUNG_STARLTE
-
+		defauld 1440 if SAMSUNG_D2S
+	
 	config FRAMEBUFFER_HEIGHT
 		int "Framebuffer Height (for SimpleFB)"
 		depends on SIMPLE_FB
@@ -73,7 +82,8 @@ menu "Device Specific Addresses"
 		default 2220 if SAMSUNG_JACKPOTLTE
 		default 2960 if SAMSUNG_DREAMLTE
 		default 2960 if SAMSUNG_STARLTE
-
+		default 3040 if SAMSUNG_D2S
+	
 	config FRAMEBUFFER_STRIDE
 		int "Framebuffer Stride (for SimpleFB)"
 		depends on SIMPLE_FB
@@ -82,5 +92,5 @@ menu "Device Specific Addresses"
 		default 4 if SAMSUNG_JACKPOTLTE
 		default 4 if SAMSUNG_DREAMLTE
 		default 4 if SAMSUNG_STARLTE
-
+		default 4 if SAMSUNG_D2S
 endmenu
