@@ -41,6 +41,13 @@ menu "Device Support"
 		depends on EXYNOS_9810
 		help
 		  Say Y if you want to include support for Samsung Galaxy S9
+		  
+	config SAMSUNG_X1S
+		bool "Support for Samsung Galaxy S20"
+		default n
+		depends on EXYNOS_990
+		help
+		  Say Y if you want to include support for Samsung Galaxy S20
 
 	config SAMSUNG_J5LTE
 		bool "Support for Samsung Galaxy J5 2015"
@@ -60,7 +67,9 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_ZEROFLTE
 		default 0x090000000 if SAMSUNG_DREAMLTE
 		default 0x090000000 if SAMSUNG_STARLTE
+		default 0x090000000 if SAMSUNG_X1S
 		default 0x090000000 if SAMSUNG_J5LTE
+
 
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
@@ -71,6 +80,7 @@ menu "Device Specific Addresses"
 		default 0x0e2a00000 if SAMSUNG_ZEROFLTE
 		default 0x0cc000000 if SAMSUNG_DREAMLTE
 		default 0x0cc000000 if SAMSUNG_STARLTE
+		default 0x0F1000000 if SAMSUNG_X1S
 		default 0x08e000000 if SAMSUNG_J5LTE
 
 	config FRAMEBUFFER_WIDTH
@@ -82,6 +92,7 @@ menu "Device Specific Addresses"
 		default 1440 if SAMSUNG_ZEROFLTE
 		default 1440 if SAMSUNG_DREAMLTE
 		default 1440 if SAMSUNG_STARLTE
+		default 1440 if SAMSUNG_X1S
 		default 720 if SAMSUNG_J5LTE
 
 	config FRAMEBUFFER_HEIGHT
@@ -93,6 +104,7 @@ menu "Device Specific Addresses"
 		default 2560 if SAMSUNG_ZEROFLTE
 		default 2960 if SAMSUNG_DREAMLTE
 		default 2960 if SAMSUNG_STARLTE
+		default 3200 if SAMSUNG_X1S
 		default 1280 if SAMSUNG_J5LTE
 
 	config FRAMEBUFFER_STRIDE
@@ -104,6 +116,7 @@ menu "Device Specific Addresses"
 		default 4 if SAMSUNG_ZEROFLTE
 		default 4 if SAMSUNG_DREAMLTE
 		default 4 if SAMSUNG_STARLTE
+		default 4 if SAMSUNG_X1S
 		default 4 if SAMSUNG_J5LTE
 
 endmenu
