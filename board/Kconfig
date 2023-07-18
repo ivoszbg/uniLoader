@@ -42,6 +42,12 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy S9
 
+	config SAMSUNG_J5LTE
+		bool "Support for Samsung Galaxy J5 2015"
+		default n
+		depends on QC32_8916
+		help
+		  Say Y if you want to include arm32 support for Samsung Galaxy J5 2015
 endmenu
 
 menu "Device Specific Addresses"
@@ -54,6 +60,7 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_ZEROFLTE
 		default 0x090000000 if SAMSUNG_DREAMLTE
 		default 0x090000000 if SAMSUNG_STARLTE
+		default 0x090000000 if SAMSUNG_J5LTE
 
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
@@ -64,6 +71,7 @@ menu "Device Specific Addresses"
 		default 0x0e2a00000 if SAMSUNG_ZEROFLTE
 		default 0x0cc000000 if SAMSUNG_DREAMLTE
 		default 0x0cc000000 if SAMSUNG_STARLTE
+		default 0x08e000000 if SAMSUNG_J5LTE
 
 	config FRAMEBUFFER_WIDTH
 		int "Framebuffer Width (for SimpleFB)"
@@ -74,6 +82,7 @@ menu "Device Specific Addresses"
 		default 1440 if SAMSUNG_ZEROFLTE
 		default 1440 if SAMSUNG_DREAMLTE
 		default 1440 if SAMSUNG_STARLTE
+		default 720 if SAMSUNG_J5LTE
 
 	config FRAMEBUFFER_HEIGHT
 		int "Framebuffer Height (for SimpleFB)"
@@ -84,6 +93,7 @@ menu "Device Specific Addresses"
 		default 2560 if SAMSUNG_ZEROFLTE
 		default 2960 if SAMSUNG_DREAMLTE
 		default 2960 if SAMSUNG_STARLTE
+		default 1280 if SAMSUNG_J5LTE
 
 	config FRAMEBUFFER_STRIDE
 		int "Framebuffer Stride (for SimpleFB)"
@@ -94,5 +104,6 @@ menu "Device Specific Addresses"
 		default 4 if SAMSUNG_ZEROFLTE
 		default 4 if SAMSUNG_DREAMLTE
 		default 4 if SAMSUNG_STARLTE
+		default 4 if SAMSUNG_J5LTE
 
 endmenu

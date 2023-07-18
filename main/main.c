@@ -6,9 +6,12 @@
 #include <main.h>
 
 void main(void* dt, void* kernel) {
-	/* C entry */
-
 	/* Initialize SoC and Board specific peripherals/quirks */
+
+	/* TODO: Find a better way to make this more universal (since devices like arm64 Samsung Galaxies enable FB after soc_init) */
+#ifdef CONFIG_SIMPLE_FB
+	clean_fb((char*)CONFIG_FRAMEBUFFER_BASE, CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_HEIGHT, CONFIG_FRAMEBUFFER_STRIDE);
+#endif
 	soc_init();
 	printk("soc_init() passed!");
 
@@ -17,6 +20,10 @@ void main(void* dt, void* kernel) {
 
 	/* Copy kernel to memory and boot  */
 	printk("Booting linux...");
-	__builtin_memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
-	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);	
+
+	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
+	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
+
+	/* We shouldn't get there */
+	while(1) {}
 }

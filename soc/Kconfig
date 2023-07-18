@@ -6,6 +6,10 @@ config EXYNOS
 	bool
 	default n
 
+config QUALCOMM
+	bool
+	default n
+
 choice
 	prompt "SoC Support"
 
@@ -43,5 +47,12 @@ choice
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos9810 SoC
+
+	config QC32_8916
+		bool "Support for QUALCOMM MSM8916"
+		default n
+		select QUALCOMM
+		help
+		  Say Y if your device uses this Qualcomm SoC
 endchoice
 
