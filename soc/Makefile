@@ -4,3 +4,4 @@ lib-$(CONFIG_EXYNOS_7885) += exynos/exynos7885.o
 lib-$(CONFIG_EXYNOS_8895) += exynos/exynos8895.o
 lib-$(CONFIG_EXYNOS_9810) += exynos/exynos9810.o
 lib-$(CONFIG_EXYNOS_990) += exynos/exynos990.o
+lib-$(CONFIG_QC32_8916) += qualcomm/msm8916.o
