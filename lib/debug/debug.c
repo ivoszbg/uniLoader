@@ -26,9 +26,9 @@ void printk(char *text) {
 	debug_linecount++;
 #endif
 }
-
+/*
 	#ifdef __aarch64__
-		/* Define our own 128 bit memcpy */
+		Define our own 128 bit memcpy *
 		void memcpy(void *dest, void *src, size_t size)
 		{
 			unsigned __int128 *src2 = src;
@@ -44,4 +44,4 @@ void printk(char *text) {
 			for (size_t i = 0; i < len; i++)
 				dest[i] = src[i];
 		}
-	#endif
+	#endif*/

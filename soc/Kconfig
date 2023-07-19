@@ -10,7 +10,7 @@ config QUALCOMM
 	bool
 	default n
 
-choice
+ choice
 	prompt "SoC Support"
 
 	config APPLE_T7000
@@ -61,4 +61,4 @@ choice
 		select QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
-endchoice
+ endchoice
