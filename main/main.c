@@ -4,6 +4,7 @@
  */
 
 #include <main.h>
+#include <string.h>
 
 void main(void* dt, void* kernel) {
 	/* Initialize SoC and Board specific peripherals/quirks */

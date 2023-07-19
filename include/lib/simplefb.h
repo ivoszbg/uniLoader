@@ -9,9 +9,10 @@
 #define SIMPLEFB_H_
 
 typedef struct _color {
-	int r;
-	int g;
-	int b;
+	unsigned char a;
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
 } color;
 
 typedef struct _font_params {
@@ -20,16 +21,5 @@ typedef struct _font_params {
 } font_params;
 
 font_params get_font_params(void);
-
-long unsigned int strlen(const char *p) {
-	unsigned int i = 0;
-
-	while(*p != '\0') {
-		i++;
-		p++;
-	}
-
-    return i;
-}
 
 #endif
