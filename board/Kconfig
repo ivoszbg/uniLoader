@@ -55,6 +55,13 @@ menu "Device Support"
 		depends on QC32_8916
 		help
 		  Say Y if you want to include arm32 support for Samsung Galaxy J5 2015
+	
+	config SAMSUNG_J4LTE
+		bool "Support for Samsung Galaxy J4 2018"
+		default n
+		depends on EXYNOS_7570
+		help
+		  Say Y if you want to include arm64 support for Samsung Galaxy J4 2018
 endmenu
 
 menu "Device Specific Addresses"
@@ -69,6 +76,7 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_STARLTE
 		default 0x090000000 if SAMSUNG_X1S
 		default 0x090000000 if SAMSUNG_J5LTE
+		default 0x040000000 if SAMSUNG_J4LTE
 
 
 	config FRAMEBUFFER_BASE
@@ -82,6 +90,7 @@ menu "Device Specific Addresses"
 		default 0x0cc000000 if SAMSUNG_STARLTE
 		default 0x0F1000000 if SAMSUNG_X1S
 		default 0x08e000000 if SAMSUNG_J5LTE
+		default 0x067000000 if SAMSUNG_J4LTE
 
 	config FRAMEBUFFER_WIDTH
 		int "Framebuffer Width (for SimpleFB)"
@@ -94,6 +103,7 @@ menu "Device Specific Addresses"
 		default 1440 if SAMSUNG_STARLTE
 		default 1440 if SAMSUNG_X1S
 		default 720 if SAMSUNG_J5LTE
+		default 720 if SAMSUNG_J4LTE
 
 	config FRAMEBUFFER_HEIGHT
 		int "Framebuffer Height (for SimpleFB)"
@@ -106,6 +116,7 @@ menu "Device Specific Addresses"
 		default 2960 if SAMSUNG_STARLTE
 		default 3200 if SAMSUNG_X1S
 		default 1280 if SAMSUNG_J5LTE
+		default 1280 if SAMSUNG_J4LTE
 
 	config FRAMEBUFFER_STRIDE
 		int "Framebuffer Stride (for SimpleFB)"
@@ -118,5 +129,6 @@ menu "Device Specific Addresses"
 		default 4 if SAMSUNG_STARLTE
 		default 4 if SAMSUNG_X1S
 		default 3 if SAMSUNG_J5LTE
+		default 4 if SAMSUNG_J4LTE
 
 endmenu
