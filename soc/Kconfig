@@ -20,6 +20,13 @@ config QUALCOMM
 		help
 		  Say Y if your device uses Apple T7000 SoC
 
+	config APPLE_T8010
+		bool "Support for Apple T8010"
+		default n
+		select APPLE_SILICON
+		help
+		  Say Y if your device uses Apple T8010 SoC
+
 	config EXYNOS_7420
 		bool "Support for Exynos 7420"
 		default n
