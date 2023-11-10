@@ -9,10 +9,10 @@
 #define SIMPLEFB_H_
 
 typedef struct _color {
-	unsigned char a;
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
+	unsigned char a;
 } color;
 
 typedef struct _font_params {

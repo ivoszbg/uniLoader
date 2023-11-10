@@ -18,10 +18,14 @@ void clean_fb(volatile char *fb, int width, int height, int stride) {
 /* Unlike ARGB8888, we explicitly use 3 bytes to represent each pixel, making sure no extra padding byte is added. */
 void draw_pixel(volatile char *fb, int x, int y, int width, int stride, color c) {
 	long int location = (x * stride) + (y * width * stride);
-
+#ifdef CONFIG_FRAMEBUFFER_BGRA
+	*(fb + location) = c.b;
+	*(fb + location + 2) = c.r;
+#else
 	*(fb + location) = c.r;
-	*(fb + location + 1) = c.g;
 	*(fb + location + 2) = c.b;
+#endif
+	*(fb + location + 1) = c.g;
 #if CONFIG_FRAMEBUFFER_STRIDE == 4
 	*(fb + location + 3) = c.a;
 #endif
