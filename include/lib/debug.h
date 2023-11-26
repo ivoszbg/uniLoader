@@ -7,6 +7,6 @@
 #define DEBUG_H_
 
 extern void draw_text(volatile char *fb, char *text, int textX, int textY, int width, int stride);
-long int debug_linecount = 0;
+long int debug_linecount = CONFIG_FB_FIRST_LINE_OFFSET;
 
 #endif

@@ -26,6 +26,13 @@ config QUALCOMM
 		select APPLE_SILICON
 		help
 		  Say Y if your device uses Apple T8010 SoC
+	
+	config EXYNOS_W920
+		bool "Support for Wearable Exynos W920"
+		default n
+		select EXYNOS
+		help
+		  Say Y if your wearable device uses Samsung Exynos W920 SoC.
 
 	config EXYNOS_7420
 		bool "Support for Exynos 7420"

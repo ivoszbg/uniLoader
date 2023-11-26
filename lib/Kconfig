@@ -1,7 +1,21 @@
 menu "Libraries"
-	config SIMPLE_FB
+	menuconfig SIMPLE_FB
 		bool "Support for Simple Framebuffer"
 		default y
 		help
 		  Say Y if you want to have Framebuffer output.
+
+if SIMPLE_FB
+
+config FB_FIRST_LINE_OFFSET
+	int "Offset of the first line drawn to screen"
+	default 0
+	help
+	  This option sets the offset of the first line drawn
+	  to the framebuffer, useful for devices with unusual
+	  display shapes (i.e Galaxy Watches), so that the first
+	  lines that are drawn on the display are not cut off.
+	  If unsure, select 0.
+
+endif
 endmenu
