@@ -8,7 +8,7 @@ menu "Libraries"
 if SIMPLE_FB
 
 config FB_FIRST_LINE_OFFSET
-	int	"Offset of the first line drawn to screen"
+	int "Offset of the first line drawn to screen"
 	default 0
 	help
 	  This option sets the offset of the first line drawn
