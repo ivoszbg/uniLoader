@@ -2,51 +2,71 @@
 // 2024 - BotchedRPR <ibelwon@protonmail.com>
 
 #include <main.h>
-#include <string.h>
 
+#define POWER_BUTTON 0
+#define VOLUMEDOWN_BUTTON 1
+#define VOLUMEUP_BUTTON 2
 
-int readKey(int base, int bank)
-{
+/* Don't call this function. */
+int readKey(int base, int bank) {
     unsigned int address = ((base + bank) + 0x4);
-    return ((char*)address)[0];
+    return ((unsigned char *)address)[0];
 }
 
-void testreadkeys()
+/* Call this one instead! :)*/
+int checkKey(int button)
 {
-    int powerHeld = 0;
-    int vol1Held = 0;
-    int vol2Held = 0;
-
-    if (!(readKey(0x15850000, 0x40) & (1 << 0x4))) {
-        powerHeld = 1;
-    }
-    else
+    switch(button)
     {
-        if(powerHeld == 1)
+        case POWER_BUTTON:
+            if (!(readKey(0x15850000, 0x40) & (1 << 0x4))) {
+                return 1;
+            }
+        
+        case VOLUMEDOWN_BUTTON:
+            if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
+                return 1;
+            }
+
+        case VOLUMEUP_BUTTON:
+            if (!(readKey(0x15850000, 0x00) & (1 << 0x3))) {
+                return 1;
+            }
+
+        default:
+            return 0;
+    }
+    return 0;
+}
+
+int anyKeyPressed()
+{
+    /* This code looks (and is) very hacky but it works. */
+    if(checkKey(POWER_BUTTON) ||
+        checkKey(VOLUMEDOWN_BUTTON) ||
+        checkKey(VOLUMEUP_BUTTON))
+    {
+        return 1;
+    }
+    return 0;
+}
+
+void testreadkeys() {
+    int isPressed = 0;
+
+    while(1)
+    {
+        if(isPressed == 0)
         {
-            printk("Power released.");
+            if(anyKeyPressed())
+            {
+                printk("You have pressed a key. Good job.");
+                isPressed = 1;
+            }
         }
-    }
-
-    if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
-        vol1Held = 1;
-    }
-    else
-    {
-        if(vol1Held == 1)
+        else if(!anyKeyPressed())
         {
-            printk("Vol- released.");
-        }
-    }
-
-    if (!(readKey(0x15850000, 0x00) & (1 << 0x3))) {
-        vol2Held = 1;
-    }
-    else
-    {
-        if(vol2Held == 1)
-        {
-            printk("Vol+ released.");
+            isPressed = 0;
         }
     }
 }

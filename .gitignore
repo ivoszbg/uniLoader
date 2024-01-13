@@ -14,3 +14,5 @@ lib/*.a*
 include/config/auto.conf
 include/generated/autoconf.h
 include/config
+.clangd
+AIK-Linux/*

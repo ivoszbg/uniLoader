@@ -19,9 +19,9 @@ void clean_fb(volatile char *fb, int width, int height, int stride) {
 void draw_pixel(volatile char *fb, int x, int y, int width, int stride, color c) {
 	long int location = (x * stride) + (y * width * stride);
 
-	*(fb + location) = c.r;
+	*(fb + location) = c.b;
 	*(fb + location + 1) = c.g;
-	*(fb + location + 2) = c.b;
+	*(fb + location + 2) = c.r;
 #if CONFIG_FRAMEBUFFER_STRIDE == 4
 	*(fb + location + 3) = c.a;
 #endif
