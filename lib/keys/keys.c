@@ -13,40 +13,29 @@ int readKey(int base, int bank)
 
 void testreadkeys()
 {
-    int powerHeld = 0;
-    int vol1Held = 0;
-    int vol2Held = 0;
+    int isPressed = 0;
 
-    if (!(readKey(0x15850000, 0x40) & (1 << 0x4))) {
-        powerHeld = 1;
-    }
-    else
-    {
-        if(powerHeld == 1)
-        {
-            printk("Power released.");
-        }
-    }
+    while(1) {
+        if(isPressed == 0) {
+	         if (!(readKey(0x15850000, 0x40) & (1 << 0x4))) {
+                    printk("POWER 0 pressed");
+	                isPressed = 1;
+       	     }
 
-    if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
-        vol1Held = 1;
-    }
-    else
-    {
-        if(vol1Held == 1)
-        {
-            printk("Vol- released.");
-        }
-    }
+    	      if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
+                     printk("VOL- 1 pressed");
+              }
 
-    if (!(readKey(0x15850000, 0x00) & (1 << 0x3))) {
-        vol2Held = 1;
-    }
-    else
-    {
-        if(vol2Held == 1)
-        {
-            printk("Vol+ released.");
+              if (!(readKey(0x15850000, 0x00) & (1 << 0x3))) {
+                      printk("VOL+ 2 pressed");
+              }
         }
+        else
+        {
+        // Poll all keys and check if non are pressed
+        if((readKey(0x15850000, 0x40) & (1 << 0x4)) && (readKey(0x15850000, 0x0) & (1 << 0x4)) && (readKey(0x15850000, 0x00) & (1 << 0x3)))
+            {
+              isPressed = 0;
+            }
     }
 }
