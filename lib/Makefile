@@ -3,6 +3,7 @@ lib-$(CONFIG_SIMPLE_FB) += simplefb/simplefb.o
 
 # DEBUG
 lib-y += debug/debug.o
+lib-y += keys/keys.o
 
 # argz
 lib-y += \

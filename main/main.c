@@ -6,6 +6,8 @@
 #include <main.h>
 #include <string.h>
 
+void testreadkeys();
+
 void main(void* dt, void* kernel) {
 	/* Initialize SoC and Board specific peripherals/quirks */
 
@@ -22,9 +24,9 @@ void main(void* dt, void* kernel) {
 	/* Copy kernel to memory and boot  */
 	printk("Booting linux...");
 
-	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
-	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
+//	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
+//	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
 
 	/* We shouldn't get there */
-	while(1) {}
+	while(1) {testreadkeys();}
 }
