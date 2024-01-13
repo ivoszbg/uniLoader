@@ -1,3 +1,0 @@
-CompileFlags: # Tweak the parse settings
-  Add: 
-    - "--include-directory=/home/bochenek/uniLoader/include/"
