@@ -1,6 +1,6 @@
 // Keys! - a key driver that does some mmio magic
 // 2024 - BotchedRPR <ibelwon@protonmail.com>
-
+    
 #include <main.h>
 #include <string.h>
 
@@ -23,11 +23,13 @@ void testreadkeys()
        	     }
 
     	      if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
-                     printk("VOL- 1 pressed");
+                    printk("VOL- 1 pressed");
+                    isPressed = 1;
               }
 
               if (!(readKey(0x15850000, 0x00) & (1 << 0x3))) {
                       printk("VOL+ 2 pressed");
+                      isPressed = 1;
               }
         }
         else
