@@ -1,0 +1,3 @@
+[submodule "AIK-Linux"]
+	path = AIK-Linux
+	url = https://github.com/SebaUbuntu/AIK-Linux-mirror
