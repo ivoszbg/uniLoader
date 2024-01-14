@@ -7,7 +7,7 @@
 
 #include <lib/simplefb.h>
 #include <lib/font.h>
-#include <string.h>
+#include <lib/minlib.h>
 
 void clean_fb(volatile char *fb, int width, int height, int stride) {
 	for (volatile char *addr = fb; addr < fb + (width * height * stride); addr += stride)
