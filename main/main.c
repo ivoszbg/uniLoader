@@ -1,11 +1,11 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 /*
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
+ * Copyright (c) 2024, BotchedRPR <ibelwon@protonmail.com>
  */
 
 #include <main.h>
-
-void testreadkeys();
+#include <keys.h>
 
 // Function to write two strings using printk (HACK)
 void write_two_strings(char* str1, char* str2) {
@@ -26,7 +26,7 @@ void write_two_strings(char* str1, char* str2) {
     // Null-terminate the combined string
     combined_str[i + j] = '\0';
 
-    // Call draw_text with the combined string
+    // Call printk with the combined string
     printk(combined_str);
 }
 
@@ -54,5 +54,5 @@ void main(void* dt, void* kernel) {
 //	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
 
 	/* We shouldn't get there */
-	while(1) {testreadkeys();}
+	while(1) {readKeyStatus(0);}
 }
