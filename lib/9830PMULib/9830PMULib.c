@@ -17,12 +17,28 @@
 #define PMU_BASE_ADDR   0x15860000
 #define PMU_SYSIP_DAT0  0x810
 
+// Reboot Modes
+#define REBOOT_MODE_NORMAL		0x00
+#define REBOOT_MODE_CHARGE		0x0A
+#define REBOOT_MODE_FASTBOOT		0xFC
+#define REBOOT_MODE_RECOVERY		0xFF
+
+int pmuWrite(int PmuBaseAddr, int Offset, int Value)
+{
+    writel(Value, PmuBaseAddr + Offset);
+    return 0;
+}
+
 int pmuUpdate(int PmuBaseAddr, int Offset, int Mask, int Value)
 {
   int i;
+  int read;
 
   if (Offset > 0x3FFF) {
-    // TODO: Add Stuff
+    read = readl(PmuBaseAddr + Offset);
+    read &= ~Mask;
+    read |= (Value & Mask);
+    writel(read, PmuBaseAddr + Offset);
   } else {
     for (i = 0; i < 32; i++) {
       if (Mask & (1 << i)) {
@@ -44,14 +60,21 @@ int coldReset()
 return 1;
 }
 
+int warmReset()
+{
+    pmuWrite(PMU_BASE_ADDR, SWRESET, SWRESET_TRIGGER);
+}
+
 int powerOff()
 {
     pmuUpdate(PMU_BASE_ADDR, PS_HOLD_CONTROL, PS_HOLD_EN, 0);
     return 0;
 }
 
-int resetToMode (char * resetData)
+int rebootToMode()
 {
     // TODO
-return 1;
+writel(REBOOT_MODE_RECOVERY, PMU_BASE_ADDR + PMU_SYSIP_DAT0);
+warmReset();
+return 0;
 }
