@@ -3,6 +3,8 @@
 
 #include <keys.h>
 
+int rebootToMode();
+
 /* Don't call this function. */
 int readKey(int base, int bank) {
     unsigned int address = ((base + bank) + 0x4);
@@ -21,6 +23,8 @@ int checkKey(int button)
         
         case VOLUMEDOWN_BUTTON:
             if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
+		printk("Resetting system.");
+		rebootToMode();
                 return 1;
             }
 

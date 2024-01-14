@@ -14,6 +14,15 @@ void writel(unsigned int value, void* address) {
     *ptr = value;
 }
 
+int readl(void* address) {
+    // Cast the address pointer to a 32-bit unsigned integer pointer
+    volatile unsigned int* ptr = (volatile unsigned int*)address;
+
+    // return the value of the memory location
+    return *ptr;
+}
+
+
 void printk(char *text) {
 #ifdef CONFIG_SIMPLE_FB
 	/* IMPORTANT: Limit the linecount */
