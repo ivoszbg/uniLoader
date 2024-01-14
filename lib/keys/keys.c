@@ -23,8 +23,6 @@ int checkKey(int button)
         
         case VOLUMEDOWN_BUTTON:
             if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
-		printk("Resetting system.");
-		rebootToMode();
                 return 1;
             }
 

@@ -22,4 +22,12 @@ typedef struct _font_params {
 
 font_params get_font_params(void);
 
+void draw_pixel(volatile char *fb, int x, int y, int width, int stride, color c);
+
+void draw_horizontal_line(volatile char *fb, int x1, int x2, int y, color c, int width, int stride);
+
+void draw_vertical_line(volatile char *fb, int x, int y1, int y2, color c, int width, int stride);
+
+void draw_filled_rectangle(volatile char *fb, int x1, int y1, int w, int h, color c, int width, int stride);
+
 #endif
