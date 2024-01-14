@@ -1,8 +1,6 @@
-# SIMPLEFB
 lib-$(CONFIG_SIMPLE_FB) += simplefb/simplefb.o
-
-# DEBUG
 lib-y += debug/debug.o
+<<<<<<< HEAD
 lib-y += keys/keys.o
 
 # argz
@@ -345,3 +343,5 @@ lib-y += \
 	machine/aarch64/strrchr-stub.o \
 	machine/aarch64/strrchr.o
 endif
+=======
+>>>>>>> parent of a1be36a (EXPERIMENTAL: Partially implement NewLib)
