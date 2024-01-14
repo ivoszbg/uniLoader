@@ -4,9 +4,32 @@
  */
 
 #include <main.h>
-#include <string.h>
 
 void testreadkeys();
+
+// Function to write two strings using printk (HACK)
+void write_two_strings(char* str1, char* str2) {
+    // Concatenate the two strings
+    char combined_str[100];  // Adjust the size based on your needs
+    int i, j;
+
+    // Copy characters from str1 to combined_str
+    for (i = 0; str1[i] != '\0'; ++i) {
+        combined_str[i] = str1[i];
+    }
+
+    // Copy characters from str2 to combined_str
+    for (j = 0; str2[j] != '\0'; ++j) {
+        combined_str[i + j] = str2[j];
+    }
+
+    // Null-terminate the combined string
+    combined_str[i + j] = '\0';
+
+    // Call draw_text with the combined string
+    printk(combined_str);
+}
+
 
 void main(void* dt, void* kernel) {
 	/* Initialize SoC and Board specific peripherals/quirks */
@@ -15,6 +38,9 @@ void main(void* dt, void* kernel) {
 #ifdef CONFIG_SIMPLE_FB
 	clean_fb((char*)CONFIG_FRAMEBUFFER_BASE, CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_HEIGHT, CONFIG_FRAMEBUFFER_STRIDE);
 #endif
+
+	write_two_strings("uniLoader ", VERSION);
+
 	soc_init();
 	printk("soc_init() passed!");
 

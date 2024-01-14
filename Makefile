@@ -6,6 +6,9 @@
 # Comments in this file are targeted only to the developer, do not
 # expect to learn how to build the kernel reading this file.
 
+# Get our last Git commit hash (shortened)
+GIT_VERSION := "$(shell git describe --abbrev=15 --dirty --always --tags)"
+
 # Do not:
 # o  use make's built-in rules and variables
 #    (this increases performance and avoids hard-to-debug behaviour);
@@ -197,7 +200,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
-		   -Wno-builtin-declaration-mismatch -Wno-main
+		   -Wno-builtin-declaration-mismatch -Wno-main -DVERSION=\"$(GIT_VERSION)\"
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
