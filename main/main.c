@@ -8,6 +8,8 @@
 #include <bootmenu/bootmenu.h>
 #include <keys.h>
 
+void memcpy(void *dest, void *src, int size);
+
 // Function to write two strings using printk (HACK)
 void write_two_strings(char* str1, char* str2) {
     // Concatenate the two strings
@@ -52,8 +54,8 @@ void main(void* dt, void* kernel) {
 	printk("Booting linux...");
 
     bootmenu_show();
-//	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
-//	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
+	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
+	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
 
 	/* We shouldn't get there */
 	while(1) {}

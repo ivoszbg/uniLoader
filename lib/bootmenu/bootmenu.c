@@ -11,7 +11,7 @@ int bootmenu_show()
 {
     int centerH = CONFIG_FRAMEBUFFER_WIDTH / 2;
 
-    int bootspace = CONFIG_FRAMEBUFFER_HEIGHT - CONFIG_FRAMEBUFFER_HEIGHT / 4; // uhhhh change if too much
+    int bootspace = CONFIG_FRAMEBUFFER_HEIGHT - CONFIG_FRAMEBUFFER_HEIGHT / 2; // uhhhh change if too much
 
     color white = {255,255,255};
     draw_filled_rectangle(CONFIG_FRAMEBUFFER_BASE, 0, centerH, CONFIG_FRAMEBUFFER_WIDTH, 10, white, CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE); // i hate this

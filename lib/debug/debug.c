@@ -36,21 +36,11 @@ void printk(char *text) {
 #endif
 }
 
-	#ifdef __aarch64__
-		/* Define our own 128 bit memcpy */
-		void memcpy(void *dest, void *src, size_t size)
-		{
-			unsigned __int128 *src2 = src;
-			unsigned __int128 *dest2 = dest;
-
-			for (size_t i = 0; i < size / 16; i++)
-				dest2[i] = src2[i];
-		}
-	#endif
-
-	#ifdef __arm__
-		void memcpy (char* src, char* dest, size_t len) {
-			for (size_t i = 0; i < len; i++)
-				dest[i] = src[i];
-		}
-	#endif
+/* Define our own 128 bit memcpy */
+void memcpy(void *dest, void *src, int size)
+{
+	unsigned __int128 *src2 = src;
+	unsigned __int128 *dest2 = dest;
+	for (int i=0; i<size/16; i++)
+		dest2[i] = src2[i];
+}
