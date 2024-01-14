@@ -5,6 +5,9 @@ lib-$(CONFIG_SIMPLE_FB) += simplefb/simplefb.o
 lib-y += debug/debug.o
 lib-y += keys/keys.o
 
+# 9830 PMU
+lib-y += 9830PMULib/9830PMULib.o
+
 # argz
 lib-y += \
 	argz/argz_add.o \

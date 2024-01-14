@@ -7,6 +7,8 @@
 #define VOLUMEDOWN_BUTTON 1
 #define VOLUMEUP_BUTTON 2
 
+int powerOff();
+
 /* Don't call this function. */
 int readKey(int base, int bank) {
     unsigned int address = ((base + bank) + 0x4);
@@ -25,6 +27,8 @@ int checkKey(int button)
         
         case VOLUMEDOWN_BUTTON:
             if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
+		printk("Shutting off system.");
+		powerOff();
                 return 1;
             }
 
