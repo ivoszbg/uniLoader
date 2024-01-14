@@ -1,11 +1,7 @@
 // Keys! - a key driver that does some mmio magic
 // 2024 - BotchedRPR <ibelwon@protonmail.com>
 
-#include <main.h>
-
-#define POWER_BUTTON 0
-#define VOLUMEDOWN_BUTTON 1
-#define VOLUMEUP_BUTTON 2
+#include <keys.h>
 
 int rebootToMode();
 
@@ -45,7 +41,7 @@ int checkKey(int button)
 
 int anyKeyPressed()
 {
-    /* This code looks (and is) very hacky but it works. */
+    /* Probably useless right now. */
     if(checkKey(POWER_BUTTON) ||
         checkKey(VOLUMEDOWN_BUTTON) ||
         checkKey(VOLUMEUP_BUTTON))
@@ -55,22 +51,7 @@ int anyKeyPressed()
     return 0;
 }
 
-void testreadkeys() {
-    int isPressed = 0;
-
-    while(1)
-    {
-        if(isPressed == 0)
-        {
-            if(anyKeyPressed())
-            {
-                printk("You have pressed a key. Good job.");
-                isPressed = 1;
-            }
-        }
-        else if(!anyKeyPressed())
-        {
-            isPressed = 0;
-        }
-    }
+int readKeyStatus(int key) 
+{
+    return checkKey(key);
 }
