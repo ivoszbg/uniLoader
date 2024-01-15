@@ -103,10 +103,5 @@ int bootmenu_show()
 
     selection = startListener();
 
-    if(selection == 2)
-    {
-        rebootToMode();
-    }
-
     return selection;
 }
