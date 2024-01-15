@@ -10,7 +10,7 @@
 
 void memcpy(void *dest, void *src, int size);
 
-int rebootToMode();
+int warmReset();
 
 // Function to write two strings using printk (HACK)
 void write_two_strings(char* str1, char* str2) {
@@ -64,7 +64,7 @@ void main(void* dt, void* kernel) {
     }
     else if(sel == 2)
     {
-        rebootToMode();
+        warmReset();
     }
 
 	/* We shouldn't get there */
