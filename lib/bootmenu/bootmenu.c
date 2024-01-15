@@ -99,7 +99,7 @@ int bootmenu_show()
         draw_horizontal_line(CONFIG_FRAMEBUFFER_BASE, 0, CONFIG_FRAMEBUFFER_WIDTH, i, white, CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
     }
 
-    drawText();
+    highlightSelection(1);
 
     selection = startListener();
 
