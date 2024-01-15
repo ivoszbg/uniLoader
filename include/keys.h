@@ -6,5 +6,6 @@
 #define VOLUMEUP_BUTTON 2
 
 int readKeyStatus(int key);
+int checkKeys();
 
 #endif

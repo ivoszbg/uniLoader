@@ -37,6 +37,21 @@ int checkKey(int button)
     return 0;
 }
 
+int checkKeys()
+{
+    if (!(readKey(0x15850000, 0x40) & (1 << 0x4))) {
+        return POWER_BUTTON;
+    }
+
+    if (!(readKey(0x15850000, 0x0) & (1 << 0x4))) {
+        return VOLUMEDOWN_BUTTON;
+    }
+    if (!(readKey(0x15850000, 0x00) & (1 << 0x3))) {
+        return VOLUMEUP_BUTTON;
+    }
+    return -1;
+}
+
 int anyKeyPressed()
 {
     /* Probably useless right now. */
