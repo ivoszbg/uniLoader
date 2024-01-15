@@ -10,6 +10,8 @@
 
 void memcpy(void *dest, void *src, int size);
 
+int rebootToMode();
+
 // Function to write two strings using printk (HACK)
 void write_two_strings(char* str1, char* str2) {
     // Concatenate the two strings
@@ -53,9 +55,17 @@ void main(void* dt, void* kernel) {
 	/* Copy kernel to memory and boot  */
 	printk("Booting linux...");
 
-    bootmenu_show();
-	//memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
-	//load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
+    int sel = bootmenu_show();
+
+    if(sel == 1)
+    {
+        memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
+        load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
+    }
+    else if(sel == 2)
+    {
+        rebootToMode();
+    }
 
 	/* We shouldn't get there */
 	while(1) {}

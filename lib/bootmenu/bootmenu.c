@@ -11,13 +11,11 @@
 #define MAX_ENTRIES 2
 #define ENTRIES (centerH + 3*20)
 
-int rebootToMode();
-
 void drawText()
 {
     int centerH = CONFIG_FRAMEBUFFER_WIDTH / 2;
 
-    draw_text(CONFIG_FRAMEBUFFER_BASE, "Entry 1 - It Works!", 5, centerH + (28 / 2), CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
+    draw_text(CONFIG_FRAMEBUFFER_BASE, "Boot kernel in blob", 5, centerH + (28 / 2), CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
     draw_text(CONFIG_FRAMEBUFFER_BASE, "Reset", 5, centerH + (68 / 2), CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
 }
 
