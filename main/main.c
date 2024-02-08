@@ -13,6 +13,7 @@ void main(void* dt, void* kernel) {
 #ifdef CONFIG_SIMPLE_FB
 	clean_fb((char*)CONFIG_FRAMEBUFFER_BASE, CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_HEIGHT, CONFIG_FRAMEBUFFER_STRIDE);
 #endif
+
 	soc_init();
 	printk("soc_init() passed!");
 

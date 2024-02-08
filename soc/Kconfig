@@ -75,4 +75,11 @@ config QUALCOMM
 		select QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
+
+        config QC32_APQ8064
+                bool "Support for QUALCOMM APQ8064"
+                default n
+                select QUALCOMM
+                help
+                  Say Y if your device uses this Qualcomm SoC
  endchoice
