@@ -9,7 +9,7 @@ INPUT(DTB_PATH)
 
 SECTIONS
 {
-        . = 0x80008000;
+        . = 0x80208000;
 	
         .boot : {
                 arch/arm/Start.o
