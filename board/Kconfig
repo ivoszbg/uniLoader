@@ -83,7 +83,7 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_STARLTE
 		default 0x090000000 if SAMSUNG_X1S
 		default 0x090000000 if SAMSUNG_J5LTE
-		default 0x040000000 if SAMSUNG_J4LTE
+		default 0x050000000 if SAMSUNG_J4LTE
 
 
 	config FRAMEBUFFER_BASE
