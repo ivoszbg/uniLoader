@@ -1,5 +1,4 @@
 menu "Device Support"
-
 	config APPLE_N61AP
 		bool "Support for Apple iPhone 6"
 		default n
@@ -142,5 +141,11 @@ menu "Device Specific Addresses"
 		default 4 if SAMSUNG_X1S
 		default 3 if SAMSUNG_J5LTE
 		default 4 if SAMSUNG_J4LTE
+
+	config FRAMEBUFFER_BGRA
+		bool "Framebuffer BGRA (for SimpleFB)"
+		depends on SIMPLE_FB
+		default y if SAMSUNG_J4LTE
+		default n
 
 endmenu
