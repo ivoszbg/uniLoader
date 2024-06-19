@@ -68,6 +68,13 @@ menu "Device Support"
 		depends on EXYNOS_7570
 		help
 		  Say Y if you want to include arm64 support for Samsung Galaxy J4 2018
+
+        config ORANGEPI_ZERO3
+                bool "Support for OrangePi Zero3"
+                default n
+                depends on ALLWINNER_H616
+                help
+                  Say Y if you want to include arm64 support for OrangePi Zero3
 endmenu
 
 menu "Device Specific Addresses"
@@ -84,7 +91,7 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_X1S
 		default 0x090000000 if SAMSUNG_J5LTE
 		default 0x050000000 if SAMSUNG_J4LTE
-
+                default 0x090000000 if ORANGEPI_ZERO3
 
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
@@ -99,6 +106,7 @@ menu "Device Specific Addresses"
 		default 0x0F1000000 if SAMSUNG_X1S
 		default 0x08e000000 if SAMSUNG_J5LTE
 		default 0x067000000 if SAMSUNG_J4LTE
+		default 0x0 	    if ORANGEPI_ZERO3
 
 	config FRAMEBUFFER_WIDTH
 		int "Framebuffer Width (for SimpleFB)"
@@ -113,6 +121,7 @@ menu "Device Specific Addresses"
 		default 1440 if SAMSUNG_X1S
 		default 720 if SAMSUNG_J5LTE
 		default 720 if SAMSUNG_J4LTE
+                default 0   if ORANGEPI_ZERO3   
 
 	config FRAMEBUFFER_HEIGHT
 		int "Framebuffer Height (for SimpleFB)"
@@ -127,6 +136,7 @@ menu "Device Specific Addresses"
 		default 3200 if SAMSUNG_X1S
 		default 1280 if SAMSUNG_J5LTE
 		default 1280 if SAMSUNG_J4LTE
+                default 0    if ORANGEPI_ZERO3
 
 	config FRAMEBUFFER_STRIDE
 		int "Framebuffer Stride (for SimpleFB)"
@@ -141,6 +151,8 @@ menu "Device Specific Addresses"
 		default 4 if SAMSUNG_X1S
 		default 3 if SAMSUNG_J5LTE
 		default 4 if SAMSUNG_J4LTE
+                default 0 if ORANGEPI_ZERO3
+
 
 	config FRAMEBUFFER_BGRA
 		bool "Framebuffer BGRA (for SimpleFB)"

@@ -9,4 +9,8 @@
 extern void draw_text(volatile char *fb, char *text, int textX, int textY, int width, int stride);
 long int debug_linecount = 0;
 
+void writel(unsigned int value, void* address);
+
+void puts(const char *s);
+
 #endif

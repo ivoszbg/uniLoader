@@ -10,6 +10,10 @@ config QUALCOMM
 	bool
 	default n
 
+config ALLWINNER
+	bool
+	default n
+
  choice
 	prompt "SoC Support"
 
@@ -75,4 +79,11 @@ config QUALCOMM
 		select QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
+
+        config ALLWINNER_H616
+                bool "Support for ALLWINNER H616"
+                default n
+                select AllWinner
+                help
+                  Say Y if your device uses this AllWinner SoC
  endchoice
