@@ -4,4 +4,11 @@ menu "Libraries"
 		default y
 		help
 		  Say Y if you want to have Framebuffer output.
+
+        config H616_UART
+                bool "Support for AllWinner H616 UART"
+                default y if ALLWINNER_H616
+		default n
+                help
+                  Say Y if you want to have UART output on boards based on H616.
 endmenu

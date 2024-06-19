@@ -1,6 +1,9 @@
 # SIMPLEFB
 lib-$(CONFIG_SIMPLE_FB) += simplefb/simplefb.o
 
+# H616 UART
+lib-$(CONFIG_H616_UART) += h616_uart/h616_uart.o
+
 # DEBUG
 lib-y += debug/debug.o
 
