@@ -13,15 +13,30 @@ INPUT(DTB_PATH)
 SECTIONS
 {
 	.boot : {
-		arch/aarch64/Start.o
+		arch/aarch64/start.o
 	}
 
-	.dtb ALIGN(0x1000) : {
+	.text : {
+		*(.text)
+	}
+
+	.bss ALIGN(4096) : {
+		_bss_start = .;
+		. = . + 4096;
+		_bss_end = .;
+	}
+
+	.stack ALIGN(4096) : {
+		. = . + 4096;
+		_stack_end = .;
+	}
+
+	.dtb ALIGN(4096) : {
 		dtb = .;
 		DTB_PATH
 	}
 
-	.kernel ALIGN(0x1000) : {
+	.kernel ALIGN(4096) : {
 		kernel = .;
 		KERNEL_PATH
 	}

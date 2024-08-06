@@ -340,8 +340,8 @@ endif # $(dot-config)
 all: arch/$(ARCH)/linker.lds uniLoader
 
 # List of main executables
-main-y		:= main/main.o
-main-y		+= arch/$(ARCH)/Start.o
+main-y		:= arch/$(ARCH)/start.o \
+		   main/main.o
 
 # Object directories
 objs-y		:= main

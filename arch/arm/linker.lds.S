@@ -14,7 +14,7 @@ SECTIONS
         . = __start_address;
 	
         .boot : {
-                arch/arm/Start.o
+                arch/arm/start.o
         }
 
         .dtb ALIGN(0x1000) : {

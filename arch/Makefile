@@ -1,1 +1,1 @@
-obj-y += $(ARCH)/Start.o
+obj-y += $(ARCH)/start.o
