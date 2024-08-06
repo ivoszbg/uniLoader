@@ -9,7 +9,9 @@ INPUT(DTB_PATH)
 
 SECTIONS
 {
-        . = 0x80008000;
+	/* The default TEXT_BASE address is 0x0 if not specified otherwise, so compare it to 0x1 */
+        __start_address = (TEXT_BASE > 0x1) ? TEXT_BASE : 0x80008000;
+        . = __start_address;
 	
         .boot : {
                 arch/arm/Start.o
