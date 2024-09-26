@@ -3,21 +3,25 @@
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 
+#include <board.h>
 #include <main.h>
 #include <string.h>
 
 void main(void* dt, void* kernel) {
 	/* Initialize SoC and Board specific peripherals/quirks */
+	struct board_data *board = get_current_board();
 
-	/* TODO: Find a better way to make this more universal (since devices like arm64 Samsung Galaxies enable FB after soc_init) */
+	/* TODO: Move into the simpleFB driver once the drivers framework is done */
 #ifdef CONFIG_SIMPLE_FB
 	clean_fb((char*)CONFIG_FRAMEBUFFER_BASE, CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_HEIGHT, CONFIG_FRAMEBUFFER_STRIDE);
 #endif
-	soc_init();
-	printk("soc_init() passed!");
+	board->init();
+	printk("board init() passed!");
 
-	board_init();
-	printk("board_init() passed!");
+	board->driver_setup();
+
+	board->late_init();
+	printk("board late_init() passed!");
 
 	/* Copy kernel to memory and boot  */
 	printk("Booting linux...");
