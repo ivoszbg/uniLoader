@@ -14,3 +14,7 @@ lib/*.a*
 include/config/auto.conf
 include/generated/autoconf.h
 include/config
+boot.img
+blob/Image
+blob/dtb
+drivers/*.a

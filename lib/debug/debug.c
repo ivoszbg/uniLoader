@@ -3,16 +3,8 @@
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <lib/debug.h>
+#include <lib/simplefb.h>
 #include <stddef.h>
-
-/* TODO: Import libc */
-void writel(unsigned int value, void* address) {
-    // Cast the address pointer to a 32-bit unsigned integer pointer
-    volatile unsigned int* ptr = (volatile unsigned int*)address;
-
-    // Write the value to the memory location
-    *ptr = value;
-}
 
 void printk(char *text) {
 #ifdef CONFIG_SIMPLE_FB

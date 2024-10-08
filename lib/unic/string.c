@@ -207,3 +207,9 @@ long atol(const char *s)
 
 	return val;
 }
+
+void writel(unsigned int value, void* address)
+{
+	volatile unsigned int* ptr = (volatile unsigned int*)address;
+	*ptr = value;
+}

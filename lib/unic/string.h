@@ -22,6 +22,7 @@ size_t strnlen(const char *s, size_t n);
 char *strchr(const char *s, int c);
 char *strrchr(const char *s, int c);
 long atol(const char *s);
+void writel(unsigned int value, void* address);
 
 static inline int tolower(int c)
 {

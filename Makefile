@@ -195,6 +195,7 @@ KBUILD_CPPFLAGS := -D__KERNEL__
 
 KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
+		   -fno-stack-protector \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
@@ -346,14 +347,21 @@ main-y		:= arch/$(ARCH)/start.o \
 # Object directories
 objs-y		:= main
 objs-y		+= arch
+
+# Libraries
 libs-y		:= soc
 libs-y		+= board
 libs-y		+= lib
+libs-y		+= drivers
+
+# Include these in the build process as we 
 
 uniLoader-dirs	:= $(objs-y) $(libs-y)
 uniLoader-objs	:= $(patsubst %,%/built-in.o, $(objs-y))
-uniLoader-mains := $(objs-y)/*.o
 uniLoader-libs	:= $(patsubst %,%/lib.a, $(libs-y))
+
+uniLoader-mains := $(objs-y)/*.o
+
 uniLoader-all	:= $(uniLoader-objs) $(uniLoader-libs)
 
 # Do modpost on a prelinked vmlinux. The finally linked vmlinux has

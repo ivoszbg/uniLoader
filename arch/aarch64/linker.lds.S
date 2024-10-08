@@ -16,7 +16,7 @@ SECTIONS
 		arch/aarch64/start.o
 	}
 
-	.text : {
+	.text ALIGN(4096) : {
 		*(.text)
 	}
 

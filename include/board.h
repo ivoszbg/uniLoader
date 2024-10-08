@@ -12,28 +12,46 @@
  * Well, well, well. We come back to this style again.
  * TODO: Implement libfdt once we have C libs all sorted out.
  *
- * @name -> board name
- * @init -> initialization as soon as we hit C
- * @late_init -> late initialization
- * @driver_setup -> driver initialization
+ * BOARD_OP_INIT -> initialization as soon as we hit C
+ * BOARD_OP_LATE_INIT -> late initialization
+ * BOARD_OP_DRIVER_SETUP -> drivers setup
+ * BOARD_OP_EXIT -> the last op, currently unused
  */
+enum board_ops {
+	BOARD_OP_INIT,
+	BOARD_OP_LATE_INIT,
+	BOARD_OP_DRIVER_SETUP,
+	BOARD_OP_EXIT
+};
+
+// Hold board data WITHOUT POINTERS
 struct board_data {
 	const char *name;
-	void (*init)(void);
-	void (*late_init)(void);
-	void (*driver_setup)(void);
+	int ops[BOARD_OP_EXIT];
 };
 
-extern struct board_data *get_current_board(void);
+extern void init_board_funcs(void *board);
 
-// Declare a weak reference to the board data structure
-extern struct board_data __attribute__((weak)) default_board;
+extern int board_driver_setup(void);
+extern int board_init(void);
+extern int board_late_init(void);
 
-struct board_data default_board = {
-	.name = "DEFAULT",
-	.init = NULL,  // No init function for the default
-	.late_init = NULL,
-	.driver_setup = NULL,
-};
+// Macro definitions for board operations
+#define EXECUTE_BOARD_OP(op_id)			\
+	do {					\
+		switch (op_id) {		\
+		case BOARD_OP_INIT:		\
+			board_init();		\
+			break;			\
+		case BOARD_OP_LATE_INIT:	\
+			board_late_init();	\
+			break;			\
+		case BOARD_OP_DRIVER_SETUP:	\
+			board_driver_setup();	\
+			break;			\
+		default:			\
+			break;			\
+		}				\
+	} while (0)
 
 #endif // BOARD_H_

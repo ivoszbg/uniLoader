@@ -8,35 +8,48 @@
 #define DECON_F_BASE		0x19050000
 #define HW_SW_TRIG_CONTROL	0x70
 
+void init_board_funcs(void *board)
+{
+	/*
+	 * Parsing the struct directly without restructing is
+	 * broken as of Sep 29 2024
+	 */
+	struct {
+		const char *name;
+		int ops[BOARD_OP_EXIT];
+	} *board_restruct = board;
+
+	board_restruct->name = "X1S";
+}
+
 // Early initialization
-static void x1s_init(void)
+int board_init(void)
 {
 	/* Allow framebuffer to be written to */
 	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
+	return 0;
 }
 
 // Late initialization
-static void x1s_late_init(void)
+int board_late_init(void)
 {
-
+	return 0;
 }
 
-static void x1s_driver_setup(void)
+int board_driver_setup(void)
 {
-    // Register drivers for S5PV210-specific peripherals
-    // register_driver(&simplefb_driver);
-    // Add more drivers here as needed
-}
+	struct {
+		int width;
+		int height;
+		int stride;
+		void *address;
+	} simplefb_data = {
+		.width = 1440,
+		.height = 3200,
+		.stride = 4,
+		.address = (void *)0xf1000000
+	};
 
-// Create the board_data structure for S5PV210
-static struct board_data x1s_board = {
-	.name = "X1S",
-	.init = x1s_init,
-	.late_init = x1s_late_init,
-	.driver_setup = x1s_driver_setup,
-};
-
-// Function to retrieve current board data
-struct board_data *get_current_board(void) {
-	return &x1s_board; // Return the correct board based on runtime config
+	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
+	return 0;
 }

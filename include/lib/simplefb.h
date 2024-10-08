@@ -8,6 +8,18 @@
 #ifndef SIMPLEFB_H_	/* Include guard */
 #define SIMPLEFB_H_
 
+#include <stdint.h>
+
+extern void simplefb_probe(void *data);
+extern struct video *video_info;
+
+struct video {
+	int width;
+	int height;
+	int stride;
+	void *address;
+};
+
 typedef struct _color {
 	unsigned char r;
 	unsigned char g;

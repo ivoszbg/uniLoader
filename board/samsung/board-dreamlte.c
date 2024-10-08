@@ -3,39 +3,54 @@
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <drivers/framework.h>
+#include <lib/simplefb.h>
 
 #define DECON_F_BASE		0x12860000
 #define HW_SW_TRIG_CONTROL	0x70
 
+void init_board_funcs(void *board)
+{
+	/*
+	 * Parsing the struct directly without restructing is
+	 * broken as of Sep 29 2024
+	 */
+	struct {
+		const char *name;
+		int ops[BOARD_OP_EXIT];
+	} *board_restruct = board;
+
+	board_restruct->name = "DREAMLTE";
+}
+
 // Early initialization
-static void dreamlte_init(void)
+int board_init(void)
 {
 	/* Allow framebuffer to be written to */
 	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
+	return 0;
 }
 
 // Late initialization
-static void dreamlte_late_init(void)
+int board_late_init(void)
 {
-
+	return 0;
 }
 
-static void dreamlte_driver_setup(void)
+int board_driver_setup(void)
 {
-    // Register drivers for S5PV210-specific peripherals
-    // register_driver(&simplefb_driver);
-    // Add more drivers here as needed
-}
+	struct {
+		int width;
+		int height;
+		int stride;
+		void *address;
+	} simplefb_data = {
+		.width = 1440,
+		.height = 2960,
+		.stride = 4,
+		.address = (void *)0xcc000000
+	};
 
-// Create the board_data structure for S5PV210
-static struct board_data dreamlte_board = {
-	.name = "DREAMLTE",
-	.init = dreamlte_init,
-	.late_init = dreamlte_late_init,
-	.driver_setup = dreamlte_driver_setup,
-};
-
-// Function to retrieve current board data (could be hardcoded or chosen via config)
-struct board_data *get_current_board(void) {
-	return &dreamlte_board; // Return the correct board based on runtime config
+	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
+	return 0;
 }
