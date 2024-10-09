@@ -344,6 +344,10 @@ all: arch/$(ARCH)/linker.lds uniLoader
 main-y		:= arch/$(ARCH)/start.o \
 		   main/main.o
 
+ifeq ($(ARCH), aarch64)
+arch-libs-y	:= arch/$(ARCH)/memcpy.o
+endif
+
 # Object directories
 objs-y		:= main
 objs-y		+= arch
@@ -353,8 +357,6 @@ libs-y		:= soc
 libs-y		+= board
 libs-y		+= lib
 libs-y		+= drivers
-
-# Include these in the build process as we 
 
 uniLoader-dirs	:= $(objs-y) $(libs-y)
 uniLoader-objs	:= $(patsubst %,%/built-in.o, $(objs-y))
@@ -367,7 +369,7 @@ uniLoader-all	:= $(uniLoader-objs) $(uniLoader-libs)
 # Do modpost on a prelinked vmlinux. The finally linked vmlinux has
 # relevant sections renamed as per the linker script.
 quiet_cmd_uniLoader = LD      $@.o
-      cmd_uniLoader = $(LD) $(main-y) $(uniLoader-libs) -o $@.o --script=arch/$(ARCH)/linker.lds
+      cmd_uniLoader = $(LD) $(main-y) $(arch-libs-y) $(uniLoader-libs) -o $@.o --script=arch/$(ARCH)/linker.lds
 
 arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(KERNEL_PATH)
 	$(CPP) $< -DTEXT_BASE=$(TEXT_BASE) -DKERNEL_PATH=$(KERNEL_PATH) -DDTB_PATH=$(DT_PATH) -P -o $@

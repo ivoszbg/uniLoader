@@ -6,37 +6,54 @@
 #include "stdbool.h"
 #include "string.h"
 
-void *memcpy(void *s1, const void *s2, size_t n)
+void *memset (void *m, int c, size_t n)
 {
-	char *dest = (char *)s1;
-	const char *src = (const char *)s2;
+	char *s = (char *) m;
 
-	while (n--) {
-		*dest++ = *src++;
+	unsigned int i;
+	unsigned long buffer;
+	unsigned long *aligned_addr;
+	unsigned int d = c & 0xff;
+
+	while (UNALIGNED (s)) {
+		if (n--)
+			*s++ = (char) c;
+		else
+			return m;
 	}
 
-	return s1;
-}
+	if (!TOO_SMALL (n)) {
+		/* If we get this far, we know that n is large and s is word-aligned. */
+		aligned_addr = (unsigned long *) s;
 
-void *memmove(void *s1, const void *s2, size_t n)
-{
-	char *dest = (char *)s1;
-	const char *src = (const char *)s2;
+		/*
+		 * Store D into each char sized location in BUFFER so that
+		 * we can set large blocks quickly.
+		 */
+		buffer = (d << 8) | d;
+		buffer |= (buffer << 16);
+		for (i = 32; i < LBLOCKSIZE * 8; i <<= 1)
+			buffer = (buffer << i) | buffer;
 
-	if (dest <= src) {
-		while (n--) {
-			*dest++ = *src++;
+		/* Unroll the loop. */
+		while (n >= LBLOCKSIZE*4) {
+			*aligned_addr++ = buffer;
+			*aligned_addr++ = buffer;
+			*aligned_addr++ = buffer;
+			*aligned_addr++ = buffer;
+			n -= 4*LBLOCKSIZE;
 		}
-	} else {
-		src += n;
-		dest += n;
 
-		while (n--) {
-			*--dest = *--src;
+		while (n >= LBLOCKSIZE)	{
+			*aligned_addr++ = buffer;
+			n -= LBLOCKSIZE;
 		}
+
+		/* Pick up the remainder with a bytewise loop.	*/
+		s = (char*)aligned_addr;
 	}
 
-	return s1;
+	return m;
 }
 
 int memcmp(const void *s1, const void *s2, size_t n)
@@ -54,17 +71,6 @@ int memcmp(const void *s1, const void *s2, size_t n)
 	}
 
 	return 0;
-}
-
-void *memset(void *s, int c, size_t n)
-{
-	unsigned char *p = (unsigned char *)s;
-
-	while (n--) {
-		*p++ = (unsigned char)c;
-	}
-
-	return s;
 }
 
 void *memchr(const void *s, int c, size_t n)
