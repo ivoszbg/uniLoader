@@ -66,7 +66,7 @@ void __simplefb_raw_print(volatile char *fb, char *text, int text_x, int text_y,
 		}
 
 		int ix = font_index(text[i]);
-		const unsigned char *img = letters[ix];
+		unsigned char *img = letters[ix];
 
 		// Draw the character as a scaled bitmap
 		for (int y = 0; y < FONTH; y++) {
