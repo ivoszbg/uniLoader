@@ -4,6 +4,8 @@
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <drivers/framework.h>
+#include <lib/simplefb.h>
 
 #define DECON_F_BASE		0x19050000
 #define HW_SW_TRIG_CONTROL	0x70
