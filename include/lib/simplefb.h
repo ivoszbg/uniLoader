@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+// SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  * Copyright (c) 2022, Markuss Broks <markuss.broks@gmail.com>
@@ -10,6 +10,8 @@
 
 #include <stdint.h>
 
+extern void __simplefb_raw_print(volatile char *fb, char *text, int text_x,
+				 int text_y, int width, int stride);
 extern void simplefb_probe(void *data);
 extern struct video *video_info;
 
@@ -34,4 +36,4 @@ typedef struct _font_params {
 
 font_params get_font_params(void);
 
-#endif
+#endif // SIMPLEFB_H_

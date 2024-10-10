@@ -13,6 +13,10 @@ menu "Building options"
 		  need to set this unless you want the configured kernel build
 		  directory to select the cross-compiler automatically.
 
+	config LOGLEVEL
+		int "Verbosity of logs"
+		default 7
+
 	config EMBED_LINUX
 		bool "Embed linux kernel and device tree"
 		default y
