@@ -1,3 +1,0 @@
-[submodule "lib/neatlibc"]
-	path = lib/neatlibc
-	url = https://github.com/aligrudi/neatlibc.git
