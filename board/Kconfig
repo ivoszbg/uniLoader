@@ -98,6 +98,7 @@ menu "Device Specific Addresses"
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
+		default 0x082000000 if EXYNOS_990
 		default 0x082000000 if SAMSUNG_DREAMLTE
 
 	config FRAMEBUFFER_BASE
