@@ -9,6 +9,7 @@ TARGET(binary)
 
 INPUT(KERNEL_PATH)
 INPUT(DTB_PATH)
+INPUT(RAMDISK_PATH)
 
 SECTIONS
 {
@@ -41,5 +42,11 @@ SECTIONS
 		KERNEL_PATH
 	}
 
+	.ramdisk ALIGN(4096) : {
+		ramdisk = .;
+		RAMDISK_PATH
+	}
+
 	kernel_size = SIZEOF(.kernel);
+	ramdisk_size = SIZEOF(.ramdisk);
 }

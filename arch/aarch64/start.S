@@ -18,6 +18,8 @@ ENTRY(_start)
 	add     x0, x0, #:lo12:dtb  /* Add offset within the page */
 	adrp    x1, kernel          /* Load page of kernel */
 	add     x1, x1, #:lo12:kernel /* Add offset within the page */
+	adrp    x2, ramdisk          /* Load page of kernel */
+	add     x2, x2, #:lo12:ramdisk /* Add offset within the page */
 
 	bl main
 END(_start)

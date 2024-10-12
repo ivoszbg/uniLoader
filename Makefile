@@ -103,6 +103,7 @@ export srctree objtree VPATH
 CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 KERNEL_PATH	?= $(CONFIG_KERNEL_PATH:"%"=%)
 DT_PATH	?= $(CONFIG_DT_PATH:"%"=%)
+RAMDISK_PATH	?= $(CONFIG_RAMDISK_PATH:"%"=%)
 TEXT_BASE	?= $(CONFIG_TEXT_BASE:"%"=%)
 
 KCONFIG_CONFIG	?= .config
@@ -371,8 +372,8 @@ uniLoader-all	:= $(uniLoader-objs) $(uniLoader-libs)
 quiet_cmd_uniLoader = LD      $@.o
       cmd_uniLoader = $(LD) $(main-y) $(arch-libs-y) $(uniLoader-libs) -o $@.o --script=arch/$(ARCH)/linker.lds
 
-arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(KERNEL_PATH)
-	$(CPP) $< -DTEXT_BASE=$(TEXT_BASE) -DKERNEL_PATH=$(KERNEL_PATH) -DDTB_PATH=$(DT_PATH) -P -o $@
+arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(KERNEL_PATH) $(RAMDISK_PATH)
+	$(CPP) $< -DTEXT_BASE=$(TEXT_BASE) -DKERNEL_PATH=$(KERNEL_PATH) -DDTB_PATH=$(DT_PATH) -DRAMDISK_PATH=$(RAMDISK_PATH) -P -o $@
 
 uniLoader: $(uniLoader-all)
 	$(call if_changed,uniLoader)

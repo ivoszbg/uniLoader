@@ -36,6 +36,13 @@ menu "Building options"
 		default blob/dtb
 		help
 		  Path to the device tree, which is going to get embedded to uniLoader
+
+	config RAMDISK_PATH
+		string "Path to ramdisk image"
+		depends on EMBED_LINUX
+		default blob/ramdisk
+		help
+		  Path to the ramdisk, which is going to get embedded to uniLoader
 endmenu
 
 source "lib/Kconfig"

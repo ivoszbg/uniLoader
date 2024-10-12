@@ -97,6 +97,10 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_J5LTE
 		default 0x090000000 if SAMSUNG_GTA4XL
 
+	config RAMDISK_ENTRY
+		hex "Ramdisk Entry Address"
+		default 0x082000000 if SAMSUNG_DREAMLTE
+
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
 		depends on SIMPLE_FB

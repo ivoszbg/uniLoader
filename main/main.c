@@ -23,7 +23,7 @@ struct board_data board = {
 	}
 };
 
-void main(void* dt, void* kernel)
+void main(void* dt, void* kernel, void* ramdisk)
 {
 	/* Initialize SoC and Board specific peripherals/quirks */
 	init_board_funcs(&board);
@@ -46,6 +46,7 @@ void main(void* dt, void* kernel)
 	printk(-1, "Booting linux...\n");
 
 	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
+	__optimized_memcpy((void*)CONFIG_RAMDISK_ENTRY, ramdisk, (unsigned long) &ramdisk_size);
 	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
 
 	/* We shouldn't get there */

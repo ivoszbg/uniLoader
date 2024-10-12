@@ -9,6 +9,7 @@
 #define MAIN_H_
 
 extern unsigned long kernel_size;
+extern unsigned long ramdisk_size;
 extern void load_kernel(void* dtb, void* x1, void* x2, void* x3, void* kernel);
 extern void soc_init(void);
 
