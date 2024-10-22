@@ -100,6 +100,8 @@ menu "Device Specific Addresses"
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
 		default 0x082000000 if SAMSUNG_DREAMLTE
+		default 0x084000000 if SAMSUNG_C1S
+		default 0x084000000 if SAMSUNG_X1S
 
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
