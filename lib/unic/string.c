@@ -216,3 +216,8 @@ void writel(unsigned int value, void* address)
 	volatile unsigned int* ptr = (volatile unsigned int*)address;
 	*ptr = value;
 }
+
+uint32_t readl(volatile uint32_t *addr)
+{
+	return *addr;
+}

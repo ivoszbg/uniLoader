@@ -7,6 +7,7 @@
 #define STRING_H_
 
 #include "stddef.h"
+#include "stdint.h"
 
 #define LBLOCKSIZE (sizeof(long))
 #define UNALIGNED(X) ((long)X & (LBLOCKSIZE - 1))
@@ -26,6 +27,7 @@ char *strchr (const char *s, int c);
 char *strrchr (const char *s, int c);
 long atol (const char *s);
 void writel (unsigned int value, void* address);
+uint32_t readl(volatile uint32_t *addr);
 
 // C-driven optimized functions
 void *memset (void *m, int c, size_t n);
@@ -37,6 +39,7 @@ void *memset (void *m, int c, size_t n);
 /* How many bytes are copied each iteration of the 4X unrolled loop.  */
 #define BIGBLOCKSIZE (sizeof(long) << 2)
 
+static void *__optimized_memcpy (void *dst0, const void *src0, size_t len0) __attribute__((unused));
 static void *__optimized_memcpy (void *dst0, const void *src0, size_t len0)
 {
 	char *dst = dst0;
@@ -63,9 +66,9 @@ static void *__optimized_memcpy (void *dst0, const void *src0, size_t len0)
 			len0 -= LBLOCKSIZE;
 		}
 
-	/* Pick up any residual with a byte copier.  */
-	dst = (char*)aligned_dst;
-	src = (char*)aligned_src;
+		/* Pick up any residual with a byte copier.  */
+		dst = (char*)aligned_dst;
+		src = (char*)aligned_src;
 	}
 
 	while (len0--)
