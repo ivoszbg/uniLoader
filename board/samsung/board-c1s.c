@@ -6,9 +6,7 @@
 #include <board.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
-
-#define DECON_F_BASE		0x19050000
-#define HW_SW_TRIG_CONTROL	0x70
+#include <soc/exynos990.h>
 
 void init_board_funcs(void *board)
 {
@@ -29,6 +27,7 @@ int board_init(void)
 {
 	/* Allow framebuffer to be written to */
 	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
+
 	return 0;
 }
 
