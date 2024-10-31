@@ -6,9 +6,9 @@
 #include <board.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
-
-#define DECON_F_BASE		0x19050000
-#define HW_SW_TRIG_CONTROL	0x70
+#include <lib/debug.h>
+#include <soc/exynos990.h>
+#include <drivers/samsung/exynos-speedy.h>
 
 void init_board_funcs(void *board)
 {
@@ -24,6 +24,53 @@ void init_board_funcs(void *board)
 	board_restruct->name = "X1S";
 }
 
+struct s2mps19_data {
+	uint32_t ldo_address;
+};
+
+static void s2mps19_setup(void)
+{
+	int ret;
+	struct speedy_transaction s2mps19;
+
+	/* S2MPS19 configuration */
+	s2mps19.base = SPEEDY_0_BASE;
+	s2mps19.slave = S2MPS19_PM_ADDR;
+
+	/*
+	 * Define LDO control register values
+	 * Values have been borrowed from Linaro's LK
+	 */
+	const struct s2mps19_data data[] = {
+		{
+			S2MPS19_PM_LDO2M_CTRL
+		}, {
+			S2MPS19_PM_LDO15M_CTRL
+		}
+	};
+
+	/* Configure LDOs */
+	for (int i = 0; i < 3; i++) {
+		s2mps19.offset = data[i].ldo_address;
+
+		ret = speedy_read(&s2mps19);
+		if (ret)
+			goto handle_err;
+
+		s2mps19.val |= S2MPS_OUTPUT_ON_NORMAL;
+
+		ret = speedy_write(&s2mps19);
+		if (ret)
+			goto handle_err;
+	}
+
+	return;
+
+handle_err:
+	printk(KERN_ERR, "s2mps19: err\n");
+	return;
+}
+
 // Early initialization
 int board_init(void)
 {
@@ -35,6 +82,8 @@ int board_init(void)
 // Late initialization
 int board_late_init(void)
 {
+	s2mps19_setup();
+
 	return 0;
 }
 
