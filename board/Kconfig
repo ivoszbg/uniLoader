@@ -93,13 +93,12 @@ menu "Device Specific Addresses"
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
 		default 0x830000000 if APPLE_N61AP
-		default 0x090000000 if SAMSUNG_C1S
+		default 0x090000000 if EXYNOS_990
 		default 0x050000000 if SAMSUNG_NOBLELTE
 		default 0x090000000 if SAMSUNG_JACKPOTLTE
 		default 0x090000000 if SAMSUNG_ZEROFLTE
 		default 0x090000000 if SAMSUNG_DREAMLTE
 		default 0x090000000 if SAMSUNG_STARLTE
-		default 0x090000000 if SAMSUNG_X1S
 		default 0x050000000 if SAMSUNG_J4LTE
 		default 0x090000000 if SAMSUNG_J5LTE
 		default 0x090000000 if SAMSUNG_GTA4XL
@@ -107,6 +106,7 @@ menu "Device Specific Addresses"
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
+		default 0x082000000 if EXYNOS_990
 		default 0x082000000 if SAMSUNG_DREAMLTE
 		default 0x084000000 if SAMSUNG_C1S
 		default 0x084000000 if SAMSUNG_X1S
@@ -116,13 +116,12 @@ menu "Device Specific Addresses"
 		hex "Framebuffer Base Address (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 0x83e900000 if APPLE_N61AP
-		default 0x0f1000000 if SAMSUNG_C1S
+		default 0x0f1000000 if EXYNOS_990
 		default 0x0e2a00000 if SAMSUNG_NOBLELTE
 		default 0x0ec000000 if SAMSUNG_JACKPOTLTE
 		default 0x0e2a00000 if SAMSUNG_ZEROFLTE
 		default 0x0cc000000 if SAMSUNG_DREAMLTE
 		default 0x0cc000000 if SAMSUNG_STARLTE
-		default 0x0f1000000 if SAMSUNG_X1S
 		default 0x067000000 if SAMSUNG_J4LTE
 		default 0x08e000000 if SAMSUNG_J5LTE
 		default 0x0ca000000 if SAMSUNG_GTA4XL
@@ -164,13 +163,12 @@ menu "Device Specific Addresses"
 		int "Framebuffer Stride (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 4 if APPLE_N61AP
-		default 4 if SAMSUNG_C1S
+		default 4 if EXYNOS_990
 		default 4 if SAMSUNG_NOBLELTE
 		default 4 if SAMSUNG_JACKPOTLTE
 		default 4 if SAMSUNG_ZEROFLTE
 		default 4 if SAMSUNG_DREAMLTE
 		default 4 if SAMSUNG_STARLTE
-		default 4 if SAMSUNG_X1S
 		default 4 if SAMSUNG_J4LTE
 		default 3 if SAMSUNG_J5LTE
 		default 4 if SAMSUNG_GTA4XL
