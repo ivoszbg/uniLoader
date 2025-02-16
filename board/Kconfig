@@ -111,6 +111,7 @@ menu "Device Specific Addresses"
 		default 0x084000000 if SAMSUNG_C1S
 		default 0x084000000 if SAMSUNG_X1S
 		default 0x084000000 if SAMSUNG_R8S
+		default 0x084000000 if SAMSUNG_GTA4XL
 
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
