@@ -27,6 +27,13 @@ config QUALCOMM
 		help
 		  Say Y if your device uses Apple T8010 SoC
 
+	config EXYNOS_2200
+		bool "Support for Exynos 2200"
+		default n
+		select EXYNOS
+		help
+		  Say Y if your device uses Samsung Exynos2200 SoC
+
 	config EXYNOS_7420
 		bool "Support for Exynos 7420"
 		default n
