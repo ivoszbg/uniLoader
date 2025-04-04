@@ -6,6 +6,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for iPhone 6
 
+        config SAMSUNG_A127F
+		bool "Support for Samsung Galaxy A12 Nacho"
+		default n
+		depends on EXYNOS_3830
+		help
+		  Say Y if you want to include support for Samsung Galaxy A12 Nacho
+
 	config SAMSUNG_C1S
 		bool "Support for Samsung Galaxy Note20"
 		default n
@@ -107,6 +114,7 @@ menu "Device Specific Addresses"
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
 		default 0x830000000 if APPLE_N61AP
+		default 0x090008000 if SAMSUNG_A127F
 		default 0x090000000 if SAMSUNG_C1S
 		default 0x090000000 if SAMSUNG_G0S
 		default 0x050000000 if SAMSUNG_NOBLELTE
@@ -123,6 +131,7 @@ menu "Device Specific Addresses"
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
+		default 0x082000000 if SAMSUNG_A127F
 		default 0x082000000 if SAMSUNG_DREAMLTE
 		default 0x084000000 if SAMSUNG_C1S
 		default 0x084000000 if SAMSUNG_G0S
@@ -134,6 +143,7 @@ menu "Device Specific Addresses"
 		hex "Framebuffer Base Address (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 0x83e900000 if APPLE_N61AP
+		default 0x0fa000000 if SAMSUNG_A127F
 		default 0x0f1000000 if SAMSUNG_C1S
 		default 0x0f6200000 if SAMSUNG_G0S
 		default 0x0e2a00000 if SAMSUNG_NOBLELTE
@@ -152,6 +162,7 @@ menu "Device Specific Addresses"
 		int "Framebuffer Width (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 752 if APPLE_N61AP
+		default 720 if SAMSUNG_A127F
 		default 1080 if SAMSUNG_C1S
 		default 1080 if SAMSUNG_G0S
 		default 1440 if SAMSUNG_NOBLELTE
@@ -170,6 +181,7 @@ menu "Device Specific Addresses"
 		int "Framebuffer Height (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 1334 if APPLE_N61AP
+		default 1600 if SAMSUNG_A127F
 		default 2400 if SAMSUNG_C1S
 		default 2340 if SAMSUNG_G0S
 		default 2560 if SAMSUNG_NOBLELTE
@@ -188,6 +200,7 @@ menu "Device Specific Addresses"
 		int "Framebuffer Stride (for SimpleFB)"
 		depends on SIMPLE_FB
 		default 4 if APPLE_N61AP
+		default 4 if SAMSUNG_A127F
 		default 4 if SAMSUNG_C1S
 		default 4 if SAMSUNG_G0S
 		default 4 if SAMSUNG_NOBLELTE

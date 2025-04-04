@@ -38,6 +38,13 @@ config QUALCOMM
 		help
 		  Say Y if your device uses Samsung Exynos2200 SoC
 
+	config EXYNOS_3830
+		bool "Support for Exynos 850"
+		default n
+		select EXYNOS
+		help
+		  Say Y if your device uses Samsung Exynos850 SoC
+
 	config EXYNOS_7420
 		bool "Support for Exynos 7420"
 		default n
