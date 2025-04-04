@@ -137,6 +137,7 @@ menu "Device Specific Addresses"
 		default 0x084000000 if SAMSUNG_G0S
 		default 0x084000000 if SAMSUNG_X1S
 		default 0x084000000 if SAMSUNG_R8S
+		default 0x084000000 if SAMSUNG_GTA4XL
 		default 0x51100000 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_BASE
