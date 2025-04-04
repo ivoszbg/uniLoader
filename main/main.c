@@ -8,23 +8,23 @@
 #include <string.h>
 #include <lib/debug.h>
 
-/*
- * Provide an empty board config that has
- * to be filled in the board files
- * TODO: figure out why having it in
- * the board files makes devices reboot.
- */
-struct board_data board = {
-	.name = "default",
-	.ops = {
-		[BOARD_OP_INIT] = BOARD_OP_INIT,
-		[BOARD_OP_LATE_INIT] = BOARD_OP_LATE_INIT,
-		[BOARD_OP_DRIVER_SETUP] = BOARD_OP_DRIVER_SETUP,
-	}
-};
-
 void main(void* dt, void* kernel, void* ramdisk)
 {
+	/*
+	 * Provide an empty board config that has
+	 * to be filled in the board files
+	 * TODO: figure out why having it in
+	 * the board files makes devices reboot.
+	 */
+	struct board_data board = {
+		.name = "default",
+		.ops = {
+			[BOARD_OP_INIT] = BOARD_OP_INIT,
+			[BOARD_OP_LATE_INIT] = BOARD_OP_LATE_INIT,
+			[BOARD_OP_DRIVER_SETUP] = BOARD_OP_DRIVER_SETUP,
+		}
+	};
+
 	/* Initialize SoC and Board specific peripherals/quirks */
 	init_board_funcs(&board);
 
