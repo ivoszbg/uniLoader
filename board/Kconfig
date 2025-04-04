@@ -89,6 +89,13 @@ menu "Device Support"
                 depends on EXYNOS_990
                 help
                   Say Y if you want to include support for Samsung Galaxy S20 FE
+
+	config VOLLA_ALGIZ
+		bool "Support for Volla Phone Quintus"
+		default n
+		depends on MT6877
+		help
+		  Say Y if you want to include support for Volla Phone Quintus
 endmenu
 
 menu "Device Specific Addresses"
@@ -112,6 +119,7 @@ menu "Device Specific Addresses"
 		default 0x090000000 if SAMSUNG_J5LTE
 		default 0x090000000 if SAMSUNG_GTA4XL
 		default 0x090000000 if SAMSUNG_R8S
+		default 0x60000000 if VOLLA_ALGIZ
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
@@ -120,6 +128,7 @@ menu "Device Specific Addresses"
 		default 0x084000000 if SAMSUNG_G0S
 		default 0x084000000 if SAMSUNG_X1S
 		default 0x084000000 if SAMSUNG_R8S
+		default 0x51100000 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
@@ -137,6 +146,7 @@ menu "Device Specific Addresses"
 		default 0x08e000000 if SAMSUNG_J5LTE
 		default 0x0ca000000 if SAMSUNG_GTA4XL
 		default 0x0f1000000 if SAMSUNG_R8S
+		default 0x7d010000 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_WIDTH
 		int "Framebuffer Width (for SimpleFB)"
@@ -154,6 +164,7 @@ menu "Device Specific Addresses"
 		default 720 if SAMSUNG_J5LTE
 		default 1200 if SAMSUNG_GTA4XL
 		default 1080 if SAMSUNG_R8S
+		default 1080 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_HEIGHT
 		int "Framebuffer Height (for SimpleFB)"
@@ -171,6 +182,7 @@ menu "Device Specific Addresses"
 		default 1280 if SAMSUNG_J5LTE
 		default 2000 if SAMSUNG_GTA4XL
 		default 2400 if SAMSUNG_R8S
+		default 2400 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_STRIDE
 		int "Framebuffer Stride (for SimpleFB)"
@@ -188,6 +200,7 @@ menu "Device Specific Addresses"
 		default 3 if SAMSUNG_J5LTE
 		default 4 if SAMSUNG_GTA4XL
 		default 4 if SAMSUNG_R8S
+		default 4 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_BGRA
 		bool "Framebuffer BGRA (for SimpleFB)"
