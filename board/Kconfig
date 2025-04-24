@@ -28,6 +28,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for CMF Phone 1
 
+	config NOKIA_ESSENTIAL
+		bool "Support for Nokia 3"
+		default n
+		depends on MT6735
+		help
+		  Say Y if you want to include support for Nokia 3
+
 	config NOTHING_TETRIS_DISABLE_WDT
 		bool "Disable the watchdog timer on startup"
 		default y
