@@ -20,6 +20,14 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy A12 Nacho
 
+	config SAMSUNG_A305F
+		bool "Support for Samsung Galaxy A30"
+		default n
+		depends on EXYNOS_7885
+		help
+		   Say Y if you want to include support for Samsung Galaxy A30
+
+
 	config SAMSUNG_A336B
 		bool "Support for Samsung Galaxy A33"
 		default n
@@ -130,6 +138,7 @@ menu "Device Specific Addresses"
 		default 0x830000000 if APPLE_N61AP
 		default 0x090000000 if SAMSUNG_A105F
 		default 0x090008000 if SAMSUNG_A127F
+		default 0x090000000 if SAMSUNG_A305F
 		default 0x090000000 if SAMSUNG_A336B
 		default 0x090000000 if SAMSUNG_C1S
 		default 0x090000000 if SAMSUNG_G0S
@@ -149,6 +158,7 @@ menu "Device Specific Addresses"
 		hex "Ramdisk Entry Address"
 		default 0x084000000 if SAMSUNG_A105F
 		default 0x082000000 if SAMSUNG_A127F
+		default 0x089000000 if SAMSUNG_A305F
 		default 0x084000000 if SAMSUNG_A336B
 		default 0x082000000 if SAMSUNG_DREAMLTE
 		default 0x084000000 if SAMSUNG_C1S
@@ -164,6 +174,7 @@ menu "Device Specific Addresses"
 		default 0x83e900000 if APPLE_N61AP
 		default 0x0ec000000 if SAMSUNG_A105F
 		default 0x0fa000000 if SAMSUNG_A127F
+		default 0x0ec000000 if SAMSUNG_A305F
 		default 0x0fa200000 if SAMSUNG_A336B
 		default 0x0f1000000 if SAMSUNG_C1S
 		default 0x0f6200000 if SAMSUNG_G0S
@@ -185,6 +196,7 @@ menu "Device Specific Addresses"
 		default 752 if APPLE_N61AP
 		default 720 if SAMSUNG_A105F
 		default 720 if SAMSUNG_A127F
+		default 1080 if SAMSUNG_A305F
 		default 1080 if SAMSUNG_A336B
 		default 1080 if SAMSUNG_C1S
 		default 1080 if SAMSUNG_G0S
@@ -206,6 +218,7 @@ menu "Device Specific Addresses"
 		default 1334 if APPLE_N61AP
 		default 1520 if SAMSUNG_A105F
 		default 1600 if SAMSUNG_A127F
+		default 2340 if SAMSUNG_A305F
 		default 2400 if SAMSUNG_A336B
 		default 2400 if SAMSUNG_C1S
 		default 2340 if SAMSUNG_G0S
@@ -227,6 +240,7 @@ menu "Device Specific Addresses"
 		default 4 if APPLE_N61AP
 		default 4 if SAMSUNG_A105F
 		default 4 if SAMSUNG_A127F
+		default 4 if SAMSUNG_A305F
 		default 4 if SAMSUNG_A336B
 		default 4 if SAMSUNG_C1S
 		default 4 if SAMSUNG_G0S
