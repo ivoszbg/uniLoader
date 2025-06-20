@@ -4,6 +4,23 @@
  */
 #include "asmdefs.h"
 
+_head:
+        mov x1,_start
+        b      _start
+
+_stack_base:
+        .quad 0x0
+
+_stack_size:
+         .quad _stack_end
+         .quad 0
+         .quad 0
+         .quad 0
+         .quad 0
+         .ascii "ARM\x64"
+         .long 0
+
+.align 4
 .section .text
 ENTRY(_start)
 	/* Set up the base address for the stack */
