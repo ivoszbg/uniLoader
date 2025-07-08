@@ -16,5 +16,5 @@
 #define KERN_INFO	6
 #define KERN_DEBUG	7
 
-extern void printk(int loglevel, char *text);
+extern void printk(int log_level, const char *fmt, ...);
 #endif // DEBUG_H_

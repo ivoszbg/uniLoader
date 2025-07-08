@@ -5,9 +5,24 @@
 
 #include <stddef.h>
 #include <string.h>
+#include <stdarg.h>
 #include <lib/debug.h>
 #include <lib/simplefb.h>
 #include <lib/video/font.h>
+
+#define NANOPRINTF_IMPLEMENTATION
+#define NANOPRINTF_USE_FIELD_WIDTH_FORMAT_SPECIFIERS	1
+#define NANOPRINTF_USE_PRECISION_FORMAT_SPECIFIERS	1
+#define NANOPRINTF_USE_FLOAT_FORMAT_SPECIFIERS		0
+#define NANOPRINTF_USE_SMALL_FORMAT_SPECIFIERS		1
+#define NANOPRINTF_USE_LARGE_FORMAT_SPECIFIERS		0
+#define NANOPRINTF_USE_BINARY_FORMAT_SPECIFIERS		1
+#define NANOPRINTF_USE_WRITEBACK_FORMAT_SPECIFIERS	1
+#define NANOPRINTF_USE_ALT_FORM_FLAG			1
+
+#include <lib/nanoprintf.h>
+
+#define PRINTK_BUFFER_SIZE 256
 
 long int debug_linecount = 0;
 
@@ -16,8 +31,11 @@ void uart_puts(const char *s);
 // Global log level that controls the verbosity
 static int global_loglevel = CONFIG_LOGLEVEL;
 
-void printk(int log_level, char *text)
+void printk(int log_level, const char *fmt, ...)
 {
+	static char print_buffer[PRINTK_BUFFER_SIZE];
+	va_list args;
+
 	if (log_level > global_loglevel)
 		return;
 
@@ -52,9 +70,13 @@ void printk(int log_level, char *text)
 		break;
 	}
 
+	va_start(args, fmt);
+	npf_vsnprintf(print_buffer, sizeof(print_buffer), fmt, args);
+	va_end(args);
+
 #ifdef CONFIG_UART_DEBUG
 	uart_puts(prefix);
-	uart_puts(text);
+	uart_puts(print_buffer);
 	uart_puts("\r");
 #endif
 
@@ -64,8 +86,8 @@ void printk(int log_level, char *text)
 	int prefix_width = strlen(prefix) * SCALED_FONTW;
 
 	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, prefix, 0, y_pos,
-		  CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
-	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, text, prefix_width, y_pos,
-		  CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
+	CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
+	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, print_buffer, prefix_width, y_pos,
+	CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
 #endif
 }
