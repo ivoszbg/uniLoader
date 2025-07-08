@@ -6,6 +6,10 @@ config EXYNOS
 	bool
 	default n
 
+config FREESCALE
+	bool
+	default n
+
 config MEDIATEK
 	bool
 	default n
@@ -114,4 +118,11 @@ config QUALCOMM
 		select QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
+
+	config FREESCALE_IMX6SL
+		bool "Support for Freescale i.MX6SL"
+		default n
+		select FREESCALE
+		help
+		  Say Y if your device uses i.MX6SL
  endchoice

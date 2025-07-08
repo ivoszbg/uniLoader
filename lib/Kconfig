@@ -4,4 +4,10 @@ menu "Libraries"
 		default y
 		help
 		  Say Y if you want to have Framebuffer output.
+
+	config UART_DEBUG
+		bool "Support for UART debugging"
+		default n
+		help
+		  Say Y if you want to have UART output.
 endmenu

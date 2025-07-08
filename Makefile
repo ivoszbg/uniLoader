@@ -206,6 +206,11 @@ KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 
+ifeq ($(ARCH), arm)
+KBUILD_CFLAGS += -march=armv7-a -mfloat-abi=soft -mtune=cortex-a9
+KBUILD_AFLAGS += -march=armv7-a -mfloat-abi=soft -mtune=cortex-a9
+endif
+
 # Read KERNELRELEASE from include/config/kernel.release (if it exists)
 KERNELRELEASE = $(shell cat include/config/kernel.release 2> /dev/null)
 KERNELVERSION = $(VERSION)$(if $(PATCHLEVEL),.$(PATCHLEVEL)$(if $(SUBLEVEL),.$(SUBLEVEL)))$(EXTRAVERSION)
@@ -345,9 +350,7 @@ all: arch/$(ARCH)/linker.lds uniLoader
 main-y		:= arch/$(ARCH)/start.o \
 		   main/main.o
 
-ifeq ($(ARCH), aarch64)
 arch-libs-y	:= arch/$(ARCH)/memcpy.o
-endif
 
 # Object directories
 objs-y		:= main

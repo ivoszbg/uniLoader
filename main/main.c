@@ -45,10 +45,15 @@ void main(void* dt, void* kernel, void* ramdisk)
 	/* Copy kernel to memory and boot  */
 	printk(-1, "Booting linux...\n");
 
+#ifdef __aarch64__
 	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
 	__optimized_memcpy((void*)CONFIG_RAMDISK_ENTRY, ramdisk, (unsigned long) &ramdisk_size);
-	load_kernel(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
-
+	load_kernel_and_jump(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
+#elif __arm__
+	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) kernel_size);
+	memcpy((void*)CONFIG_RAMDISK_ENTRY, ramdisk, (unsigned long) ramdisk_size);
+	load_kernel_and_jump(0, 0, dt, (void*)CONFIG_PAYLOAD_ENTRY);
+#endif
 	/* We shouldn't get there */
 	printk(KERN_WARNING, "Something wrong happened, we shouldn't be here. Hanging....\n");
 	while(1) {}

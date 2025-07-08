@@ -11,6 +11,8 @@
 
 long int debug_linecount = 0;
 
+void uart_puts(const char *s);
+
 // Global log level that controls the verbosity
 static int global_loglevel = CONFIG_LOGLEVEL;
 
@@ -49,6 +51,12 @@ void printk(int log_level, char *text)
 		prefix = "[LOG] ";
 		break;
 	}
+
+#ifdef CONFIG_UART_DEBUG
+	uart_puts(prefix);
+	uart_puts(text);
+	uart_puts("\r");
+#endif
 
 #ifdef CONFIG_SIMPLE_FB
 	// Actually the first line's Y pos. Scales in __simplefb_raw_print

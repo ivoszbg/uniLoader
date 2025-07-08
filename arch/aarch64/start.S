@@ -24,6 +24,6 @@ ENTRY(_start)
 	bl main
 END(_start)
 
-ENTRY(load_kernel)
+ENTRY(load_kernel_and_jump)
 	br	x4
-END(load_kernel)
+END(load_kernel_and_jump)

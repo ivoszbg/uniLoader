@@ -78,43 +78,15 @@ static void *__optimized_memcpy (void *dst0, const void *src0, size_t len0)
 
 // Assembly-driven functions
 #ifdef __aarch64__
+
 void *memcpy (void *__restrict, const void *__restrict, size_t);
 void *memmove (void *, const void *, size_t);
-#endif
 
-#ifdef __arm__
-void *memcpy (void *s1, const void *s2, size_t n)
-{
-	char *dest = (char *)s1;
-	const char *src = (const char *)s2;
+#elif __arm__
 
-	while (n--) {
-		*dest++ = *src++;
-	}
+void *__memcpy_arm (void *__restrict, const void *__restrict, size_t);
+#define memcpy __memcpy_arm
 
-	return s1;
-}
-
-void *memmove (void *s1, const void *s2, size_t n)
-{
-	char *dest = (char *)s1;
-	const char *src = (const char *)s2;
-
-	if (dest <= src) {
-		while (n--) {
-			*dest++ = *src++;
-		}
-	} else {
-		src += n;
-		dest += n;
-
-		while (n--) {
-			*--dest = *--src;
-		}
-	}
-
-	return s1;
-}
 #endif
 
 static inline int tolower (int c)

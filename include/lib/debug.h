@@ -17,5 +17,4 @@
 #define KERN_DEBUG	7
 
 extern void printk(int loglevel, char *text);
-
 #endif // DEBUG_H_
