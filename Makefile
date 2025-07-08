@@ -15,7 +15,6 @@ MAKEFLAGS += -rR --no-print-directory
 
 # To put more focus on warnings, be less verbose as default
 # Use 'make V=1' to see the full commands
-
 ifeq ("$(origin V)", "command line")
   KBUILD_VERBOSE = $(V)
 endif
@@ -100,9 +99,10 @@ VPATH		:= $(srctree)
 
 export srctree objtree VPATH
 
+# Configuration variables
 CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 KERNEL_PATH	?= $(CONFIG_KERNEL_PATH:"%"=%)
-DT_PATH	?= $(CONFIG_DT_PATH:"%"=%)
+DT_PATH		?= $(CONFIG_DT_PATH:"%"=%)
 RAMDISK_PATH	?= $(CONFIG_RAMDISK_PATH:"%"=%)
 TEXT_BASE	?= $(CONFIG_TEXT_BASE:"%"=%)
 
@@ -114,9 +114,11 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	  else if [ -x /bin/bash ]; then echo /bin/bash; \
 	  else echo sh; fi ; fi)
 
+# Host tools
 HOSTCC       = gcc
 HOSTCXX      = g++
-HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer -Wno-builtin-declaration-mismatch
+HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 \
+               -fomit-frame-pointer -Wno-builtin-declaration-mismatch
 HOSTCXXFLAGS = -O2
 
 # Beautify output
@@ -167,7 +169,6 @@ $(srctree)/scripts/Kbuild.include: ;
 include $(srctree)/scripts/Kbuild.include
 
 # Make variables (CC, etc...)
-
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
 CC		= $(CROSS_COMPILE)gcc
@@ -202,10 +203,12 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-delete-null-pointer-checks \
 		   -Wno-builtin-declaration-mismatch -Wno-main -nostdinc \
 		   -I$(srctree)/lib/unic
+
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 
+# Architecture-specific flags
 ifeq ($(ARCH), arm)
 KBUILD_CFLAGS += -march=armv7-a -mfloat-abi=soft -mtune=cortex-a9
 KBUILD_AFLAGS += -march=armv7-a -mfloat-abi=soft -mtune=cortex-a9
@@ -227,8 +230,8 @@ export KBUILD_AFLAGS_KERNEL KBUILD_CFLAGS_KERNEL
 export KBUILD_ARFLAGS
 
 # Files to ignore in find ... statements
-
-RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o -name CVS -o -name .pc -o -name .hg -o -name .git \) -prune -o
+RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o -name CVS \
+                    -o -name .pc -o -name .hg -o -name .git \) -prune -o
 
 # ===========================================================================
 # Rules shared between *config targets and build targets
@@ -251,7 +254,6 @@ ifneq ($(KBUILD_SRC),)
 	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/mkmakefile \
 	    $(srctree) $(objtree) $(VERSION) $(PATCHLEVEL)
 endif
-
 
 # To make sure we do not include .config for any of the *config targets
 # catch them early, and hand them over to scripts/kconfig/Makefile
@@ -300,7 +302,6 @@ ifeq ($(config-targets),1)
 # Read arch specific Makefile to set KBUILD_DEFCONFIG as needed.
 # KBUILD_DEFCONFIG may point out an alternative default configuration
 # used for 'make defconfig'
-#include $(srctree)/arch/$(SRCARCH)/Makefile
 export KBUILD_DEFCONFIG KBUILD_KCONFIG
 
 config: scripts_basic outputmakefile FORCE
@@ -313,11 +314,9 @@ config: scripts_basic outputmakefile FORCE
 
 else
 
-
 ifeq ($(dot-config),1)
 # Read in config
 -include include/config/auto.conf
-
 
 # Read in dependencies to all Kconfig* files, make sure to run
 # oldconfig if changes are detected.
@@ -333,92 +332,90 @@ $(KCONFIG_CONFIG) include/config/auto.conf.cmd: ;
 include/config/%.conf: $(KCONFIG_CONFIG) include/config/auto.conf.cmd
 	$(Q)$(MAKE) -f $(srctree)/Makefile silentoldconfig
 
-
 else
 # Dummy target needed, because used as prerequisite
 include/config/auto.conf: ;
 endif # $(dot-config)
 
+# ===========================================================================
+# uniLoader build configuration
 
-# The all: target is the default when no target is given on the
-# command line.
-# This allow a user to issue only 'make' to build a kernel including modules
-# Defaults to vmlinux, but the arch makefile usually adds further targets
+# Main object files and architecture-specific libraries
+uniloader-main-y := arch/built-in.o main/built-in.o
+
+# Directory structure
+uniloader-obj-dirs := main arch
+uniloader-lib-dirs := soc board lib drivers
+
+# All directories that need to be built
+uniloader-all-dirs := $(uniloader-obj-dirs) $(uniloader-lib-dirs)
+
+# Build products
+uniloader-objs := $(patsubst %,%/built-in.o, $(uniloader-obj-dirs))
+uniloader-libs := $(patsubst %,%/lib.a, $(uniloader-lib-dirs))
+uniloader-all := $(uniloader-objs) $(uniloader-libs)
+
+# Linker script dependencies
+linker-script-deps := $(KERNEL_PATH) $(RAMDISK_PATH)
+
+# ===========================================================================
+# Build targets
+
+# The all: target is the default when no target is given on the command line.
+# This allows a user to issue only 'make' to build uniLoader
 all: arch/$(ARCH)/linker.lds uniLoader
 
-# List of main executables
-main-y		:= arch/$(ARCH)/start.o \
-		   main/main.o
+# Generate linker script from template
+quiet_cmd_cpp_lds = LDS     $@
+      cmd_cpp_lds = $(CPP) $< -DTEXT_BASE=$(TEXT_BASE) \
+                            -DKERNEL_PATH=$(KERNEL_PATH) \
+                            -DDTB_PATH=$(DT_PATH) \
+                            -DRAMDISK_PATH=$(RAMDISK_PATH) \
+                            -P -o $@
 
-arch-libs-y	:= arch/$(ARCH)/memcpy.o
+arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(linker-script-deps)
+	$(call if_changed,cpp_lds)
 
-# Object directories
-objs-y		:= main
-objs-y		+= arch
+# Link uniLoader
+quiet_cmd_uniloader_link = LD      $@.o
+      cmd_uniloader_link = $(LD) $(uniloader-main-y) $(uniloader-libs) -o $@.o \
+                                 --script=arch/$(ARCH)/linker.lds
 
-# Libraries
-libs-y		:= soc
-libs-y		+= board
-libs-y		+= lib
-libs-y		+= drivers
+quiet_cmd_uniloader_objcopy = OBJCOPY $@
+      cmd_uniloader_objcopy = $(OBJCOPY) -O binary $@.o $@
 
-uniLoader-dirs	:= $(objs-y) $(libs-y)
-uniLoader-objs	:= $(patsubst %,%/built-in.o, $(objs-y))
-uniLoader-libs	:= $(patsubst %,%/lib.a, $(libs-y))
-
-uniLoader-mains := $(objs-y)/*.o
-
-uniLoader-all	:= $(uniLoader-objs) $(uniLoader-libs)
-
-# Do modpost on a prelinked vmlinux. The finally linked vmlinux has
-# relevant sections renamed as per the linker script.
-quiet_cmd_uniLoader = LD      $@.o
-      cmd_uniLoader = $(LD) $(main-y) $(arch-libs-y) $(uniLoader-libs) -o $@.o --script=arch/$(ARCH)/linker.lds
-
-arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(KERNEL_PATH) $(RAMDISK_PATH)
-	$(CPP) $< -DTEXT_BASE=$(TEXT_BASE) -DKERNEL_PATH=$(KERNEL_PATH) -DDTB_PATH=$(DT_PATH) -DRAMDISK_PATH=$(RAMDISK_PATH) -P -o $@
-
-uniLoader: $(uniLoader-all)
-	$(call if_changed,uniLoader)
-	@echo '  OBJCOPY $@'
-	$(OBJCOPY) -O binary uniLoader.o uniLoader
+uniLoader: $(uniloader-all) arch/$(ARCH)/linker.lds FORCE
+	$(call if_changed,uniloader_link)
+	$(call if_changed,uniloader_objcopy)
 
 # The actual objects are generated when descending, 
 # make sure no implicit rule kicks in
-$(sort $(uniLoader-all)): $(uniLoader-dirs) ;
+$(uniloader-all): $(uniloader-all-dirs) ;
 
-# Handle descending into subdirectories listed in $(vmlinux-dirs)
+# Handle descending into subdirectories
 # Preset locale variables to speed up the build process. Limit locale
 # tweaks to this spot to avoid wrong language settings when running
 # make menuconfig etc.
 # Error messages still appears in the original language
-
-#PHONY += $(vmlinux-dirs)
-#$(vmlinux-dirs): prepare scripts
-PHONY += $(uniLoader-dirs)
-$(uniLoader-dirs): scripts_basic
+PHONY += $(uniloader-all-dirs)
+$(uniloader-all-dirs): scripts_basic
 	$(Q)$(MAKE) $(build)=$@
 
-###
-# Cleaning is done on three levels.
-# make clean     Delete most generated files
-#                Leave enough to build external modules
-# make mrproper  Delete the current configuration, and all generated files
-# make distclean Remove editor backup files, patch leftover files and the like
+# ===========================================================================
+# Cleaning targets
 
 # Directories & files removed with 'make clean'
 CLEAN_DIRS  +=
-CLEAN_FILES +=	uniLoader
+CLEAN_FILES += uniLoader uniLoader.o arch/$(ARCH)/linker.lds
 
 # Directories & files removed with 'make mrproper'
 MRPROPER_DIRS  += include/config include/generated
 MRPROPER_FILES += .config .config.old tags TAGS cscope* GPATH GTAGS GRTAGS GSYMS
 
 # clean - Delete most, but leave enough to build external modules
-#
 clean: rm-dirs  := $(CLEAN_DIRS)
 clean: rm-files := $(CLEAN_FILES)
-clean-dirs      := $(addprefix _clean_, $(uniLoader-dirs))
+clean-dirs      := $(addprefix _clean_, $(uniloader-all-dirs))
 
 PHONY += $(clean-dirs) clean archclean
 $(clean-dirs):
@@ -429,12 +426,11 @@ clean: $(clean-dirs)
 	$(call cmd,rmfiles)
 	@find . $(RCS_FIND_IGNORE) \
 		\( -name '*.[oas]' -o -name '.*.cmd' \
-		-o -name '.*.d' -o -name '.*.tmp' -o -name '*.mod.c' -o -name '*.lds' \
+		-o -name '.*.d' -o -name '.*.tmp' -o -name '*.mod.c' \
 		-o -name modules.builtin -o -name '.tmp_*.o.*' \
 		-o -name '*.gcno' \) -type f -print | xargs rm -f
 
 # mrproper - Delete all generated files, including .config
-#
 mrproper: rm-dirs  := $(wildcard $(MRPROPER_DIRS))
 mrproper: rm-files := $(wildcard $(MRPROPER_FILES))
 mrproper-dirs      := $(addprefix _mrproper_, scripts)
@@ -448,7 +444,6 @@ mrproper: clean $(mrproper-dirs)
 	$(call cmd,rmfiles)
 
 # distclean
-#
 PHONY += distclean
 distclean: mrproper
 	@find $(srctree) $(RCS_FIND_IGNORE) \
@@ -458,9 +453,8 @@ distclean: mrproper
 		-o -name '*%' -o -name '.*.cmd' -o -name 'core' \) \
 		-type f -print | xargs rm -f
 
-
-# FIXME Should go into a make.lib or something
 # ===========================================================================
+# Helper commands
 
 quiet_cmd_rmdirs = $(if $(wildcard $(rm-dirs)),CLEAN   $(wildcard $(rm-dirs)))
       cmd_rmdirs = rm -rf $(rm-dirs)
@@ -473,7 +467,8 @@ quiet_cmd_rmfiles = $(if $(wildcard $(rm-files)),CLEAN   $(wildcard $(rm-files))
 # $(Q)$(MAKE) $(clean)=dir
 clean := -f $(if $(KBUILD_SRC),$(srctree)/)scripts/Makefile.clean obj
 
-
+# ===========================================================================
+# Help
 
 help:
 	@echo  'Cleaning targets:'
@@ -487,7 +482,7 @@ help:
 	@echo  ''
 	@echo  'Other generic targets:'
 	@echo  '  all		  - Build all targets marked with [*]'
-	@echo  '* uniLoader	  	  - Build the application'
+	@echo  '* uniLoader	  - Build the uniLoader application'
 	@echo  '  dir/            - Build all files in dir and below'
 	@echo  '  dir/file.[oisS] - Build specified target only'
 	@echo  '  dir/file.lst    - Build specified mixed source/assembly target only'
@@ -497,21 +492,14 @@ help:
 	@echo  '  gtags           - Generate GNU GLOBAL index'
 	@echo  '  kernelrelease	  - Output the release version string'
 	@echo  '  kernelversion	  - Output the version stored in Makefile'
-	 echo  ''
-	@echo  'Static analysers'
+	@echo  ''
+	@echo  'Static analysers:'
 	@echo  '  checkstack      - Generate a list of stack hogs'
 	@echo  '  namespacecheck  - Name space analysis on compiled kernel'
 	@echo  '  versioncheck    - Sanity check on version.h usage'
 	@echo  '  includecheck    - Check for duplicate included header files'
 	@echo  '  export_report   - List the usages of all exported symbols'
 	@echo  '  headers_check   - Sanity check on exported headers'
-#	@$(MAKE) -f $(srctree)/scripts/Makefile.help checker-help
-	@echo  ''
-#	@echo  'Kernel packaging:'
-#	@$(MAKE) $(build)=$(package-dir) help
-	@echo  ''
-#	@echo  'Documentation targets:'
-#	@$(MAKE) -f $(srctree)/Documentation/DocBook/Makefile dochelp
 	@echo  ''
 	@echo  '  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build'
 	@echo  '  make V=2   [targets] 2 => give reason for rebuild of target'
@@ -525,7 +513,6 @@ help:
 	@echo  ''
 	@echo  'Execute "make" or "make all" to build all targets marked with [*] '
 	@echo  'For further info see the ./README file'
-
 
 endif #ifeq ($(config-targets),1)
 endif #ifeq ($(mixed-targets),1)

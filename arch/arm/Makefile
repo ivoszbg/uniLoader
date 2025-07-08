@@ -2,4 +2,4 @@
 #
 # Copyright (c) 2025 Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
 
-include arch/$(ARCH)/Makefile
+obj-y += arm/start.o arm/memcpy.o
