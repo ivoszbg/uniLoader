@@ -39,11 +39,11 @@ void main(void* dt, void* kernel, void* ramdisk)
 	printk(-1, "|____/|___|  /__|_______ \\____(____  /\\____ |\\___  >__|\n");
 	printk(-1, "           \\/           \\/         \\/      \\/    \\/\n");
 
-	printk(-1, "Passed board initialization!\n");
-	printk(-1, "Welcome to uniLoader!\n");
+	printk(-1, "passed board initialization\n");
+	printk(-1, "welcome to uniLoader %s\n", VER_TAG);
 
 	/* Copy kernel to memory and boot  */
-	printk(-1, "Booting linux...\n");
+	printk(-1, "booting linux...\n");
 
 #ifdef __aarch64__
 	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);

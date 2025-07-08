@@ -10,6 +10,7 @@
 # o  use make's built-in rules and variables
 #    (this increases performance and avoids hard-to-debug behaviour);
 # o  print "Entering directory ...";
+
 ARCH ?= aarch64
 MAKEFLAGS += -rR --no-print-directory
 
@@ -203,6 +204,11 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-delete-null-pointer-checks \
 		   -Wno-builtin-declaration-mismatch -Wno-main -nostdinc \
 		   -I$(srctree)/lib/unic
+
+# Try to get the version from Git has
+GIT_VERSION_TAG	?= $(shell git rev-parse --short HEAD 2>/dev/null)
+BUILD_DATE	?= $(shell date "+%Y-%m-%d %H:%M:%S" 2>/dev/null)
+KBUILD_CFLAGS	+= -DVER_TAG="\"($(GIT_VERSION_TAG)) - date $(BUILD_DATE)\""
 
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
