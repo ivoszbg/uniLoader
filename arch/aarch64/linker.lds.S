@@ -3,6 +3,8 @@
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 
+ENTRY(_start);
+
 OUTPUT_FORMAT("elf64-littleaarch64")
 OUTPUT_ARCH(aarch64)
 TARGET(binary)
@@ -13,18 +15,28 @@ INPUT(RAMDISK_PATH)
 
 SECTIONS
 {
-	.boot : {
-		arch/aarch64/start.o
-	}
-
-	.text ALIGN(4096) : {
+	.text : {
+		KEEP(*(.text.start))
 		*(.text)
+		*(.text.*)
 	}
 
-	.bss ALIGN(4096) : {
-		_bss_start = .;
-		. = . + 4096;
-		_bss_end = .;
+	.rodata ALIGN(4) : {
+		*(.rodata)
+		*(.rodata.*)
+	}
+
+	.data ALIGN(4) : {
+		*(.data)
+		*(.data.*)
+	}
+
+	.bss ALIGN(4) : {
+		__bss_start = .;
+		*(.bss)
+		*(.bss.*)
+		*(COMMON)
+		__bss_end = .;
 	}
 
 	.stack ALIGN(4096) : {
