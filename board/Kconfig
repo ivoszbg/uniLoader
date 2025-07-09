@@ -135,7 +135,6 @@ menu "Device Specific Addresses"
 
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
-		default 0x090008000 if SAMSUNG_A127F
 		default 0x090000000 if SAMSUNG_A336B
 		default 0x090000000 if SAMSUNG_C1S
 		default 0x090000000 if SAMSUNG_G0S
@@ -152,7 +151,6 @@ menu "Device Specific Addresses"
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
-		default 0x082000000 if SAMSUNG_A127F
 		default 0x084000000 if SAMSUNG_A336B
 		default 0x084000000 if SAMSUNG_C1S
 		default 0x084000000 if SAMSUNG_G0S
@@ -164,7 +162,6 @@ menu "Device Specific Addresses"
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
 		depends on SIMPLE_FB
-		default 0x0fa000000 if SAMSUNG_A127F
 		default 0x0fa200000 if SAMSUNG_A336B
 		default 0x0f1000000 if SAMSUNG_C1S
 		default 0x0f6200000 if SAMSUNG_G0S
@@ -182,7 +179,6 @@ menu "Device Specific Addresses"
 	config FRAMEBUFFER_WIDTH
 		int "Framebuffer Width (for SimpleFB)"
 		depends on SIMPLE_FB
-		default 720 if SAMSUNG_A127F
 		default 1080 if SAMSUNG_A336B
 		default 1080 if SAMSUNG_C1S
 		default 1080 if SAMSUNG_G0S
@@ -200,7 +196,6 @@ menu "Device Specific Addresses"
 	config FRAMEBUFFER_HEIGHT
 		int "Framebuffer Height (for SimpleFB)"
 		depends on SIMPLE_FB
-		default 1600 if SAMSUNG_A127F
 		default 2400 if SAMSUNG_A336B
 		default 2400 if SAMSUNG_C1S
 		default 2340 if SAMSUNG_G0S
@@ -218,7 +213,6 @@ menu "Device Specific Addresses"
 	config FRAMEBUFFER_STRIDE
 		int "Framebuffer Stride (for SimpleFB)"
 		depends on SIMPLE_FB
-		default 4 if SAMSUNG_A127F
 		default 4 if SAMSUNG_A336B
 		default 4 if SAMSUNG_C1S
 		default 4 if SAMSUNG_G0S
