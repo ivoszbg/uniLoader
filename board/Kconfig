@@ -135,7 +135,6 @@ menu "Device Specific Addresses"
 
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
-		default 0x90000000 if AMAZON_PW3
 		default 0x830000000 if APPLE_N61AP
 		default 0x090000000 if SAMSUNG_A105F
 		default 0x090008000 if SAMSUNG_A127F
@@ -156,7 +155,6 @@ menu "Device Specific Addresses"
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
-		default 0x87000000 if AMAZON_PW3
 		default 0x084000000 if SAMSUNG_A105F
 		default 0x082000000 if SAMSUNG_A127F
 		default 0x084000000 if SAMSUNG_A336B
