@@ -44,7 +44,6 @@ void main(void* dt, void* kernel, void* ramdisk)
 
 	/* Copy kernel to memory and boot  */
 	printk(-1, "booting linux...\n");
-
 #ifdef __aarch64__
 	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
 	__optimized_memcpy((void*)CONFIG_RAMDISK_ENTRY, ramdisk, (unsigned long) &ramdisk_size);

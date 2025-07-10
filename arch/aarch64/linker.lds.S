@@ -2,8 +2,14 @@
 /*
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
+ENTRY(
+#ifdef CONFIG_POSITION_INDEPENDENT
+      _head
+#else
+      _start
+#endif
+     );
 
-ENTRY(_start);
 
 OUTPUT_FORMAT("elf64-littleaarch64")
 OUTPUT_ARCH(aarch64)
@@ -15,10 +21,29 @@ INPUT(RAMDISK_PATH)
 
 SECTIONS
 {
+	. = TEXT_BASE;
+
 	.text : {
-		KEEP(*(.text.start))
+#ifdef CONFIG_POSITION_INDEPENDENT
+		_reloc_start = .;
+#endif
 		*(.text)
 		*(.text.*)
+	}
+
+	.kernel ALIGN(4096) : {
+		kernel = .;
+		KERNEL_PATH
+	}
+
+	.dtb ALIGN(4096) : {
+		dtb = .;
+		DTB_PATH
+	}
+
+	.ramdisk ALIGN(4096) : {
+		ramdisk = .;
+		RAMDISK_PATH
 	}
 
 	.rodata ALIGN(4) : {
@@ -42,23 +67,14 @@ SECTIONS
 	.stack ALIGN(4096) : {
 		. = . + 4096;
 		_stack_end = .;
-	}
-
-	.dtb ALIGN(4096) : {
-		dtb = .;
-		DTB_PATH
-	}
-
-	.kernel ALIGN(4096) : {
-		kernel = .;
-		KERNEL_PATH
-	}
-
-	.ramdisk ALIGN(4096) : {
-		ramdisk = .;
-		RAMDISK_PATH
+#ifdef CONFIG_POSITION_INDEPENDENT
+		_reloc_end = .;
+#endif
 	}
 
 	kernel_size = SIZEOF(.kernel);
 	ramdisk_size = SIZEOF(.ramdisk);
+#ifdef CONFIG_POSITION_INDEPENDENT
+	_reloc_size = _reloc_end - _reloc_start;
+#endif
 }

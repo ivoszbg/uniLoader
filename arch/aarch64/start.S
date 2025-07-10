@@ -27,3 +27,4 @@ END(_start)
 ENTRY(load_kernel_and_jump)
 	br	x4
 END(load_kernel_and_jump)
+

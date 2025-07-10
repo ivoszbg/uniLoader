@@ -373,7 +373,8 @@ all: arch/$(ARCH)/linker.lds uniLoader
 
 # Generate linker script from template
 quiet_cmd_cpp_lds = LDS     $@
-      cmd_cpp_lds = $(CPP) $< -DTEXT_BASE=$(TEXT_BASE) \
+      cmd_cpp_lds = $(CPP)  -include include/generated/autoconf.h $< \
+                            -DTEXT_BASE=$(TEXT_BASE) \
                             -DKERNEL_PATH=$(KERNEL_PATH) \
                             -DDTB_PATH=$(DT_PATH) \
                             -DRAMDISK_PATH=$(RAMDISK_PATH) \

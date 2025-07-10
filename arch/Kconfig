@@ -1,0 +1,7 @@
+menu "Architecture"
+	config POSITION_INDEPENDENT
+		bool "Code relocation during early boot"
+		help
+		  Say Y if your previous bootloader loads uniLoader at an unknown
+		  or different address every time.
+endmenu

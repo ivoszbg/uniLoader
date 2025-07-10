@@ -4,6 +4,8 @@
 #
 mainmenu "uniLoader Configuration"
 
+source "arch/Kconfig"
+
 menu "Building options"
 	config CROSS_COMPILE
 		string "Cross-compiler tool prefix"
