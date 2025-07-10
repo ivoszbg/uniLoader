@@ -15,20 +15,6 @@
 #define EXYNOS_MAILBOX_AP2APM	0x15900000
 #define DECON_F_BASE		0x19f00000
 
-void init_board_funcs(void *board)
-{
-	/*
-	 * Parsing the struct directly without restructing is
-	 * broken as of Sep 29 2024
-	 */
-	struct {
-		const char *name;
-		int ops[BOARD_OP_EXIT];
-	} *board_restruct = board;
-
-	board_restruct->name = "G0S";
-}
-
 /* WDT Register MAP */
 #define S5E9925_WDT_BASE				0x10050000
 #define S5E9925_WDT_WTCON				(S5E9925_WDT_BASE + 0x0000)
@@ -85,8 +71,7 @@ void pmic_init(void)
 	spmi_write(mailbox_base, 0, S2MPS25_PM1_ADDR, S2MPS25_REG_LDO28M_CTRL, reg);
 }
 
-// Early initialization
-int board_init(void)
+int g0s_init(void)
 {
 	/* Allow framebuffer to be written to */
 	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
@@ -97,13 +82,7 @@ int board_init(void)
 	return 0;
 }
 
-// Late initialization
-int board_late_init(void)
-{
-	return 0;
-}
-
-int board_driver_setup(void)
+int g0s_drv(void)
 {
 	struct {
 		int width;
@@ -120,3 +99,18 @@ int board_driver_setup(void)
 	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
 	return 0;
 }
+
+int g0s_late_init(void)
+{
+	return 0;
+}
+
+struct board_data board_ops = {
+	.name = "samsung-g0s",
+	.ops = {
+		.early_init = g0s_init,
+		.drivers_init = g0s_drv,
+		.late_init = g0s_late_init,
+	},
+	.quirks = 0
+};

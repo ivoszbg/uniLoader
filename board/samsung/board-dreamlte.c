@@ -18,20 +18,6 @@
 #define DECON_F_BASE			0x12860000
 #define SPEEDY_BASE			0x15b50000
 
-void init_board_funcs(void *board)
-{
-	/*
-	 * Parsing the struct directly without restructing is
-	 * broken as of Sep 29 2024
-	 */
-	struct {
-		const char *name;
-		int ops[BOARD_OP_EXIT];
-	} *board_restruct = board;
-
-	board_restruct->name = "DREAMLTE";
-}
-
 enum s2mps17_ldos {
 	S2MPS17_LDO2,
 	S2MPS17_LDO34,
@@ -120,23 +106,14 @@ static void s2mps17_setup(void)
 	return;
 }
 
-// Early initialization
-int board_init(void)
+int dreamlte_init(void)
 {
-	/* Allow framebuffer to be written to */
+	/* allow framebuffer to be written to */
 	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
 	return 0;
 }
 
-// Late initialization
-int board_late_init(void)
-{
-	s2mps17_setup();
-
-	return 0;
-}
-
-int board_driver_setup(void)
+int dreamlte_drv(void)
 {
 	struct {
 		int width;
@@ -153,3 +130,20 @@ int board_driver_setup(void)
 	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
 	return 0;
 }
+
+int dreamlte_late_init(void)
+{
+	s2mps17_setup();
+
+	return 0;
+}
+
+struct board_data board_ops = {
+	.name = "samsung-dreamlte",
+	.ops = {
+		.early_init = dreamlte_init,
+		.drivers_init = dreamlte_drv,
+		.late_init = dreamlte_late_init,
+	},
+	.quirks = 0
+};

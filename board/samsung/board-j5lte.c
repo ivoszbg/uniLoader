@@ -16,21 +16,7 @@
 #define MDP_CTL_0_BASE                          0x1A02000
 #define MDP_CTL_FLUSH				0x18
 
-void init_board_funcs(void *board)
-{
-	/*
-	 * Parsing the struct directly without restructing is
-	 * broken as of Sep 29 2024
-	 */
-	struct {
-		const char *name;
-		int ops[BOARD_OP_EXIT];
-	} *board_restruct = board;
-
-	board_restruct->name = "J5LTE";
-}
-
-int board_init(void)
+int j5lte_init(void)
 {
 	/* TODO: Doesn't really work :P */
 	writel(0x000236FF, PIPE_BASE + PIPE_SSPP_SRC_FORMAT);
@@ -41,13 +27,7 @@ int board_init(void)
 	return 0;
 }
 
-// Late initialization
-int board_late_init(void)
-{
-	return 0;
-}
-
-int board_driver_setup(void)
+int j5lte_drv(void)
 {
 	struct {
 		int width;
@@ -64,3 +44,18 @@ int board_driver_setup(void)
 	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
 	return 0;
 }
+
+int j5lte_late_init(void)
+{
+	return 0;
+}
+
+struct board_data board_ops = {
+	.name = "samsung-j5lte",
+	.ops = {
+		.early_init = j5lte_init,
+		.drivers_init = j5lte_drv,
+		.late_init = j5lte_late_init,
+	},
+	.quirks = 0
+};

@@ -10,22 +10,8 @@
 #define DECON_F_BASE		0x14830000
 #define HW_SW_TRIG_CONTROL	0x70
 
-void init_board_funcs(void *board)
-{
-	/*
-	 * Parsing the struct directly without restructing is
-	 * broken as of Sep 29 2024
-	 */
-	struct {
-		const char *name;
-		int ops[BOARD_OP_EXIT];
-	} *board_restruct = board;
-
-	board_restruct->name = "J4LTE";
-}
-
 // Early initialization
-int board_init(void)
+int j4lte_init(void)
 {
 	/* Allow framebuffer to be written to */
 	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
@@ -33,12 +19,12 @@ int board_init(void)
 }
 
 // Late initialization
-int board_late_init(void)
+int j4lte_late_init(void)
 {
 	return 0;
 }
 
-int board_driver_setup(void)
+int j4lte_drv(void)
 {
 	struct {
 		int width;
@@ -55,3 +41,13 @@ int board_driver_setup(void)
 	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
 	return 0;
 }
+
+struct board_data board_ops = {
+	.name = "samsung-j4lte",
+	.ops = {
+		.early_init = j4lte_init,
+		.drivers_init = j4lte_drv,
+		.late_init = j4lte_late_init,
+	},
+	.quirks = 0
+};

@@ -6,34 +6,13 @@
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
-void init_board_funcs(void *board)
+int algiz_init(void)
 {
-	/*
-	 * Parsing the struct directly without restructing is
-	 * broken as of Sep 29 2024
-	 */
-	struct {
-		const char *name;
-		int ops[BOARD_OP_EXIT];
-	} *board_restruct = board;
-
-	board_restruct->name = "ALGIZ";
-}
-
-// Early initialization
-int board_init(void)
-{
-	/* TODO: Deal with framebuffer refreshing here */
+	/* TODO: deal with framebuffer refreshing here */
 	return 0;
 }
 
-// Late initialization
-int board_late_init(void)
-{
-	return 0;
-}
-
-int board_driver_setup(void)
+int algiz_drv(void)
 {
 	struct {
 		int width;
@@ -50,3 +29,18 @@ int board_driver_setup(void)
 	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
 	return 0;
 }
+
+int algiz_late_init(void)
+{
+	return 0;
+}
+
+struct board_data board_ops = {
+	.name = "volla-quintus",
+	.ops = {
+		.early_init = algiz_init,
+		.drivers_init = algiz_drv,
+		.late_init = algiz_late_init,
+	},
+	.quirks = 0
+};

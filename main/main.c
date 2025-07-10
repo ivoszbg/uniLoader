@@ -8,29 +8,15 @@
 #include <string.h>
 #include <lib/debug.h>
 
+extern struct board_data board_ops;
+
 void main(void* dt, void* kernel, void* ramdisk)
 {
-	/*
-	 * Provide an empty board config that has
-	 * to be filled in the board files
-	 * TODO: figure out why having it in
-	 * the board files makes devices reboot.
-	 */
-	struct board_data board = {
-		.name = "default",
-		.ops = {
-			[BOARD_OP_INIT] = BOARD_OP_INIT,
-			[BOARD_OP_LATE_INIT] = BOARD_OP_LATE_INIT,
-			[BOARD_OP_DRIVER_SETUP] = BOARD_OP_DRIVER_SETUP,
-		}
-	};
+	if (board_ops.ops.early_init())
+		goto err;
 
-	/* Initialize SoC and Board specific peripherals/quirks */
-	init_board_funcs(&board);
-
-	EXECUTE_BOARD_OP(board.ops[BOARD_OP_INIT]);
-	EXECUTE_BOARD_OP(board.ops[BOARD_OP_DRIVER_SETUP]);
-	EXECUTE_BOARD_OP(board.ops[BOARD_OP_LATE_INIT]);
+	if (board_ops.ops.drivers_init())
+		goto err;
 
 	printk(-1, "             .__.____                     .___\n");
 	printk(-1, " __ __  ____ |__|    |    _________     __| _/___________\n");
@@ -42,7 +28,10 @@ void main(void* dt, void* kernel, void* ramdisk)
 	printk(-1, "passed board initialization\n");
 	printk(-1, "welcome to uniLoader %s\n", VER_TAG);
 
-	/* Copy kernel to memory and boot  */
+	if (board_ops.ops.late_init())
+		goto err;
+
+	/* copy kernel to memory and boot  */
 	printk(-1, "booting linux...\n");
 #ifdef __aarch64__
 	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
@@ -53,7 +42,10 @@ void main(void* dt, void* kernel, void* ramdisk)
 	memcpy((void*)CONFIG_RAMDISK_ENTRY, ramdisk, (unsigned long) ramdisk_size);
 	load_kernel_and_jump(0, 0, dt, (void*)CONFIG_PAYLOAD_ENTRY);
 #endif
-	/* We shouldn't get there */
+
+ err:
+	/* we shouldn't get there */
+	/* TODO: make this a per-board reset */
 	printk(KERN_WARNING, "Something wrong happened, we shouldn't be here. Hanging....\n");
 	while(1) {}
 }

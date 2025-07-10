@@ -6,31 +6,12 @@
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
-void init_board_funcs(void *board)
-{
-	/*
-	 * Parsing the struct directly without restructing is
-	 * broken as of Sep 29 2024
-	 */
-	struct {
-		const char *name;
-		int ops[BOARD_OP_EXIT];
-	} *board_restruct = board;
-
-	board_restruct->name = "N61AP";
-}
-
-int board_init(void)
+int n61ap_init(void)
 {
 	return 0;
 }
 
-int board_late_init(void)
-{
-	return 0;
-}
-
-int board_driver_setup(void)
+int n61ap_drv(void)
 {
 	struct {
 		int width;
@@ -47,3 +28,18 @@ int board_driver_setup(void)
 	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
 	return 0;
 }
+
+int n61ap_late_init(void)
+{
+	return 0;
+}
+
+struct board_data board_ops = {
+	.name = "apple-iphone6",
+	.ops = {
+		.early_init = n61ap_init,
+		.drivers_init = n61ap_drv,
+		.late_init = n61ap_late_init,
+	},
+	.quirks = 0
+};

@@ -9,28 +9,18 @@
 #include <soc/exynos3830.h>
 #include <stdint.h>
 
-void init_board_funcs(void *board)
-{
-	struct {
-		const char *name;
-		int ops[BOARD_OP_EXIT];
-	} *board_restruct = board;
-
-        board_restruct->name = "A127F";
-}
-
-int board_init(void)
+int a127f_init(void)
 {
 	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
 	return 0;
 }
 
-int board_late_init(void)
+int a127f_late_init(void)
 {
 	return 0;
 }
 
-int board_driver_setup(void)
+int a127f_drv(void)
 {
 	struct {
 		int width;
@@ -47,3 +37,13 @@ int board_driver_setup(void)
 	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
 	return 0;
 }
+
+struct board_data board_ops = {
+	.name = "samsung-a127f",
+	.ops = {
+		.early_init = a127f_init,
+		.drivers_init = a127f_drv,
+		.late_init = a127f_late_init,
+	},
+	.quirks = 0
+};
