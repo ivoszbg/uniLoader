@@ -20,6 +20,5 @@ extern void load_kernel_and_jump(unsigned int r0, unsigned int r1,
 #endif
 
 extern void soc_init(void);
-extern void writel(unsigned int value, void* address);
 
 #endif // MAIN_H_
