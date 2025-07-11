@@ -113,21 +113,21 @@ int dreamlte_init(void)
 	return 0;
 }
 
+#ifdef CONFIG_SIMPLE_FB
+static struct video_info dreamlte_fb = {
+	.format = FB_FORMAT_ARGB8888,
+	.width = CONFIG_FRAMEBUFFER_WIDTH,
+	.height = CONFIG_FRAMEBUFFER_HEIGHT,
+	.stride = CONFIG_FRAMEBUFFER_STRIDE,
+	.address = (void *)CONFIG_FRAMEBUFFER_BASE
+};
+#endif
+
 int dreamlte_drv(void)
 {
-	struct {
-		int width;
-		int height;
-		int stride;
-		void *address;
-	} simplefb_data = {
-		.width = 1440,
-		.height = 2960,
-		.stride = 4,
-		.address = (void *)0xcc000000
-	};
-
-	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
+#ifdef CONFIG_SIMPLE_FB
+	REGISTER_DRIVER("simplefb", simplefb_probe, &dreamlte_fb);
+#endif
 	return 0;
 }
 

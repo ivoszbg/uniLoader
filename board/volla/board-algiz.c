@@ -12,21 +12,21 @@ int algiz_init(void)
 	return 0;
 }
 
+#ifdef CONFIG_SIMPLE_FB
+static struct video_info algiz_fb = {
+	.format = FB_FORMAT_ARGB8888,
+	.width = 1080,
+	.height = 2400,
+	.stride = 4,
+	.address = (void *)0x7d010000
+};
+#endif
+
 int algiz_drv(void)
 {
-	struct {
-		int width;
-		int height;
-		int stride;
-		void *address;
-	} simplefb_data = {
-		.width = 1080,
-		.height = 2400,
-		.stride = 4,
-		.address = (void *)0x7d010000
-	};
-
-	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
+#ifdef CONFIG_SIMPLE_FB
+	REGISTER_DRIVER("simplefb", simplefb_probe, &algiz_fb);
+#endif
 	return 0;
 }
 

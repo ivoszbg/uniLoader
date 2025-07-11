@@ -11,21 +11,21 @@ int n61ap_init(void)
 	return 0;
 }
 
+#ifdef CONFIG_SIMPLE_FB
+static struct video_info n61ap_fb = {
+	.format = FB_FORMAT_ARGB8888,
+	.width = CONFIG_FRAMEBUFFER_WIDTH,
+	.height = CONFIG_FRAMEBUFFER_HEIGHT,
+	.stride = CONFIG_FRAMEBUFFER_STRIDE,
+	.address = (void *)CONFIG_FRAMEBUFFER_BASE
+};
+#endif
+
 int n61ap_drv(void)
 {
-	struct {
-		int width;
-		int height;
-		int stride;
-		void *address;
-	} simplefb_data = {
-		.width = 752,
-		.height = 1334,
-		.stride = 4,
-		.address = (void *)0x83e900000
-	};
-
-	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
+#ifdef CONFIG_SIMPLE_FB
+	REGISTER_DRIVER("simplefb", simplefb_probe, &n61ap_fb);
+#endif
 	return 0;
 }
 

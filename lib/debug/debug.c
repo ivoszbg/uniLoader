@@ -19,75 +19,80 @@
 #define NANOPRINTF_USE_BINARY_FORMAT_SPECIFIERS		1
 #define NANOPRINTF_USE_WRITEBACK_FORMAT_SPECIFIERS	1
 #define NANOPRINTF_USE_ALT_FORM_FLAG			1
-
 #include <lib/nanoprintf.h>
 
 #define PRINTK_BUFFER_SIZE 256
 
 long int debug_linecount = 0;
+extern void uart_puts(const char *s);
 
-void uart_puts(const char *s);
+typedef struct {
+	const char *prefix;
+	color text_color;
+} log_style_t;
 
-// Global log level that controls the verbosity
-static int global_loglevel = CONFIG_LOGLEVEL;
+static const color red = {255, 0, 0, 255};
+static const color orange = {255, 165, 0, 255};
+static const color yellow = {255, 255, 0, 255};
+static const color cyan = {0, 255, 255, 255};
+static const color green = {0, 255, 0, 255};
+static const color gray = {128, 128, 128, 255};
+static const color amber = {255, 192, 0, 255};
+
+static inline log_style_t get_log_style(int level)
+{
+	static const log_style_t styles[] = {
+		[KERN_EMERG]	= {"[EMERG] ", red},
+		[KERN_ALERT]	= {"[ALERT] ", orange},
+		[KERN_CRIT]	= {"[CRIT] ", yellow},
+		[KERN_ERR]	= {"[ERROR] ", red},
+		[KERN_WARNING]	= {"[WARN] ", yellow},
+		[KERN_NOTICE]	= {"[NOTICE] ", green},
+		[KERN_INFO]	= {"[INFO] ", amber},
+		[KERN_DEBUG]	= {"[DEBUG] ", gray}
+	};
+
+	return (level >= 0 && level < sizeof(styles)/sizeof(styles[0])) ?
+		styles[level] : (log_style_t){"[UNKNOWN] ", {255, 255, 255, 255}};
+}
+
+static inline void uart_output(const char *prefix, const char *message)
+{
+#ifdef CONFIG_UART_DEBUG
+	uart_puts(prefix);
+	uart_puts(message);
+	uart_puts("\r");
+#endif
+}
+
+static inline void fb_output(const char *prefix, const char *message, color text_color)
+{
+#ifdef CONFIG_SIMPLE_FB
+	const int y_pos = 5;
+	const int prefix_width = strlen(prefix) * SCALED_FONTW;
+
+	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, prefix, 0, y_pos, text_color);
+	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, message, prefix_width, y_pos, gray);
+#endif
+}
 
 void printk(int log_level, const char *fmt, ...)
 {
-	static char print_buffer[PRINTK_BUFFER_SIZE];
+#if !defined(CONFIG_UART_DEBUG) && !defined(CONFIG_SIMPLE_FB)
+	return;
+#endif
+
+	if (log_level > CONFIG_LOGLEVEL) return;
+
 	va_list args;
+	static char print_buffer[PRINTK_BUFFER_SIZE];
 
-	if (log_level > global_loglevel)
-		return;
-
-	char *prefix;
-	switch (log_level) {
-	case KERN_EMERG:
-		prefix = "[EMERG] ";
-		break;
-	case KERN_ALERT:
-		prefix = "[ALERT] ";
-		break;
-	case KERN_CRIT:
-		prefix = "[CRIT] ";
-		break;
-	case KERN_ERR:
-		prefix = "[ERROR] ";
-		break;
-	case KERN_WARNING:
-		prefix = "[WARN] ";
-		break;
-	case KERN_NOTICE:
-		prefix = "[NOTICE] ";
-		break;
-	case KERN_INFO:
-		prefix = "[INFO] ";
-		break;
-	case KERN_DEBUG:
-		prefix = "[DEBUG] ";
-		break;
-	default:
-		prefix = "[LOG] ";
-		break;
-	}
+	const log_style_t style = get_log_style(log_level);
 
 	va_start(args, fmt);
 	npf_vsnprintf(print_buffer, sizeof(print_buffer), fmt, args);
 	va_end(args);
 
-#ifdef CONFIG_UART_DEBUG
-	uart_puts(prefix);
-	uart_puts(print_buffer);
-	uart_puts("\r");
-#endif
-
-#ifdef CONFIG_SIMPLE_FB
-	// Actually the first line's Y pos. Scales in __simplefb_raw_print
-	int y_pos = 5;
-	int prefix_width = strlen(prefix) * SCALED_FONTW;
-
-	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, prefix, 0, y_pos,
-	CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
-	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, print_buffer, prefix_width, y_pos,
-	CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_STRIDE);
-#endif
+	uart_output(style.prefix, print_buffer);
+	fb_output(style.prefix, print_buffer, style.text_color);
 }

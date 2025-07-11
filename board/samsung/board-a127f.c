@@ -20,21 +20,21 @@ int a127f_late_init(void)
 	return 0;
 }
 
+#ifdef CONFIG_SIMPLE_FB
+static struct video_info a127f_fb = {
+	.format = FB_FORMAT_ARGB8888,
+	.width = CONFIG_FRAMEBUFFER_WIDTH,
+	.height = CONFIG_FRAMEBUFFER_HEIGHT,
+	.stride = CONFIG_FRAMEBUFFER_STRIDE,
+	.address = (void *)CONFIG_FRAMEBUFFER_BASE
+};
+#endif
+
 int a127f_drv(void)
 {
-	struct {
-		int width;
-		int height;
-		int stride;
-		void *address;
-	} simplefb_data = {
-		.width = 720,
-		.height = 1600,
-		.stride = 4,
-		.address = (void *)0xfa000000,
-	};
-
-	REGISTER_DRIVER("simplefb", simplefb_probe, &simplefb_data);
+#ifdef CONFIG_SIMPLE_FB
+	REGISTER_DRIVER("simplefb", simplefb_probe, &a127f_fb);
+#endif
 	return 0;
 }
 
