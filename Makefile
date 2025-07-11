@@ -351,7 +351,7 @@ uniloader-main-y := arch/built-in.o main/built-in.o
 
 # Directory structure
 uniloader-obj-dirs := main arch
-uniloader-lib-dirs := soc board lib drivers
+uniloader-lib-dirs := soc board drivers lib
 
 # All directories that need to be built
 uniloader-all-dirs := $(uniloader-obj-dirs) $(uniloader-lib-dirs)
