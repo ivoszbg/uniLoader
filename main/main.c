@@ -18,21 +18,21 @@ void main(void* dt, void* kernel, void* ramdisk)
 	if (board_ops.ops.drivers_init())
 		goto err;
 
-	printk(-1, "             .__.____                     .___\n");
-	printk(-1, " __ __  ____ |__|    |    _________     __| _/___________\n");
-	printk(-1, "|  |  \\/    \\|  |    |   /  _ \\__  \\   / __ |/ __ \\_  __\\\n");
-	printk(-1, "|  |  /   |  \\  |    |__(  <_> ) __ \\_/ /_/ \\  ___/|  |\\/\n");
-	printk(-1, "|____/|___|  /__|_______ \\____(____  /\\____ |\\___  >__|\n");
-	printk(-1, "           \\/           \\/         \\/      \\/    \\/\n");
+	printk(KERN_INFO, "             .__.____                     .___\n");
+	printk(KERN_INFO, " __ __  ____ |__|    |    _________     __| _/___________\n");
+	printk(KERN_INFO, "|  |  \\/    \\|  |    |   /  _ \\__  \\   / __ |/ __ \\_  __\\\n");
+	printk(KERN_INFO, "|  |  /   |  \\  |    |__(  <_> ) __ \\_/ /_/ \\  ___/|  |\\/\n");
+	printk(KERN_INFO, "|____/|___|  /__|_______ \\____(____  /\\____ |\\___  >__|\n");
+	printk(KERN_INFO, "           \\/           \\/         \\/      \\/    \\/\n");
 
-	printk(-1, "passed board initialization\n");
-	printk(-1, "welcome to uniLoader %s\n", VER_TAG);
+	printk(KERN_INFO, "passed board initialization\n");
+	printk(KERN_INFO, "welcome to uniLoader %s on %s\n", VER_TAG, board_ops.name);
 
 	if (board_ops.ops.late_init())
 		goto err;
 
 	/* copy kernel to memory and boot  */
-	printk(-1, "booting linux...\n");
+	printk(KERN_INFO, "booting linux...\n");
 #ifdef __aarch64__
 	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
 	__optimized_memcpy((void*)CONFIG_RAMDISK_ENTRY, ramdisk, (unsigned long) &ramdisk_size);
@@ -46,6 +46,6 @@ void main(void* dt, void* kernel, void* ramdisk)
  err:
 	/* we shouldn't get there */
 	/* TODO: make this a per-board reset */
-	printk(KERN_WARNING, "Something wrong happened, we shouldn't be here. Hanging....\n");
+	printk(KERN_EMERG, "Something wrong happened, we shouldn't be here. Hanging....\n");
 	while(1) {}
 }
