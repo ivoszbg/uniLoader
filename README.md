@@ -17,7 +17,7 @@ The currently supported architectures are ARMV7 and AARCH64.</br>
     ```sh
     cd uniLoader
     ```
-4. Place your kernel and device tree blobs under the `blob/` directory.
+4. Place your kernel, device tree and ramdisk blobs under the `blob/` directory.
 
 ### Make Syntax
 ```sh
@@ -31,8 +31,9 @@ git clone https://github.com/ivoszbg/uniLoader
 cd uniLoader
 cp /home/user/linux/arch/arm64/boot/Image blob/Image
 cp /home/user/linux/arch/arm64/boot/dts/exynos/exynos8895-dreamlte.dtb blob/dtb
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j4 dreamlte_defconfig
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j4
+cp /home/user/ramdisk.gz blob/ramdisk
+make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- -j4 dreamlte_defconfig
+make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- -j4
 ```
 
 ### Usage
