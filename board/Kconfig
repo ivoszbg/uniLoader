@@ -14,6 +14,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for iPhone 6
 
+	config GOOGLE_TAIMEN
+		bool "Support for Google Pixel 2 XL"
+		default n
+		depends on MSM8998
+		help
+		  Say Y if you want to include support for Pixel 2 XL
+
 	config SAMSUNG_A105F
 		bool "Support for Samsung Galaxy A10"
 		default n
@@ -148,6 +155,7 @@ menu "Device Specific Addresses"
 	config FRAMEBUFFER_BASE
 		hex "Framebuffer Base Address (for SimpleFB)"
 		depends on SIMPLE_FB
+		default 0
 		default 0x067000000 if SAMSUNG_J4LTE
 		default 0x08e000000 if SAMSUNG_J5LTE
 		default 0x0ca000000 if SAMSUNG_GTA4XL
@@ -156,6 +164,7 @@ menu "Device Specific Addresses"
 	config FRAMEBUFFER_WIDTH
 		int "Framebuffer Width (for SimpleFB)"
 		depends on SIMPLE_FB
+		default 0
 		default 720 if SAMSUNG_J4LTE
 		default 720 if SAMSUNG_J5LTE
 		default 1200 if SAMSUNG_GTA4XL
@@ -164,6 +173,7 @@ menu "Device Specific Addresses"
 	config FRAMEBUFFER_HEIGHT
 		int "Framebuffer Height (for SimpleFB)"
 		depends on SIMPLE_FB
+		default 0
 		default 1280 if SAMSUNG_J4LTE
 		default 1280 if SAMSUNG_J5LTE
 		default 2000 if SAMSUNG_GTA4XL
@@ -172,6 +182,7 @@ menu "Device Specific Addresses"
 	config FRAMEBUFFER_STRIDE
 		int "Framebuffer Stride (for SimpleFB)"
 		depends on SIMPLE_FB
+		default 0
 		default 4 if SAMSUNG_J4LTE
 		default 3 if SAMSUNG_J5LTE
 		default 4 if SAMSUNG_GTA4XL

@@ -119,6 +119,13 @@ config QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
 
+	config MSM8998
+		bool "Support for Qualcomm Snapdragon 835"
+		default n
+		select QUALCOMM
+		help
+		  Say Y if your device uses Qualcomm MSM8998
+
 	config FREESCALE_IMX6SL
 		bool "Support for Freescale i.MX6SL"
 		default n
