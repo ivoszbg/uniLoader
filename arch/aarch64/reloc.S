@@ -16,13 +16,14 @@ ENTRY_ALIAS(_rel_stack_base)
 
 ENTRY_ALIAS(_rel_stack_size)
 	.quad _reloc_size
+#ifdef CONFIG_LINUX_KRNL_HEADER_IMG
 	.quad 0
 	.quad 0
 	.quad 0
 	.quad 0
 	.ascii "ARM\x64"
 	.long 0
-
+#endif
 ENTRY_ALIAS( _reloc_entry)
 	adr	x4, _start
 	ldr	x5, _rel_stack_base
