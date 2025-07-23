@@ -5,6 +5,25 @@
 #include "asmdefs.h"
 
 .section .text
+#ifdef CONFIG_LINUX_KRNL_HEADER_IMG
+_head:
+	mov x1,_start
+	b      _start
+
+_stack_base:
+	.quad 0x0
+
+_stack_size:
+	.quad _stack_end
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.ascii "ARM\x64"
+	.long 0
+
+.align 4
+#endif
 ENTRY(_start)
 	/* Set up the base address for the stack */
 	adrp    x0, _stack_end      /* Load page of the _stack_end symbol */
