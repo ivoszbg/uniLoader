@@ -218,6 +218,9 @@ KBUILD_AFLAGS   := -D__ASSEMBLY__
 ifeq ($(ARCH), arm)
 KBUILD_CFLAGS += -march=armv7-a -mfloat-abi=soft -mtune=cortex-a9
 KBUILD_AFLAGS += -march=armv7-a -mfloat-abi=soft -mtune=cortex-a9
+else
+KBUILD_CFLAGS += -march=armv8-a -mtune=cortex-a53 -mcpu=cortex-a53
+KBUILD_AFLAGS += -march=armv8-a -mtune=cortex-a53 -mcpu=cortex-a53
 endif
 
 # Read KERNELRELEASE from include/config/kernel.release (if it exists)
@@ -383,7 +386,9 @@ quiet_cmd_cpp_lds = LDS     $@
 arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(linker-script-deps)
 	$(call if_changed,cpp_lds)
 
-# Link uniLoader
+#
+# CMDs for binary formats
+#
 quiet_cmd_uniloader_link = LD      $@.o
       cmd_uniloader_link = $(LD) $(uniloader-main-y) $(uniloader-libs) -o $@.o \
                                  --script=arch/$(ARCH)/linker.lds
@@ -391,9 +396,13 @@ quiet_cmd_uniloader_link = LD      $@.o
 quiet_cmd_uniloader_objcopy = OBJCOPY $@
       cmd_uniloader_objcopy = $(OBJCOPY) -O binary $@.o $@
 
+quiet_cmd_gzip_uniloader = GZIP    $@.gz
+      cmd_gzip_uniloader = gzip -c uniLoader > uniLoader.gz
+
 uniLoader: $(uniloader-all) arch/$(ARCH)/linker.lds FORCE
 	$(call if_changed,uniloader_link)
 	$(call if_changed,uniloader_objcopy)
+	$(call if_changed,gzip_uniloader)
 
 # The actual objects are generated when descending, 
 # make sure no implicit rule kicks in
@@ -413,7 +422,7 @@ $(uniloader-all-dirs): scripts_basic
 
 # Directories & files removed with 'make clean'
 CLEAN_DIRS  +=
-CLEAN_FILES += uniLoader uniLoader.o arch/$(ARCH)/linker.lds
+CLEAN_FILES += uniLoader uniLoader.o uniLoader.gz arch/$(ARCH)/linker.lds
 
 # Directories & files removed with 'make mrproper'
 MRPROPER_DIRS  += include/config include/generated

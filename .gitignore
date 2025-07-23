@@ -1,5 +1,6 @@
 uniLoader
 *.o
+*.gz
 main/*.o
 arch/*/linker.lds
 board/*/*.o*
