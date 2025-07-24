@@ -14,6 +14,10 @@ config MEDIATEK
 	bool
 	default n
 
+config QEMU
+	bool
+	default n
+
 config QUALCOMM
 	bool
 	default n
@@ -118,6 +122,14 @@ config QUALCOMM
 		select QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
+	
+	config QEMU_SOC_VIRT
+		bool "Support for QEMU virt aarch64 SoC"
+		default n
+		select QEMU
+		help
+		  Say Y if you are using the generic QEMU emulation
+		  platform target - virt.
 
 	config MSM8998
 		bool "Support for Qualcomm Snapdragon 835"
