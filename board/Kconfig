@@ -21,6 +21,14 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Pixel 2 XL
 
+	config QEMU_BOARD_VIRT
+		bool "Support for QEMU virt platform (aarch64)"
+		default n
+		depends on QEMU_SOC_VIRT
+		help
+		  Say Y if you are using the generic QEMU emulation
+		  platform target - virt.
+
 	config SAMSUNG_A105F
 		bool "Support for Samsung Galaxy A10"
 		default n
