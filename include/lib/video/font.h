@@ -9,11 +9,6 @@
 #define FONTW 8
 #define FONTH 16
 
-// Define scaled font dimensions --> 8x16 becomes 16x32
-#define SCALE_FACTOR 2
-#define SCALED_FONTW (FONTW * SCALE_FACTOR)
-#define SCALED_FONTH (FONTH * SCALE_FACTOR)
-
 static unsigned char letters[256][16] = {
 	//  32 ' '---
 	{

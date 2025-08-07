@@ -46,6 +46,32 @@ static void draw_pixel(volatile char *fb, int x, int y, int width, int stride,
 	}
 }
 
+#define SCALED_FONTW (FONTW * fb_info->scale_f)
+#define SCALED_FONTH (FONTH * fb_info->scale_f)
+
+int get_font_scale_factor()
+{
+	/* integer sqrt inline */
+	int n = fb_info->width * fb_info->width + fb_info->height * fb_info->height;
+	int x = n;
+	int y = (x + 1) / 2;
+
+	while (y < x) {
+		x = y;
+		y = (x + n / x) / 2;
+	}
+	int diag = x;
+
+	/* determine scale factor from pseudo-diagonal */
+	int scale = diag / 750;
+
+	/* clamp the result */
+	if (scale < 1)
+		scale = 1;
+
+	return scale;
+}
+
 void __simplefb_raw_print(const char *text, int text_x, int text_y,
 			  color text_color)
 {
@@ -100,10 +126,10 @@ void __simplefb_raw_print(const char *text, int text_x, int text_y,
 
 			for (int x = 0; x < FONTW; x++) {
 				if (((b << x) & 0b10000000) > 0) {
-					for (int dy = 0; dy < SCALE_FACTOR; dy++) {
-						for (int dx = 0; dx < SCALE_FACTOR; dx++) {
-							draw_pixel(fb_info->address, current_x + x * SCALE_FACTOR + dx,
-								   current_y + y * SCALE_FACTOR + dy,
+					for (int dy = 0; dy < fb_info->scale_f; dy++) {
+						for (int dx = 0; dx < fb_info->scale_f; dx++) {
+							draw_pixel(fb_info->address, current_x + x * fb_info->scale_f + dx,
+								   current_y + y * fb_info->scale_f + dy,
 								   fb_info->width, fb_info->stride, text_color);
 						}
 					}
@@ -121,4 +147,6 @@ void simplefb_probe(void *data)
 
 	clean_fbmem((char*)fb_info->address, fb_info->width, fb_info->height,
 		 fb_info->stride);
+
+	fb_info->scale_f = get_font_scale_factor();
 }

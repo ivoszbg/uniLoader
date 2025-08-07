@@ -28,12 +28,15 @@ struct video_info {
 	int width;
 	int height;
 	int stride;
+	int scale_f;
 	void *address;
 };
 
 extern void __simplefb_raw_print(const char *text, int text_x, int text_y,
 				 color text_color);
 extern void simplefb_probe(void *data);
+
+int get_font_scale_factor(void);
 
 typedef struct _font_params {
 	int width;

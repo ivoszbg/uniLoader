@@ -69,7 +69,7 @@ static inline void fb_output(const char *prefix, const char *message, color text
 {
 #ifdef CONFIG_SIMPLE_FB
 	const int y_pos = 5;
-	const int prefix_width = strlen(prefix) * SCALED_FONTW;
+	const int prefix_width = strlen(prefix) * FONTW * get_font_scale_factor();
 
 	__simplefb_raw_print(prefix, 0, y_pos, text_color);
 	__simplefb_raw_print(message, prefix_width, y_pos, gray);
