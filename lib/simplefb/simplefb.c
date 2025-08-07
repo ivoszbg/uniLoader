@@ -46,7 +46,7 @@ static void draw_pixel(volatile char *fb, int x, int y, int width, int stride,
 	}
 }
 
-void __simplefb_raw_print(volatile char *fb, const char *text, int text_x, int text_y,
+void __simplefb_raw_print(const char *text, int text_x, int text_y,
 			  color text_color)
 {
 	int l = strlen(text);
@@ -101,7 +101,7 @@ void __simplefb_raw_print(volatile char *fb, const char *text, int text_x, int t
 				if (((b << x) & 0b10000000) > 0) {
 					for (int dy = 0; dy < SCALE_FACTOR; dy++) {
 						for (int dx = 0; dx < SCALE_FACTOR; dx++) {
-							draw_pixel(fb, current_x + x * SCALE_FACTOR + dx,
+							draw_pixel(fb_info->address, current_x + x * SCALE_FACTOR + dx,
 								   current_y + y * SCALE_FACTOR + dy,
 								   fb_info->width, fb_info->stride, text_color);
 						}

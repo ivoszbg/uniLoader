@@ -31,8 +31,8 @@ struct video_info {
 	void *address;
 };
 
-extern void __simplefb_raw_print(volatile char *fb, const char *text, int text_x,
-				 int text_y, color text_color);
+extern void __simplefb_raw_print(const char *text, int text_x, int text_y,
+				 color text_color);
 extern void simplefb_probe(void *data);
 
 typedef struct _font_params {

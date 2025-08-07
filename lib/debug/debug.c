@@ -71,8 +71,8 @@ static inline void fb_output(const char *prefix, const char *message, color text
 	const int y_pos = 5;
 	const int prefix_width = strlen(prefix) * SCALED_FONTW;
 
-	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, prefix, 0, y_pos, text_color);
-	__simplefb_raw_print((char*)CONFIG_FRAMEBUFFER_BASE, message, prefix_width, y_pos, gray);
+	__simplefb_raw_print(prefix, 0, y_pos, text_color);
+	__simplefb_raw_print(message, prefix_width, y_pos, gray);
 #endif
 }
 
