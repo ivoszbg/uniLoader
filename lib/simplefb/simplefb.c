@@ -49,6 +49,8 @@ static void draw_pixel(volatile char *fb, int x, int y, int width, int stride,
 void __simplefb_raw_print(const char *text, int text_x, int text_y,
 			  color text_color)
 {
+	if (!fb_info) return;
+
 	int l = strlen(text);
 	int current_x = text_x;
 	int current_y = text_y;
@@ -59,7 +61,6 @@ void __simplefb_raw_print(const char *text, int text_x, int text_y,
 	} else {
 		current_y = last_y;
 	}
-
 
 	int max_x = fb_info->width - SCALED_FONTW;
 
