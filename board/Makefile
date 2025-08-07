@@ -4,6 +4,7 @@ lib-$(CONFIG_GOOGLE_TAIMEN) += google/board-taimen.o
 lib-$(CONFIG_QEMU_BOARD_VIRT) += qemu/board-virt.o
 lib-$(CONFIG_SAMSUNG_A105F) += samsung/board-a105f.o
 lib-$(CONFIG_SAMSUNG_A127F) += samsung/board-a127f.o
+lib-$(CONFIG_SAMSUNG_A3XELTE) += samsung/board-a3xelte.o
 lib-$(CONFIG_SAMSUNG_C1S) += samsung/board-c1s.o
 lib-$(CONFIG_SAMSUNG_G0S) += samsung/board-g0s.o
 lib-$(CONFIG_SAMSUNG_NOBLELTE) += samsung/board-noblelte.o
