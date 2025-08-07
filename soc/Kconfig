@@ -145,6 +145,13 @@ config QUALCOMM
 		help
 		  Say Y if your device uses Qualcomm MSM8998
 
+	config SM8450
+		bool "Support for QUALCOMM SM8450"
+		default n
+		select QUALCOMM
+		help
+		  Say Y if your device uses this Qualcomm SoC
+
 	config FREESCALE_IMX6SL
 		bool "Support for Freescale i.MX6SL"
 		default n
