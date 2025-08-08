@@ -141,6 +141,13 @@ menu "Device Support"
                 help
                   Say Y if you want to include support for Samsung Galaxy S20 FE
 
+	config XIAOMI_BEGONIA
+		bool "Support for Redmi Note 8 Pro"
+		default n
+		depends on MT6785
+		help
+		  Say Y if you want to include support for Redmi Note 8 Pro
+
 	config VOLLA_ALGIZ
 		bool "Support for Volla Phone Quintus"
 		default n
@@ -158,6 +165,7 @@ menu "Device Specific Addresses"
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
 		default 0x050000000 if SAMSUNG_J4LTE
+		default 0x050000000 if XIAOMI_BEGONIA
 		default 0x090000000 if SAMSUNG_J5LTE
 		default 0x090000000 if SAMSUNG_GTA4XL
 		default 0x60000000 if VOLLA_ALGIZ
@@ -165,6 +173,7 @@ menu "Device Specific Addresses"
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
 		default 0x084000000 if SAMSUNG_GTA4XL
+		default 0x048000000 if XIAOMI_BEGONIA
 		default 0x51100000 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_BASE
@@ -174,6 +183,7 @@ menu "Device Specific Addresses"
 		default 0x067000000 if SAMSUNG_J4LTE
 		default 0x08e000000 if SAMSUNG_J5LTE
 		default 0x0ca000000 if SAMSUNG_GTA4XL
+		default 0x07d9b0000 if XIAOMI_BEGONAI
 		default 0x7d010000 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_WIDTH
@@ -184,6 +194,7 @@ menu "Device Specific Addresses"
 		default 720 if SAMSUNG_J5LTE
 		default 1200 if SAMSUNG_GTA4XL
 		default 1080 if VOLLA_ALGIZ
+		default 1088 if XIAOMI_BEGONIA
 
 	config FRAMEBUFFER_HEIGHT
 		int "Framebuffer Height (for SimpleFB)"
@@ -193,6 +204,7 @@ menu "Device Specific Addresses"
 		default 1280 if SAMSUNG_J5LTE
 		default 2000 if SAMSUNG_GTA4XL
 		default 2400 if VOLLA_ALGIZ
+		default 2340 if XIAOMI_BEGONIA
 
 	config FRAMEBUFFER_STRIDE
 		int "Framebuffer Stride (for SimpleFB)"
@@ -202,6 +214,7 @@ menu "Device Specific Addresses"
 		default 3 if SAMSUNG_J5LTE
 		default 4 if SAMSUNG_GTA4XL
 		default 4 if VOLLA_ALGIZ
+		default 4 if XIAOMI_BEGONIA
 
 	config FRAMEBUFFER_BGRA
 		bool "Framebuffer BGRA (for SimpleFB)"
