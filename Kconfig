@@ -19,6 +19,19 @@ menu "Building options"
 		int "Verbosity of logs"
 		default 7
 
+	config COMPRESS_GZIP
+		bool "Compress the uniLoader image with gzip"
+		default y
+		help
+		  Select this if you want to use gzip to compress the final uniLoader image.
+
+	config COMPRESS_LZ4
+		bool "Compress the uniLoader image with lz4"
+		default n
+		help
+		  Select this if you want to use lz4 to compress the final uniLoader image.
+		  This is required on some new MediaTek devices.
+
 	config EMBED_LINUX
 		bool "Embed linux kernel and device tree"
 		default y

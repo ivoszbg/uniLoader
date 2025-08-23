@@ -399,10 +399,18 @@ quiet_cmd_uniloader_objcopy = OBJCOPY $@
 quiet_cmd_gzip_uniloader = GZIP    $@.gz
       cmd_gzip_uniloader = gzip -c uniLoader > uniLoader.gz
 
+quiet_cmd_lz4_uniloader = LZ4     $@.lz4
+      cmd_lz4_uniloader = lz4 uniLoader -l -f -q
+
 uniLoader: $(uniloader-all) arch/$(ARCH)/linker.lds FORCE
 	$(call if_changed,uniloader_link)
 	$(call if_changed,uniloader_objcopy)
+ifdef CONFIG_COMPRESS_GZIP
 	$(call if_changed,gzip_uniloader)
+endif
+ifdef CONFIG_COMPRESS_LZ4
+	$(call if_changed,lz4_uniloader)
+endif
 
 # The actual objects are generated when descending, 
 # make sure no implicit rule kicks in
