@@ -88,6 +88,13 @@ config QUALCOMM
 		help
 		  Say Y if your device uses Samsung Exynos7885 SoC
 
+	config EXYNOS_8890
+		bool "Support for Exynos 8890"
+		default n
+		select EXYNOS
+		help
+		  Say Y if your device uses Samsung Exynos8890 SoC
+
 	config EXYNOS_8895
 		bool "Support for Exynos 8895"
 		default n

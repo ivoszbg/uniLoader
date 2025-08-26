@@ -71,6 +71,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy S22+
 
+	config SAMSUNG_HEROLTE
+		bool "Support for Samsung Galaxy S7"
+		default n
+		depends on EXYNOS_8890
+		help
+		  Say Y if you want to include support for Samsung Galaxy S7
+
 	config SAMSUNG_NOBLELTE
 		bool "Support for Samsung Galaxy Note5"
 		default n
