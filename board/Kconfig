@@ -166,12 +166,10 @@ menu "Device Specific Addresses"
 		hex "Payload Entry Address"
 		default 0x050000000 if SAMSUNG_J4LTE
 		default 0x090000000 if SAMSUNG_J5LTE
-		default 0x090000000 if SAMSUNG_GTA4XL
 		default 0x60000000 if VOLLA_ALGIZ
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
-		default 0x084000000 if SAMSUNG_GTA4XL
 		default 0x51100000 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_BASE
@@ -180,7 +178,6 @@ menu "Device Specific Addresses"
 		default 0
 		default 0x067000000 if SAMSUNG_J4LTE
 		default 0x08e000000 if SAMSUNG_J5LTE
-		default 0x0ca000000 if SAMSUNG_GTA4XL
 		default 0x7d010000 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_WIDTH
@@ -189,7 +186,6 @@ menu "Device Specific Addresses"
 		default 0
 		default 720 if SAMSUNG_J4LTE
 		default 720 if SAMSUNG_J5LTE
-		default 1200 if SAMSUNG_GTA4XL
 		default 1080 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_HEIGHT
@@ -198,7 +194,6 @@ menu "Device Specific Addresses"
 		default 0
 		default 1280 if SAMSUNG_J4LTE
 		default 1280 if SAMSUNG_J5LTE
-		default 2000 if SAMSUNG_GTA4XL
 		default 2400 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_STRIDE
@@ -207,7 +202,6 @@ menu "Device Specific Addresses"
 		default 0
 		default 4 if SAMSUNG_J4LTE
 		default 3 if SAMSUNG_J5LTE
-		default 4 if SAMSUNG_GTA4XL
 		default 4 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_BGRA
