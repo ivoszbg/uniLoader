@@ -21,6 +21,23 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Pixel 2 XL
 
+	config NOTHING_TETRIS
+		bool "Support for CMF Phone 1"
+		default n
+		depends on MT6878
+		help
+		  Say Y if you want to include support for CMF Phone 1
+
+	config NOTHING_TETRIS_DISABLE_WDT
+		bool "Disable the watchdog timer on startup"
+		default y
+		depends on NOTHING_TETRIS
+		help
+		  Say Y if you want to disable the watchdog timer on startup
+		  on this board. While this is obviously useful for end-users,
+		  developers may want to leave this on to avoid holding down
+		  the power button every time.
+
 	config QEMU_BOARD_VIRT
 		bool "Support for QEMU virt platform (aarch64)"
 		default n
@@ -164,12 +181,14 @@ menu "Device Specific Addresses"
 
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
+		default 0x50000000 if NOTHING_TETRIS
 		default 0x050000000 if SAMSUNG_J4LTE
 		default 0x090000000 if SAMSUNG_J5LTE
 		default 0x60000000 if VOLLA_ALGIZ
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
+		default 0x40000000 if NOTHING_TETRIS
 		default 0x51100000 if VOLLA_ALGIZ
 
 	config FRAMEBUFFER_BASE
