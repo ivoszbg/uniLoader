@@ -7,6 +7,7 @@ lib-$(CONFIG_SAMSUNG_A105F) += samsung/board-a105f.o
 lib-$(CONFIG_SAMSUNG_A127F) += samsung/board-a127f.o
 lib-$(CONFIG_SAMSUNG_A3XELTE) += samsung/board-a3xelte.o
 lib-$(CONFIG_SAMSUNG_C1S) += samsung/board-c1s.o
+lib-$(CONFIG_SAMSUNG_HEROLTE) += samsung/board-herolte.o
 lib-$(CONFIG_SAMSUNG_G0S) += samsung/board-g0s.o
 lib-$(CONFIG_SAMSUNG_NOBLELTE) += samsung/board-noblelte.o
 lib-$(CONFIG_SAMSUNG_JACKPOTLTE) += samsung/board-jackpotlte.o
