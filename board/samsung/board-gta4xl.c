@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
- * Copyright (c) 2024 Alexandru Chimac <alexchimac@protonmail.com>
+ * Copyright (c) 2025, Alexandru Chimac <alex@chimac.ro>
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
@@ -27,10 +27,10 @@ int gta4xl_late_init(void)
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info gta4xl_fb = {
 	.format = FB_FORMAT_ARGB8888,
-	.width = CONFIG_FRAMEBUFFER_WIDTH,
-	.height = CONFIG_FRAMEBUFFER_HEIGHT,
-	.stride = CONFIG_FRAMEBUFFER_STRIDE,
-	.address = (void *)CONFIG_FRAMEBUFFER_BASE
+	.width = 1200,
+	.height = 2000,
+	.stride = 4,
+	.address = (void *)0xca000000
 };
 #endif
 
