@@ -16,12 +16,6 @@ int a33x_init(void)
 	return 0;
 }
 
-// Late initialization
-int a33x_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info a33x_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -45,7 +39,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = a33x_init,
 		.drivers_init = a33x_drv,
-		.late_init = a33x_late_init,
 	},
 	.quirks = 0
 };
