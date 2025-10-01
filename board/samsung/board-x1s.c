@@ -18,12 +18,6 @@ int x1s_init(void)
 	return 0;
 }
 
-// Late initialization
-int x1s_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info x1s_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -47,7 +41,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = x1s_init,
 		.drivers_init = x1s_drv,
-		.late_init = x1s_late_init,
 	},
 	.quirks = 0
 };
