@@ -45,17 +45,11 @@ int herolte_drv(void)
 	return 0;
 }
 
-int herolte_late_init(void)
-{
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "samsung-herolte",
 	.ops = {
 		.early_init = herolte_init,
 		.drivers_init = herolte_drv,
-		.late_init = herolte_late_init,
 	},
 	.quirks = 0
 };
