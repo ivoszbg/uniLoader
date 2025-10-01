@@ -18,12 +18,6 @@ int starlte_init(void)
 	return 0;
 }
 
-// Late initialization
-int starlte_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info starlte_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -47,7 +41,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = starlte_init,
 		.drivers_init = starlte_drv,
-		.late_init = starlte_late_init,
 	},
 	.quirks = 0
 };
