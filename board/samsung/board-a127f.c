@@ -15,11 +15,6 @@ int a127f_init(void)
 	return 0;
 }
 
-int a127f_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info a127f_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -43,7 +38,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = a127f_init,
 		.drivers_init = a127f_drv,
-		.late_init = a127f_late_init,
 	},
 	.quirks = 0
 };
