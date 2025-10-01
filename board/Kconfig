@@ -197,43 +197,4 @@ menu "Device Specific Addresses"
 		hex "Ramdisk Entry Address"
 		default 0x40000000 if NOTHING_TETRIS
 		default 0x51100000 if VOLLA_ALGIZ
-
-	config FRAMEBUFFER_BASE
-		hex "Framebuffer Base Address (for SimpleFB)"
-		depends on SIMPLE_FB
-		default 0
-		default 0x067000000 if SAMSUNG_J4LTE
-		default 0x08e000000 if SAMSUNG_J5LTE
-		default 0x7d010000 if VOLLA_ALGIZ
-
-	config FRAMEBUFFER_WIDTH
-		int "Framebuffer Width (for SimpleFB)"
-		depends on SIMPLE_FB
-		default 0
-		default 720 if SAMSUNG_J4LTE
-		default 720 if SAMSUNG_J5LTE
-		default 1080 if VOLLA_ALGIZ
-
-	config FRAMEBUFFER_HEIGHT
-		int "Framebuffer Height (for SimpleFB)"
-		depends on SIMPLE_FB
-		default 0
-		default 1280 if SAMSUNG_J4LTE
-		default 1280 if SAMSUNG_J5LTE
-		default 2400 if VOLLA_ALGIZ
-
-	config FRAMEBUFFER_STRIDE
-		int "Framebuffer Stride (for SimpleFB)"
-		depends on SIMPLE_FB
-		default 0
-		default 4 if SAMSUNG_J4LTE
-		default 3 if SAMSUNG_J5LTE
-		default 4 if VOLLA_ALGIZ
-
-	config FRAMEBUFFER_BGRA
-		bool "Framebuffer BGRA (for SimpleFB)"
-		depends on SIMPLE_FB
-		default y if SAMSUNG_J4LTE
-		default n
-
 endmenu
