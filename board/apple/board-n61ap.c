@@ -9,10 +9,10 @@
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info n61ap_fb = {
 	.format = FB_FORMAT_ARGB8888,
-	.width = CONFIG_FRAMEBUFFER_WIDTH,
-	.height = CONFIG_FRAMEBUFFER_HEIGHT,
-	.stride = CONFIG_FRAMEBUFFER_STRIDE,
-	.address = (void *)CONFIG_FRAMEBUFFER_BASE
+	.width = 752,
+	.height = 1334,
+	.stride = 4,
+	.address = (void *)0x83e900000
 };
 #endif
 
