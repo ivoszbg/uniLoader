@@ -100,17 +100,11 @@ int g0s_drv(void)
 	return 0;
 }
 
-int g0s_late_init(void)
-{
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "samsung-g0s",
 	.ops = {
 		.early_init = g0s_init,
 		.drivers_init = g0s_drv,
-		.late_init = g0s_late_init,
 	},
 	.quirks = 0
 };
