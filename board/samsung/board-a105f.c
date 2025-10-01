@@ -16,12 +16,6 @@ int a105f_init(void)
 	return 0;
 }
 
-// Late initialization
-int a105f_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info a105f_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -45,7 +39,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = a105f_init,
 		.drivers_init = a105f_drv,
-		.late_init = a105f_late_init,
 	},
 	.quirks = 0
 };
