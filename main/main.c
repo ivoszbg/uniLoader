@@ -12,11 +12,8 @@ extern struct board_data board_ops;
 
 void main(void* dt, void* kernel, void* ramdisk)
 {
-	if (board_ops.ops.early_init())
-		goto err;
-
-	if (board_ops.ops.drivers_init())
-		goto err;
+	INITCALL(board_ops.ops.early_init);
+	INITCALL(board_ops.ops.drivers_init);
 
 	printk(KERN_INFO, "             .__.____                     .___\n");
 	printk(KERN_INFO, " __ __  ____ |__|    |    _________     __| _/___________\n");
@@ -28,8 +25,7 @@ void main(void* dt, void* kernel, void* ramdisk)
 	printk(KERN_INFO, "passed board initialization\n");
 	printk(KERN_INFO, "welcome to uniLoader %s on %s\n", VER_TAG, board_ops.name);
 
-	if (board_ops.ops.late_init())
-		goto err;
+	INITCALL(board_ops.ops.drivers_init);
 
 	/* copy kernel to memory and boot  */
 	printk(KERN_INFO, "booting linux...\n");
@@ -43,9 +39,9 @@ void main(void* dt, void* kernel, void* ramdisk)
 	load_kernel_and_jump(0, 0, dt, (void*)CONFIG_PAYLOAD_ENTRY);
 #endif
 
- err:
 	/* we shouldn't get there */
 	/* TODO: make this a per-board reset */
 	printk(KERN_EMERG, "Something wrong happened, we shouldn't be here. Hanging....\n");
-	while(1) {}
+	HANG();
+
 }
