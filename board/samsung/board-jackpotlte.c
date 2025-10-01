@@ -18,12 +18,6 @@ int jackpotlte_init(void)
 	return 0;
 }
 
-// Late initialization
-int jackpotlte_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info jackpotlte_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -47,7 +41,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = jackpotlte_init,
 		.drivers_init = jackpotlte_drv,
-		.late_init = jackpotlte_late_init,
 	},
 	.quirks = 0
 };
