@@ -18,12 +18,6 @@ int zeroflte_init(void)
 	return 0;
 }
 
-// Late initialization
-int zeroflte_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info zeroflte_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -47,7 +41,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = zeroflte_init,
 		.drivers_init = zeroflte_drv,
-		.late_init = zeroflte_late_init,
 	},
 	.quirks = 0
 };
