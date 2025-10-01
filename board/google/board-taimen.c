@@ -48,16 +48,6 @@ void uart_puts(const char *s)
 	}
 }
 
-int taimen_init(void)
-{
-	return 0;
-}
-
-int taimen_late_init(void)
-{
-	return 0;
-}
-
 /* NOTE - does not work *yet* - stock bootloader messes up fb */
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info taimen_fb = {
@@ -80,9 +70,7 @@ int taimen_drv(void)
 struct board_data board_ops = {
 	.name = "google-taimen",
 	.ops = {
-		.early_init = taimen_init,
 		.drivers_init = taimen_drv,
-		.late_init = taimen_late_init,
 	},
 	.quirks = 0
 };
