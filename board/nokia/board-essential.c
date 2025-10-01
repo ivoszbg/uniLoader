@@ -43,18 +43,11 @@ int essential_drv(void)
 	return 0;
 }
 
-// Late initialization
-int essential_late_init(void)
-{
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "nokia-essential",
 	.ops = {
 		.early_init = essential_init,
 		.drivers_init = essential_drv,
-		.late_init = essential_late_init,
 	},
 	.quirks = 0
 };
