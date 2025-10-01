@@ -6,11 +6,6 @@
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
-int n61ap_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info n61ap_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -29,17 +24,10 @@ int n61ap_drv(void)
 	return 0;
 }
 
-int n61ap_late_init(void)
-{
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "apple-iphone6",
 	.ops = {
-		.early_init = n61ap_init,
 		.drivers_init = n61ap_drv,
-		.late_init = n61ap_late_init,
 	},
 	.quirks = 0
 };
