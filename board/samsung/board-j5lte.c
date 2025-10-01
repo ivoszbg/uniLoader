@@ -45,17 +45,11 @@ int j5lte_drv(void)
 	return 0;
 }
 
-int j5lte_late_init(void)
-{
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "samsung-j5lte",
 	.ops = {
 		.early_init = j5lte_init,
 		.drivers_init = j5lte_drv,
-		.late_init = j5lte_late_init,
 	},
 	.quirks = 0
 };
