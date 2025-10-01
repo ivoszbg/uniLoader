@@ -51,16 +51,6 @@ void tetris_disable_wdt(void)
 	return;
 }
 
-int tetris_init(void)
-{
-	return 0;
-}
-
-int tetris_drv(void)
-{
-	return 0;
-}
-
 int tetris_late_init(void)
 {
 #ifdef CONFIG_NOTHING_TETRIS_DISABLE_WDT
@@ -72,8 +62,6 @@ int tetris_late_init(void)
 struct board_data board_ops = {
 	.name = "cmf-phone-1",
 	.ops = {
-		.early_init = tetris_init,
-		.drivers_init = tetris_drv,
 		.late_init = tetris_late_init,
 	},
 	.quirks = 0
