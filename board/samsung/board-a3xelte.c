@@ -37,17 +37,11 @@ int a3xelte_drv(void)
 	return 0;
 }
 
-int a3xelte_late_init(void)
-{
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "samsung-a3xelte",
 	.ops = {
 		.early_init = a3xelte_init,
 		.drivers_init = a3xelte_drv,
-		.late_init = a3xelte_late_init,
 	},
 	.quirks = 0
 };
