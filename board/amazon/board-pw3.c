@@ -34,27 +34,7 @@ void uart_puts(const char *s)
 	}
 }
 
-int pw3_init(void)
-{
-	return 0;
-}
-
-int pw3_late_init(void)
-{
-	return 0;
-}
-
-int pw3_drv(void)
-{	
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "amazon-paperwhite3",
-	.ops = {
-		.early_init = pw3_init,
-		.drivers_init = pw3_drv,
-		.late_init = pw3_late_init,
-	},
 	.quirks = 0
 };
