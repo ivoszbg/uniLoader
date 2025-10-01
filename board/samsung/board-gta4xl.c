@@ -18,12 +18,6 @@ int gta4xl_init(void)
 	return 0;
 }
 
-// Late initialization
-int gta4xl_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info gta4xl_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -47,7 +41,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = gta4xl_init,
 		.drivers_init = gta4xl_drv,
-		.late_init = gta4xl_late_init,
 	},
 	.quirks = 0
 };
