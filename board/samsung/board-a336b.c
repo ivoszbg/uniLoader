@@ -19,10 +19,10 @@ int a33x_init(void)
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info a33x_fb = {
 	.format = FB_FORMAT_ARGB8888,
-	.width = CONFIG_FRAMEBUFFER_WIDTH,
-	.height = CONFIG_FRAMEBUFFER_HEIGHT,
-	.stride = CONFIG_FRAMEBUFFER_STRIDE,
-	.address = (void *)CONFIG_FRAMEBUFFER_BASE
+	.width = 1080,
+	.height = 2400,
+	.stride = 4,
+	.address = (void *)0xfa200000
 };
 #endif
 

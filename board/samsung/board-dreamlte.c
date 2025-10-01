@@ -116,10 +116,10 @@ int dreamlte_init(void)
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info dreamlte_fb = {
 	.format = FB_FORMAT_ARGB8888,
-	.width = CONFIG_FRAMEBUFFER_WIDTH,
-	.height = CONFIG_FRAMEBUFFER_HEIGHT,
-	.stride = CONFIG_FRAMEBUFFER_STRIDE,
-	.address = (void *)CONFIG_FRAMEBUFFER_BASE
+	.width = 1440,
+	.height = 2960,
+	.stride = 4,
+	.address = (void *)0xcc000000
 };
 #endif
 
