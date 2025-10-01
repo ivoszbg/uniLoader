@@ -18,12 +18,6 @@ int j4lte_init(void)
 	return 0;
 }
 
-// Late initialization
-int j4lte_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info j4lte_fb = {
 	.format = FB_FORMAT_BGRA8888,
@@ -47,7 +41,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = j4lte_init,
 		.drivers_init = j4lte_drv,
-		.late_init = j4lte_late_init,
 	},
 	.quirks = 0
 };
