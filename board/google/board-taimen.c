@@ -48,29 +48,7 @@ void uart_puts(const char *s)
 	}
 }
 
-/* NOTE - does not work *yet* - stock bootloader messes up fb */
-#ifdef CONFIG_SIMPLE_FB
-static struct video_info taimen_fb = {
-	.format = FB_FORMAT_ARGB8888,
-	.width = CONFIG_FRAMEBUFFER_WIDTH,
-	.height = CONFIG_FRAMEBUFFER_HEIGHT,
-	.stride = CONFIG_FRAMEBUFFER_STRIDE,
-	.address = (void *)CONFIG_FRAMEBUFFER_BASE
-};
-#endif
-
-int taimen_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &taimen_fb);
-#endif
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "google-taimen",
-	.ops = {
-		.drivers_init = taimen_drv,
-	},
 	.quirks = 0
 };
