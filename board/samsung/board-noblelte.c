@@ -18,12 +18,6 @@ int noblelte_init(void)
 	return 0;
 }
 
-// Late initialization
-int noblelte_late_init(void)
-{
-	return 0;
-}
-
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info noblelte_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -47,7 +41,6 @@ struct board_data board_ops = {
 	.ops = {
 		.early_init = noblelte_init,
 		.drivers_init = noblelte_drv,
-		.late_init = noblelte_late_init,
 	},
 	.quirks = 0
 };
