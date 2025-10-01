@@ -34,7 +34,6 @@ typedef struct {
 static const color red = {255, 0, 0, 255};
 static const color orange = {255, 165, 0, 255};
 static const color yellow = {255, 255, 0, 255};
-static const color cyan = {0, 255, 255, 255};
 static const color green = {0, 255, 0, 255};
 static const color gray = {128, 128, 128, 255};
 static const color amber = {255, 192, 0, 255};
