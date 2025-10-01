@@ -25,9 +25,4 @@ struct driver_registry_entry {
 		(probe_func)(data);			\
 	} while (0)
 
-#define PASS_STRUCT(name, probe_func, data)		\
-	do {						\
-		(probe_func)(data);			\
-	} while (0)
-
 #endif // DRIVERS_H_
