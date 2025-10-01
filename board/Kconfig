@@ -166,11 +166,11 @@ menu "Device Support"
 		  Say Y if you want to include support for Samsung Galaxy Tab S6 Lite
 
 	config SAMSUNG_R8S
-                bool "Support for Samsung Galaxy S20 FE"
-                default n
-                depends on EXYNOS_990
-                help
-                  Say Y if you want to include support for Samsung Galaxy S20 FE
+		bool "Support for Samsung Galaxy S20 FE"
+		default n
+		depends on EXYNOS_990
+		help
+		  Say Y if you want to include support for Samsung Galaxy S20 FE
 
 	config VOLLA_ALGIZ
 		bool "Support for Volla Phone Quintus"
