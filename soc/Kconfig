@@ -27,133 +27,114 @@ config QUALCOMM
 
 	config APPLE_T7000
 		bool "Support for Apple T7000"
-		default n
 		select APPLE_SILICON
 		help
 		  Say Y if your device uses Apple T7000 SoC
 
 	config APPLE_T8010
 		bool "Support for Apple T8010"
-		default n
 		select APPLE_SILICON
 		help
 		  Say Y if your device uses Apple T8010 SoC
 
 	config EXYNOS_1280
 		bool "Support for Exynos 1280"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos1280 SoC
 
 	config EXYNOS_2200
 		bool "Support for Exynos 2200"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos2200 SoC
 
 	config EXYNOS_3830
 		bool "Support for Exynos 850"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos850 SoC
 
 	config EXYNOS_7420
 		bool "Support for Exynos 7420"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos7420 SoC
 
 	config EXYNOS_7570
 		bool "Support for Exynos 7570"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos7570 SoC
 
 	config EXYNOS_7580
 		bool "Support for Exynos 7580"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos7580 SoC
 
 	config EXYNOS_7885
 		bool "Support for Exynos 7885"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos7885 SoC
 
 	config EXYNOS_8890
 		bool "Support for Exynos 8890"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos8890 SoC
 
 	config EXYNOS_8895
 		bool "Support for Exynos 8895"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos8895 SoC
 
 	config EXYNOS_9610
 		bool "Support for Exynos 9610"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos9610 SoC
 
 	config EXYNOS_9810
 		bool "Support for Exynos 9810"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos9810 SoC
 		  
 	config EXYNOS_990
 		bool "Support for Exynos 990"
-		default n
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos990 SoC
 
 	config MT6735
 		bool "Support for Mediatek MT6735"
-		default n
 		select MEDIATEK
 		help
 		  Say Y if your device uses Mediatek MT6735 SoC
 
 	config MT6877
 		bool "Support for Mediatek MT6877"
-		default n
 		select MEDIATEK
 		help
 		  Say Y if your device uses Mediatek MT6877 SoC
 
 	config MT6878
 		bool "Support for Mediatek MT6878"
-		default n
 		select MEDIATEK
 		help
 		  Say Y if your device uses Mediatek MT6878 SoC
 
 	config QC32_8916
 		bool "Support for QUALCOMM MSM8916"
-		default n
 		select QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
 	
 	config QEMU_SOC_VIRT
 		bool "Support for QEMU virt aarch64 SoC"
-		default n
 		select QEMU
 		help
 		  Say Y if you are using the generic QEMU emulation
@@ -161,14 +142,12 @@ config QUALCOMM
 
 	config MSM8998
 		bool "Support for Qualcomm Snapdragon 835"
-		default n
 		select QUALCOMM
 		help
 		  Say Y if your device uses Qualcomm MSM8998
 
 	config FREESCALE_IMX6SL
 		bool "Support for Freescale i.MX6SL"
-		default n
 		select FREESCALE
 		help
 		  Say Y if your device uses i.MX6SL
