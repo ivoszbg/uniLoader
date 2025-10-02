@@ -21,3 +21,4 @@ lib-$(CONFIG_SAMSUNG_J4LTE) += samsung/board-j4lte.o
 lib-$(CONFIG_SAMSUNG_GTA4XL) += samsung/board-gta4xl.o
 lib-$(CONFIG_SAMSUNG_R8S) += samsung/board-r8s.o
 lib-$(CONFIG_VOLLA_ALGIZ) += volla/board-algiz.o
+lib-$(CONFIG_XIAOMI_BEGONIA) += xiaomi/board-begonia.o

@@ -178,6 +178,13 @@ menu "Device Support"
 		depends on MT6877
 		help
 		  Say Y if you want to include support for Volla Phone Quintus
+
+	config XIAOMI_BEGONIA
+		bool "Support for Redmi Note 8 Pro"
+		default n
+		depends on MT6785
+		help
+		  Say Y if you want to include support for Redmi Note 8 Pro
 endmenu
 
 menu "Device Specific Addresses"
@@ -192,9 +199,11 @@ menu "Device Specific Addresses"
 		default 0x050000000 if SAMSUNG_J4LTE
 		default 0x090000000 if SAMSUNG_J5LTE
 		default 0x60000000 if VOLLA_ALGIZ
+		default 0x50000000 if XIAOMI_BEGONIA
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
 		default 0x40000000 if NOTHING_TETRIS
 		default 0x51100000 if VOLLA_ALGIZ
+		default 0x48000000 if XIAOMI_BEGONIA
 endmenu
