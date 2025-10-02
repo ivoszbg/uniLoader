@@ -132,6 +132,12 @@ config QUALCOMM
 		select QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
+
+	config SM8450
+		bool "Support for QUALCOMM SM8450"
+		select QUALCOMM
+		help
+		  Say Y if your device uses this Qualcomm SoC
 	
 	config QEMU_SOC_VIRT
 		bool "Support for QEMU virt aarch64 SoC"

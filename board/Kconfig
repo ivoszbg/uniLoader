@@ -165,6 +165,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy Tab S6 Lite
 
+	config SAMSUNG_R0Q
+		bool "Support for Samsung Galaxy S22"
+		default n
+		depends on SM8450
+		help
+		  Say Y if you want to include support for Samsung Galaxy S22
+
 	config SAMSUNG_R8S
 		bool "Support for Samsung Galaxy S20 FE"
 		default n
