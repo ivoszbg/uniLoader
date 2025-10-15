@@ -115,6 +115,12 @@ config QUALCOMM
 		help
 		  Say Y if your device uses Mediatek MT6735 SoC
 
+	config MT6765
+		bool "Support for Mediatek MT6765"
+		select MEDIATEK
+		help
+		  Say Y if your device uses Mediatek MT6765 SoC
+
 	config MT6785
 		bool "Support for Mediatek MT6785"
 		default n

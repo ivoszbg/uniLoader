@@ -179,6 +179,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy S20 FE
 
+	config XIAOMI_DANDELION
+		bool "Support for Xiaomi Redmi 9A"
+		default n
+		depends on MT6765
+		help
+		  Say Y if you want to include support for Xiaomi Redmi 9A
+
 	config VOLLA_ALGIZ
 		bool "Support for Volla Phone Quintus"
 		default n
