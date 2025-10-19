@@ -189,6 +189,13 @@ menu "Device Support"
 		  Redmi 9A, Redmi 9I, Redmi 9AT, Redmi 10A, Redmi 9A Sport, Redmi 9I Sport,
 		  Poco C3, Poco C31, Redmi 9C, Redmi 9C NFC, Redmi 9 India, Redmi 9 Active.
 
+	config XIAOMI_CAMELLIA
+		bool "Support for Xiaomi Poco M3 Pro 5G"
+		default n
+		depends on MT6833
+		help
+		  Say Y if you want to include support for Poco M3 Pro 5G
+
 	config VOLLA_ALGIZ
 		bool "Support for Volla Phone Quintus"
 		default n
