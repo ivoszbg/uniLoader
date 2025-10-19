@@ -60,6 +60,8 @@ menu "Building options"
 		  Path to the ramdisk, which is going to get embedded to uniLoader
 endmenu
 
+source "drivers/Kconfig"
+
 source "lib/Kconfig"
 
 source "soc/Kconfig"
