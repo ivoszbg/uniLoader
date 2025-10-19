@@ -1,0 +1,15 @@
+menu "Drivers"
+	config EXYNOS_ACPM
+		bool "Support for Samsung Exynos ACPM block"
+		default n
+		help
+		    Say Y if you have a device with the Samsung Exynos ACPM block.
+
+	config EXYNOS_SPEEDY
+		bool "Support for Samsung Exynos SPEEDY bus"
+		default n
+		help
+		    Say Y if you have a device with the Samsung Exynos SPEEDY bus.
+    
+
+endmenu
