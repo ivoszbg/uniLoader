@@ -16,4 +16,11 @@ menu "Libraries"
 		default y
 		help
 		  Say Y if you want to have libfdt features.
+
+	config FDT_BUF_SIZE
+		int "Size of the static buffer for the Flattened Device Tree"
+		default 500000
+		depends on LIBFDT
+		help
+		  This option specifies the size (in bytes) of the buffer used for DTB modifying. The default value of 500 KB should be sufficient even for downstream device trees.
 endmenu
