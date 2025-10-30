@@ -594,7 +594,7 @@ int fdt_get_path(const void *fdt, int nodeoffset, char *buf, int buflen)
 			if (!name)
 				return namelen;
 			if ((p + namelen + 1) <= buflen) {
-				memcpy(buf + p, name, namelen);
+				__optimized_memcpy(buf + p, name, namelen);
 				p += namelen;
 				buf[p++] = '/';
 				pdepth++;
