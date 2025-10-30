@@ -334,6 +334,6 @@ int fdt_move(const void *fdt, void *buf, int bufsize)
 	if (fdt_totalsize(fdt) > (unsigned int)bufsize)
 		return -FDT_ERR_NOSPACE;
 
-	memmove(buf, fdt, fdt_totalsize(fdt));
+	__optimized_memmove(buf, fdt, fdt_totalsize(fdt));
 	return 0;
 }

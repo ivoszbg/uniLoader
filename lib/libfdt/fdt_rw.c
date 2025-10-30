@@ -63,7 +63,7 @@ static int fdt_splice_(void *fdt, void *splicepoint, int oldlen, int newlen)
 		return -FDT_ERR_BADOFFSET;
 	if (dsize - oldlen + newlen > fdt_totalsize(fdt))
 		return -FDT_ERR_NOSPACE;
-	memmove(p + newlen, p + oldlen, ((char *)fdt + dsize) - (p + oldlen));
+	__optimized_memmove(p + newlen, p + oldlen, ((char *)fdt + dsize) - (p + oldlen));
 	return 0;
 }
 
@@ -148,7 +148,7 @@ static int fdt_find_add_string_(void *fdt, const char *s, int slen,
 	if (!can_assume(NO_ROLLBACK))
 		*allocated = 1;
 
-	memcpy(new, s, slen);
+	__optimized_memcpy(new, s, slen);
 	new[slen] = '\0';
 
 	return (new - strtab);
@@ -255,7 +255,7 @@ int fdt_set_name(void *fdt, int nodeoffset, const char *name)
 	if (err)
 		return err;
 
-	memcpy(namep, name, newlen+1);
+	__optimized_memcpy(namep, name, newlen+1);
 	return 0;
 }
 
@@ -290,7 +290,7 @@ int fdt_setprop_namelen(void *fdt, int nodeoffset, const char *name,
 		return err;
 
 	if (len)
-		memcpy(prop_data, val, len);
+		__optimized_memcpy(prop_data, val, len);
 	return 0;
 }
 
@@ -311,13 +311,13 @@ int fdt_appendprop(void *fdt, int nodeoffset, const char *name,
 		if (err)
 			return err;
 		prop->len = cpu_to_fdt32(newlen);
-		memcpy(prop->data + oldlen, val, len);
+		__optimized_memcpy(prop->data + oldlen, val, len);
 	} else {
 		err = fdt_add_property_(fdt, nodeoffset, name, strlen(name),
 					len, &prop);
 		if (err)
 			return err;
-		memcpy(prop->data, val, len);
+		__optimized_memcpy(prop->data, val, len);
 	}
 	return 0;
 }
@@ -374,7 +374,7 @@ int fdt_add_subnode_namelen(void *fdt, int parentoffset,
 
 	nh->tag = cpu_to_fdt32(FDT_BEGIN_NODE);
 	memset(nh->name, 0, FDT_TAGALIGN(namelen+1));
-	memcpy(nh->name, name, namelen);
+	__optimized_memcpy(nh->name, name, namelen);
 	endtag = (fdt32_t *)((char *)nh + nodelen - FDT_TAGSIZE);
 	*endtag = cpu_to_fdt32(FDT_END_NODE);
 
@@ -411,14 +411,14 @@ static void fdt_packblocks_(const char *old, char *new,
 	struct_off = mem_rsv_off + mem_rsv_size;
 	strings_off = struct_off + struct_size;
 
-	memmove(new + mem_rsv_off, old + fdt_off_mem_rsvmap(old), mem_rsv_size);
+	__optimized_memmove(new + mem_rsv_off, old + fdt_off_mem_rsvmap(old), mem_rsv_size);
 	fdt_set_off_mem_rsvmap(new, mem_rsv_off);
 
-	memmove(new + struct_off, old + fdt_off_dt_struct(old), struct_size);
+	__optimized_memmove(new + struct_off, old + fdt_off_dt_struct(old), struct_size);
 	fdt_set_off_dt_struct(new, struct_off);
 	fdt_set_size_dt_struct(new, struct_size);
 
-	memmove(new + strings_off, old + fdt_off_dt_strings(old), strings_size);
+	__optimized_memmove(new + strings_off, old + fdt_off_dt_strings(old), strings_size);
 	fdt_set_off_dt_strings(new, strings_off);
 	fdt_set_size_dt_strings(new, fdt_size_dt_strings(old));
 }
@@ -480,7 +480,7 @@ int fdt_open_into(const void *fdt, void *buf, int bufsize)
 
 	fdt_packblocks_(fdt, tmp, mem_rsv_size, struct_size,
 			fdt_size_dt_strings(fdt));
-	memmove(buf, tmp, newsize);
+	__optimized_memmove(buf, tmp, newsize);
 
 	fdt_set_magic(buf, FDT_MAGIC);
 	fdt_set_totalsize(buf, bufsize);
