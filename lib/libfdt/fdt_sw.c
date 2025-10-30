@@ -171,11 +171,11 @@ int fdt_resize(void *fdt, void *buf, int bufsize)
 	/* Two cases to avoid clobbering data if the old and new
 	 * buffers partially overlap */
 	if (buf <= fdt) {
-		memmove(buf, fdt, headsize);
-		memmove(newtail, oldtail, tailsize);
+		__optimized_memmove(buf, fdt, headsize);
+		__optimized_memmove(newtail, oldtail, tailsize);
 	} else {
-		memmove(newtail, oldtail, tailsize);
-		memmove(buf, fdt, headsize);
+		__optimized_memmove(newtail, oldtail, tailsize);
+		__optimized_memmove(buf, fdt, headsize);
 	}
 
 	fdt_set_totalsize(buf, bufsize);
@@ -229,7 +229,7 @@ int fdt_begin_node(void *fdt, const char *name)
 		return -FDT_ERR_NOSPACE;
 
 	nh->tag = cpu_to_fdt32(FDT_BEGIN_NODE);
-	memcpy(nh->name, name, namelen);
+	__optimized_memcpy(nh->name, name, namelen);
 	return 0;
 }
 
@@ -259,7 +259,7 @@ static int fdt_add_string_(void *fdt, const char *s)
 	if (fdt_totalsize(fdt) - offset < struct_top)
 		return 0; /* no more room :( */
 
-	memcpy(strtab - offset, s, len);
+	__optimized_memcpy(strtab - offset, s, len);
 	fdt_set_size_dt_strings(fdt, strtabsize + len);
 	return -offset;
 }
@@ -330,7 +330,7 @@ int fdt_property(void *fdt, const char *name, const void *val, int len)
 	ret = fdt_property_placeholder(fdt, name, len, &ptr);
 	if (ret)
 		return ret;
-	memcpy(ptr, val, len);
+	__optimized_memcpy(ptr, val, len);
 	return 0;
 }
 
@@ -353,7 +353,7 @@ int fdt_finish(void *fdt)
 	/* Relocate the string table */
 	oldstroffset = fdt_totalsize(fdt) - fdt_size_dt_strings(fdt);
 	newstroffset = fdt_off_dt_struct(fdt) + fdt_size_dt_struct(fdt);
-	memmove(p + newstroffset, p + oldstroffset, fdt_size_dt_strings(fdt));
+	__optimized_memmove(p + newstroffset, p + oldstroffset, fdt_size_dt_strings(fdt));
 	fdt_set_off_dt_strings(fdt, newstroffset);
 
 	/* Walk the structure, correcting string offsets */
