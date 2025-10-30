@@ -10,4 +10,10 @@ menu "Libraries"
 		default n
 		help
 		  Say Y if you want to have UART output.
+
+	config LIBFDT
+		bool "Support for libfdt"
+		default y
+		help
+		  Say Y if you want to have libfdt features.
 endmenu
