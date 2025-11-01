@@ -7,11 +7,18 @@
 #include <main.h>
 #include <string.h>
 #include <lib/debug.h>
+#include <drivers/ramdisk-handler.h>
 
 extern struct board_data board_ops;
 
+#ifdef CONFIG_LIBFDT
+static char fdt_buf[CONFIG_FDT_BUF_SIZE];
+#endif
+
 void main(void* dt, void* kernel, void* ramdisk)
 {
+	int ret;
+
 	INITCALL(board_ops.ops.early_init);
 	INITCALL(board_ops.ops.drivers_init);
 
@@ -26,6 +33,14 @@ void main(void* dt, void* kernel, void* ramdisk)
 	printk(KERN_INFO, "welcome to uniLoader %s on %s\n", VER_TAG, board_ops.name);
 
 	INITCALL(board_ops.ops.drivers_init);
+
+#ifdef CONFIG_LIBFDT
+	ret = ramdisk_handler_patch_dtb(dt, &fdt_buf, sizeof(fdt_buf));
+	if (ret == 0)
+		dt = &fdt_buf;
+	else
+		printk(KERN_ERR, "failed to patch dtb\n");
+#endif
 
 	/* copy kernel to memory and boot  */
 	printk(KERN_INFO, "booting linux...\n");

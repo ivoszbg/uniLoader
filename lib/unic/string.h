@@ -39,6 +39,29 @@ void *memset (void *m, int c, size_t n);
 /* How many bytes are copied each iteration of the 4X unrolled loop.  */
 #define BIGBLOCKSIZE (sizeof(long) << 2)
 
+static void *__optimized_memmove (void *dst0, const void *src0, size_t len0) __attribute__((unused));
+static void *__optimized_memmove (void *dst0, const void *src0, size_t len0)
+{
+	char *d = dst0;
+	const char *s = src0;
+
+	if (d == s) {
+		return d;
+	}
+
+	if (s > d) {
+		for (size_t i = 0; i < len0; i++) {
+			d[i] = s[i];
+		}
+	} else {
+		for (size_t i = len0; i != 0; i--) {
+			d[i-1] = s[i-1];
+		}
+	}
+
+	return dst0;
+}
+
 static void *__optimized_memcpy (void *dst0, const void *src0, size_t len0) __attribute__((unused));
 static void *__optimized_memcpy (void *dst0, const void *src0, size_t len0)
 {
