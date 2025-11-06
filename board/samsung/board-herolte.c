@@ -31,7 +31,7 @@ int herolte_init(void)
 static struct video_info herolte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1440,
-	.height = 2960,
+	.height = 2560,
 	.stride = 4,
 	.address = (void *)0xe2a00000
 };
