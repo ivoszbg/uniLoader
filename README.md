@@ -44,6 +44,7 @@ environment in case of a forced and buggy bootloader.
 - ZEROFLTE  
 - DREAMLTE  
 - STARLTE  
+- STAR2LTE  
 - X1S  
 - J5LTE  
 - J4LTE  
