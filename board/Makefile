@@ -1,6 +1,7 @@
 lib-$(CONFIG_APPLE_N61AP) += apple/board-n61ap.o
 lib-$(CONFIG_AMAZON_PW3) += amazon/board-pw3.o
 lib-$(CONFIG_GOOGLE_TAIMEN) += google/board-taimen.o
+lib-$(CONFIG_INFINIX_X6710) += infinix/board-x6710.o
 lib-$(CONFIG_NOKIA_ESSENTIAL) += nokia/board-essential.o
 lib-$(CONFIG_NOTHING_TETRIS) += nothing/board-tetris.o
 lib-$(CONFIG_QEMU_BOARD_VIRT) += qemu/board-virt.o

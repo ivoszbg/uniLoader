@@ -21,6 +21,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Pixel 2 XL
 
+	config INFINIX_X6710
+		bool "Support for Infinix Note 30 VIP"
+		default n
+		depends on MT6893
+		help
+		  Say Y if you want to include support for Infinix Note 30 VIP
+
 	config NOTHING_TETRIS
 		bool "Support for CMF Phone 1"
 		default n
