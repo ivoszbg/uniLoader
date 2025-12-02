@@ -23,6 +23,9 @@ environment in case of a forced and buggy bootloader.
 ### Google
 - Taimen
 
+### Infinix
+- X6710
+
 ### Nokia
 - Essential
 
