@@ -1,3 +1,5 @@
+lib-y += compiler-rt.o
+
 # simplefb
 lib-$(CONFIG_SIMPLE_FB) += simplefb/simplefb.o
 

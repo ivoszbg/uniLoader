@@ -389,8 +389,12 @@ arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(linker-script-deps)
 #
 # CMDs for binary formats
 #
+LIBGCC := $(shell $(CC) $(KBUILD_CFLAGS) -print-libgcc-file-name)
+
 quiet_cmd_uniloader_link = LD      $@.o
-      cmd_uniloader_link = $(LD) $(uniloader-main-y) $(uniloader-libs) -o $@.o \
+      cmd_uniloader_link = $(LD) $(uniloader-main-y) \
+                                 --start-group $(uniloader-libs) $(LIBGCC) --end-group \
+                                 -o $@.o \
                                  --script=arch/$(ARCH)/linker.lds
 
 quiet_cmd_uniloader_objcopy = OBJCOPY $@
