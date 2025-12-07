@@ -60,12 +60,19 @@ menu "Device Support"
 		help
 		   Say Y if you want to include support for Samsung Galaxy A10
 
-        config SAMSUNG_A127F
+	config SAMSUNG_A127F
 		bool "Support for Samsung Galaxy A12 Nacho"
 		default n
 		depends on EXYNOS_3830
 		help
 		  Say Y if you want to include support for Samsung Galaxy A12 Nacho
+
+	config SAMSUNG_A217F
+		bool "Support for Samsung Galaxy A21s"
+		default n
+		depends on EXYNOS_3830
+		help
+		  Say Y if you want to include support for Samsung Galaxy A21s
 
 	config SAMSUNG_A3XELTE
 		bool "Support for Samsung Galaxy A3 2016"
