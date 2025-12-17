@@ -23,6 +23,9 @@ environment in case of a forced and buggy bootloader.
 ### Google
 - Taimen
 
+### itel
+- P682LPN
+
 ### Nokia
 - Essential
 
