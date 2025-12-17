@@ -175,4 +175,11 @@ config QUALCOMM
 		select FREESCALE
 		help
 		  Say Y if your device uses i.MX6SL
+
+	config UMS9230
+		bool "Support for Unisoc T606"
+		select UNISOC
+		help
+		  Say Y if your device uses UNISOC UMS9230
+
  endchoice

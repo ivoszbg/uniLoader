@@ -209,6 +209,14 @@ menu "Device Support"
 		depends on MT6785
 		help
 		  Say Y if you want to include support for Redmi Note 8 Pro
+
+	config ITEL_P682LPN
+		bool "Support for itel Vision 3 Plus"
+		default n
+		depends on UMS9230
+		help
+		  Say Y if you want to include support for itel Vision 3 Plus
+
 endmenu
 
 menu "Device Specific Addresses"
