@@ -229,7 +229,6 @@ menu "Device Specific Addresses"
 		hex "Payload Entry Address"
 		default 0x50000000 if NOTHING_TETRIS
 		default 0x050000000 if SAMSUNG_J4LTE
-		default 0x090000000 if SAMSUNG_J5LTE
 		default 0x60000000 if VOLLA_ALGIZ
 		default 0x50000000 if XIAOMI_BEGONIA
 
