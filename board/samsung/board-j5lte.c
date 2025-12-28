@@ -8,21 +8,21 @@
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
-#define PIPE_SSPP_SRC_FORMAT                    0x30
-#define PIPE_SSPP_SRC_UNPACK_PATTERN            0x34
-#define PIPE_BASE				0x1A15000
-#define PIPE_SSPP_SRC_YSTRIDE			0x24
+#define PIPE_BASE			0x1a15000
+#define PIPE_SSPP_SRC_FORMAT		0x30
+#define PIPE_SSPP_SRC_UNPACK_PATTERN	0x34
+#define PIPE_SSPP_SRC_YSTRIDE		0x24
 
-#define MDP_CTL_0_BASE                          0x1A02000
-#define MDP_CTL_FLUSH				0x18
+#define MDP_CTL_0_BASE			0x1a02000
+#define MDP_CTL_FLUSH			0x18
 
 int j5lte_init(void)
 {
 	/* TODO: Doesn't really work :P */
-	writel(0x000236FF, PIPE_BASE + PIPE_SSPP_SRC_FORMAT);
-	writel(0x03020001, PIPE_BASE + PIPE_SSPP_SRC_UNPACK_PATTERN);
-	writel((720 * 4), MDP_CTL_0_BASE + MDP_CTL_FLUSH);
-	writel((1 << (0)), PIPE_BASE + PIPE_SSPP_SRC_YSTRIDE);
+	writel(0x000236FF, (void *) (PIPE_BASE + PIPE_SSPP_SRC_FORMAT));
+	writel(0x03020001, (void *) (PIPE_BASE + PIPE_SSPP_SRC_UNPACK_PATTERN));
+	writel((720 * 4), (void *) (MDP_CTL_0_BASE + MDP_CTL_FLUSH));
+	writel((1 << (0)), (void *) (PIPE_BASE + PIPE_SSPP_SRC_YSTRIDE));
 
 	return 0;
 }
@@ -33,7 +33,7 @@ static struct video_info j5lte_fb = {
 	.width = 720,
 	.height = 1280,
 	.stride = 3,
-	.address = (void *)0x08e000000
+	.address = (void *)0x8e000000
 };
 #endif
 
