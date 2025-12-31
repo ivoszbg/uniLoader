@@ -38,6 +38,7 @@ environment in case of a forced and buggy bootloader.
 ### Samsung
 - A105F  
 - A127F  
+- A305F  
 - A3XELTE  
 - C1S  
 - HEROLTE  
