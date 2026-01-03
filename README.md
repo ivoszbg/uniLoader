@@ -26,6 +26,9 @@ environment in case of a forced and buggy bootloader.
 ### itel
 - P682LPN
 
+### Infinix
+- X6710
+
 ### Nokia
 - Essential
 
