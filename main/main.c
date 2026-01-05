@@ -32,7 +32,7 @@ void main(void* dt, void* kernel, void* ramdisk)
 	printk(KERN_INFO, "passed board initialization\n");
 	printk(KERN_INFO, "welcome to uniLoader %s on %s\n", VER_TAG, board_ops.name);
 
-	INITCALL(board_ops.ops.drivers_init);
+	INITCALL(board_ops.ops.late_init);
 
 #ifdef CONFIG_LIBFDT
 	ret = ramdisk_handler_patch_dtb(dt, &fdt_buf, sizeof(fdt_buf));
