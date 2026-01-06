@@ -20,6 +20,17 @@ ENTRY(_start)
 
 	ldr sp, =__stack_top
 
+	/* Zero BSS section */
+	ldr r0, =__bss_start
+	ldr r1, =__bss_end
+	mov r2, #0
+1:
+	cmp r0, r1
+	bge 2f
+	str r2, [r0], #4
+	b 1b
+2:
+
 	/* main(void* dt, void* kernel, void* ramdisk) */
 	ldr r0, =_dt_start		@ Load address of dtb into r0
 	ldr r1, =_kernel_start		@ Load address of kernel into r1
