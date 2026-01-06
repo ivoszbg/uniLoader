@@ -150,6 +150,13 @@ menu "Device Support"
 		depends on EXYNOS_9810
 		help
 		  Say Y if you want to include support for Samsung Galaxy S9
+
+	config SAMSUNG_STAR2LTE
+		bool "Support for Samsung Galaxy S9+"
+		default n
+		depends on EXYNOS_9810
+		help
+		  Say Y if you want to include support for Samsung Galaxy S9+
 		  
 	config SAMSUNG_X1S
 		bool "Support for Samsung Galaxy S20"
