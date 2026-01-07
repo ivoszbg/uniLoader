@@ -10,6 +10,10 @@ config FREESCALE
 	bool
 	default n
 
+config HISILICON
+	bool
+	default n
+
 config MEDIATEK
 	bool
 	default n
@@ -108,6 +112,12 @@ config QUALCOMM
 		select EXYNOS
 		help
 		  Say Y if your device uses Samsung Exynos990 SoC
+
+	config HI6250
+		bool "Support for HiSilicon Hi6250"
+		select HISILICON
+		help
+		  Say Y if your device uses HiSilicon Hi6250
 
 	config MT6735
 		bool "Support for Mediatek MT6735"

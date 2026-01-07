@@ -21,6 +21,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Pixel 2 XL
 
+	config HUAWEI_AGASSI2
+		bool "Support for Huawei Mediapad T5"
+		default n
+		depends on HI6250
+		help
+		  Say Y if you want to include support for Huawei Mediapad T5
+
 	config INFINIX_X6710
 		bool "Support for Infinix Note 30 VIP"
 		default n
