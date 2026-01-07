@@ -22,6 +22,10 @@ config QUALCOMM
 	bool
 	default n
 
+config HISILICON
+	bool
+	default n
+
  choice
 	prompt "SoC Support"
 
@@ -187,5 +191,11 @@ config QUALCOMM
 		select UNISOC
 		help
 		  Say Y if your device uses UNISOC UMS9230
+
+	config HI6250
+		bool "Support for HiSilicon Hi6250"
+		select HISILICON
+		help
+		  Say Y if your device uses HiSilicon Hi6250
 
  endchoice
