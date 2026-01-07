@@ -28,12 +28,12 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Infinix Note 30 VIP
 
-	config NOTHING_TETRIS
-		bool "Support for CMF Phone 1"
+	config ITEL_P682LPN
+		bool "Support for itel Vision 3 Plus"
 		default n
-		depends on MT6878
+		depends on UMS9230
 		help
-		  Say Y if you want to include support for CMF Phone 1
+		  Say Y if you want to include support for itel Vision 3 Plus
 
 	config NOKIA_ESSENTIAL
 		bool "Support for Nokia 3"
@@ -41,6 +41,13 @@ menu "Device Support"
 		depends on MT6735
 		help
 		  Say Y if you want to include support for Nokia 3
+
+	config NOTHING_TETRIS
+		bool "Support for CMF Phone 1"
+		default n
+		depends on MT6878
+		help
+		  Say Y if you want to include support for CMF Phone 1
 
 	config NOTHING_TETRIS_DISABLE_WDT
 		bool "Disable the watchdog timer on startup"
@@ -67,7 +74,7 @@ menu "Device Support"
 		help
 		   Say Y if you want to include support for Samsung Galaxy A10
 
-        config SAMSUNG_A127F
+  config SAMSUNG_A127F
 		bool "Support for Samsung Galaxy A12 Nacho"
 		default n
 		depends on EXYNOS_3830
@@ -81,13 +88,6 @@ menu "Device Support"
 		help
 		   Say Y if you want to include support for Samsung Galaxy A30
 
-	config SAMSUNG_A3XELTE
-		bool "Support for Samsung Galaxy A3 2016"
-		default n
-		depends on EXYNOS_7580
-		help
-		  Say Y if you want to include support for Samsung Galaxy A3 2016
-
 	config SAMSUNG_A336B
 		bool "Support for Samsung Galaxy A33"
 		default n
@@ -95,47 +95,19 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy A33
 
+	config SAMSUNG_A3XELTE
+		bool "Support for Samsung Galaxy A3 2016"
+		default n
+		depends on EXYNOS_7580
+		help
+		  Say Y if you want to include support for Samsung Galaxy A3 2016
+
 	config SAMSUNG_C1S
-		bool "Support for Samsung Galaxy Note20"
+		bool "Support for Samsung Galaxy Note 20"
 		default n
 		depends on EXYNOS_990
 		help
-		  Say Y if you want to include support for Samsung Galaxy Note20
-
-	config SAMSUNG_G0S
-		bool "Support for Samsung Galaxy S22+"
-		default n
-		depends on EXYNOS_2200
-		help
-		  Say Y if you want to include support for Samsung Galaxy S22+
-
-	config SAMSUNG_HEROLTE
-		bool "Support for Samsung Galaxy S7"
-		default n
-		depends on EXYNOS_8890
-		help
-		  Say Y if you want to include support for Samsung Galaxy S7
-
-	config SAMSUNG_NOBLELTE
-		bool "Support for Samsung Galaxy Note5"
-		default n
-		depends on EXYNOS_7420
-		help
-		  Say Y if you want to include support for Samsung Galaxy Note5
-
-	config SAMSUNG_JACKPOTLTE
-		bool "Support for Samsung Galaxy A8 (2018)"
-		default n
-		depends on EXYNOS_7885
-		help
-		  Say Y if you want to include support for Samsung Galaxy A8 (2018)
-
-	config SAMSUNG_ZEROFLTE
-		bool "Support for Samsung Galaxy S6"
-		default n
-		depends on EXYNOS_7420
-		help
-		  Say Y if you want to include support for Samsung Galaxy S6
+		  Say Y if you want to include support for Samsung Galaxy Note 20
 
 	config SAMSUNG_DREAMLTE
 		bool "Support for Samsung Galaxy S8"
@@ -144,19 +116,26 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy S8
 
-	config SAMSUNG_STARLTE
-		bool "Support for Samsung Galaxy S9"
+	config SAMSUNG_G0S
+		bool "Support for Samsung Galaxy S22+"
 		default n
-		depends on EXYNOS_9810
+		depends on EXYNOS_2200
 		help
-		  Say Y if you want to include support for Samsung Galaxy S9
-		  
-	config SAMSUNG_X1S
-		bool "Support for Samsung Galaxy S20"
+		  Say Y if you want to include support for Samsung Galaxy S22+
+
+	config SAMSUNG_GTA4XL
+		bool "Support for Samsung Galaxy Tab S6 Lite"
 		default n
-		depends on EXYNOS_990
+		depends on EXYNOS_9610
 		help
-		  Say Y if you want to include support for Samsung Galaxy S20
+		  Say Y if you want to include support for Samsung Galaxy Tab S6 Lite
+
+	config SAMSUNG_HEROLTE
+		bool "Support for Samsung Galaxy S7"
+		default n
+		depends on EXYNOS_8890
+		help
+		  Say Y if you want to include support for Samsung Galaxy S7
 
 	config SAMSUNG_J4LTE
 		bool "Support for Samsung Galaxy J4 2018"
@@ -172,12 +151,19 @@ menu "Device Support"
 		help
 		  Say Y if you want to include arm32 support for Samsung Galaxy J5 2015
 
-	config SAMSUNG_GTA4XL
-		bool "Support for Samsung Galaxy Tab S6 Lite"
+	config SAMSUNG_JACKPOTLTE
+		bool "Support for Samsung Galaxy A8 (2018)"
 		default n
-		depends on EXYNOS_9610
+		depends on EXYNOS_7885
 		help
-		  Say Y if you want to include support for Samsung Galaxy Tab S6 Lite
+		  Say Y if you want to include support for Samsung Galaxy A8 (2018)
+
+	config SAMSUNG_NOBLELTE
+		bool "Support for Samsung Galaxy Note5"
+		default n
+		depends on EXYNOS_7420
+		help
+		  Say Y if you want to include support for Samsung Galaxy Note 5
 
 	config SAMSUNG_R0Q
 		bool "Support for Samsung Galaxy S22"
@@ -192,6 +178,41 @@ menu "Device Support"
 		depends on EXYNOS_990
 		help
 		  Say Y if you want to include support for Samsung Galaxy S20 FE
+
+	config SAMSUNG_STARLTE
+		bool "Support for Samsung Galaxy S9"
+		default n
+		depends on EXYNOS_9810
+		help
+		  Say Y if you want to include support for Samsung Galaxy S9
+		  
+	config SAMSUNG_X1S
+		bool "Support for Samsung Galaxy S20"
+		default n
+		depends on EXYNOS_990
+		help
+		  Say Y if you want to include support for Samsung Galaxy S20
+
+	config SAMSUNG_ZEROFLTE
+		bool "Support for Samsung Galaxy S6"
+		default n
+		depends on EXYNOS_7420
+		help
+		  Say Y if you want to include support for Samsung Galaxy S6
+
+	config VOLLA_ALGIZ
+		bool "Support for Volla Phone Quintus"
+		default n
+		depends on MT6877
+		help
+		  Say Y if you want to include support for Volla Phone Quintus
+
+	config XIAOMI_BEGONIA
+		bool "Support for Redmi Note 8 Pro"
+		default n
+		depends on MT6785
+		help
+		  Say Y if you want to include support for Redmi Note 8 Pro
 
 	config XIAOMI_BLOSSOM
 		bool "Support for Xiaomi Blossom devices"
@@ -209,28 +230,6 @@ menu "Device Support"
 		depends on MT6833
 		help
 		  Say Y if you want to include support for Poco M3 Pro 5G
-
-	config VOLLA_ALGIZ
-		bool "Support for Volla Phone Quintus"
-		default n
-		depends on MT6877
-		help
-		  Say Y if you want to include support for Volla Phone Quintus
-
-	config XIAOMI_BEGONIA
-		bool "Support for Redmi Note 8 Pro"
-		default n
-		depends on MT6785
-		help
-		  Say Y if you want to include support for Redmi Note 8 Pro
-
-	config ITEL_P682LPN
-		bool "Support for itel Vision 3 Plus"
-		default n
-		depends on UMS9230
-		help
-		  Say Y if you want to include support for itel Vision 3 Plus
-
 endmenu
 
 menu "Device Specific Addresses"
