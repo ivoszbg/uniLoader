@@ -51,6 +51,10 @@ static void draw_pixel(volatile char *fb, int x, int y, int width, int stride,
 
 int get_font_scale_factor()
 {
+	if (fb_info->scale) {
+		return fb_info->scale;
+	}
+
 	/* integer sqrt inline */
 	int n = fb_info->width * fb_info->width + fb_info->height * fb_info->height;
 	int x = n;

@@ -28,6 +28,7 @@ struct video_info {
 	int width;
 	int height;
 	int stride;
+	int scale;
 	int scale_f;
 	void *address;
 };
