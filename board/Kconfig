@@ -102,6 +102,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy A3 2016
 
+	config SAMSUNG_BEYOND1LTE
+		bool "Support for Samsung Galaxy S10"
+		default n
+		depends on EXYNOS_9820
+		help
+		  Say Y if you want to include support for Samsung Galaxy S10
+
 	config SAMSUNG_C1S
 		bool "Support for Samsung Galaxy Note 20"
 		default n

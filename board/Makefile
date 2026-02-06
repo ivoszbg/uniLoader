@@ -11,6 +11,7 @@ lib-$(CONFIG_SAMSUNG_A127F) += samsung/board-a127f.o
 lib-$(CONFIG_SAMSUNG_A305F) += samsung/board-a305f.o
 lib-$(CONFIG_SAMSUNG_A336B) += samsung/board-a336b.o
 lib-$(CONFIG_SAMSUNG_A3XELTE) += samsung/board-a3xelte.o
+lib-$(CONFIG_SAMSUNG_BEYOND1LTE) += samsung/board-beyond1lte.o
 lib-$(CONFIG_SAMSUNG_C1S) += samsung/board-c1s.o
 lib-$(CONFIG_SAMSUNG_DREAMLTE) += samsung/board-dreamlte.o
 lib-$(CONFIG_SAMSUNG_G0S) += samsung/board-g0s.o

@@ -43,6 +43,7 @@ environment in case of a forced and buggy bootloader.
 - A127F  
 - A305F  
 - A3XELTE  
+- BEYOND1LTE  
 - C1S  
 - HEROLTE  
 - G0S  

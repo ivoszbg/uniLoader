@@ -103,6 +103,12 @@ config QUALCOMM
 		help
 		  Say Y if your device uses Samsung Exynos9810 SoC
 		  
+	config EXYNOS_9820
+		bool "Support for Exynos 9820"
+		select EXYNOS
+		help
+		  Say Y if your device uses Samsung Exynos9820 SoC
+
 	config EXYNOS_990
 		bool "Support for Exynos 990"
 		select EXYNOS
