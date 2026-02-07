@@ -46,11 +46,15 @@ void main(void* dt, void* kernel, void* ramdisk)
 	printk(KERN_INFO, "booting linux...\n");
 #ifdef __aarch64__
 	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) &kernel_size);
+#ifndef CONFIG_RAMDISK_NO_COPY
 	__optimized_memcpy((void*)CONFIG_RAMDISK_ENTRY, ramdisk, (unsigned long) &ramdisk_size);
+#endif
 	load_kernel_and_jump(dt, 0, 0, 0, (void*)CONFIG_PAYLOAD_ENTRY);
 #elif __arm__
 	memcpy((void*)CONFIG_PAYLOAD_ENTRY, kernel, (unsigned long) kernel_size);
+#ifndef CONFIG_RAMDISK_NO_COPY
 	memcpy((void*)CONFIG_RAMDISK_ENTRY, ramdisk, (unsigned long) ramdisk_size);
+#endif
 	load_kernel_and_jump(0, 0, dt, (void*)CONFIG_PAYLOAD_ENTRY);
 #endif
 

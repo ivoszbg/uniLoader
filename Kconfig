@@ -58,6 +58,14 @@ menu "Building options"
 		default blob/ramdisk
 		help
 		  Path to the ramdisk, which is going to get embedded to uniLoader
+	
+	config RAMDISK_NO_COPY
+		bool "Do not copy ramdisk"
+		depends on EMBED_LINUX
+		default n
+		help
+		  Select this if the bootloader copies the ramdisk itself
+
 endmenu
 
 source "drivers/Kconfig"

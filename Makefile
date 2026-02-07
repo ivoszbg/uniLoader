@@ -383,6 +383,10 @@ quiet_cmd_cpp_lds = LDS     $@
                             -DRAMDISK_PATH=$(RAMDISK_PATH) \
                             -P -o $@
 
+ifdef CONFIG_RAMDISK_NO_COPY
+	  cmd_cpp_lds += -DRAMDISK_SIZE=$(shell stat -c%s $(RAMDISK_PATH))
+endif
+
 arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(linker-script-deps)
 	$(call if_changed,cpp_lds)
 

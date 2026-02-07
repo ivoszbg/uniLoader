@@ -237,6 +237,14 @@ menu "Device Support"
 		depends on MT6833
 		help
 		  Say Y if you want to include support for Poco M3 Pro 5G
+
+	config HUAWEI_AGASSI2
+		bool "Support for Huawei Mediapad T5"
+		default n
+		depends on HI6250
+		help
+		  Say Y if you want to include support for Huawei Mediapad T5
+
 endmenu
 
 menu "Device Specific Addresses"

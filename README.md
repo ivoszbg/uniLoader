@@ -67,6 +67,9 @@ environment in case of a forced and buggy bootloader.
 - Blossom  
 - Camellia
 
+### Huawei
+- Agassi2
+
 ---
 
 ## Make Syntax
