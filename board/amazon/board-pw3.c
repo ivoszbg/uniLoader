@@ -4,7 +4,7 @@
  */
 
 #include <board.h>
-#include <main.h>
+#include <main/main.h>
 #include <drivers/framework.h>
 
 #define IMX6SL_UART1_BASE_ADDR	0x02020000
