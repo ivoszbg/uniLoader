@@ -18,6 +18,9 @@ extern void load_kernel_and_jump(unsigned int r0, unsigned int r1,
                                  void* dtb_addr, void* kernel_entry);
 #endif
 
+// From arch/<arch>/load-kernel.c
+void arch_load_kernel(void* kernel, void* dt, void* ramdisk);
+
 void boot_kernel(void* dt, void* kernel, void* ramdisk);
 
 #endif // BOOT_H_
