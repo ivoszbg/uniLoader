@@ -90,6 +90,12 @@ make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- dreamlte_defconfig
 make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu-
 ```
 
+If you'd like to build with the **Clang** compiler, you may append to the make commands as such:
+```bash
+make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- CC=clang dreamlte_defconfig
+make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- CC=clang
+```
+
 ---
 
 ## License
