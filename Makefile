@@ -197,6 +197,7 @@ LINUXINCLUDE    := -Iinclude \
 KBUILD_CPPFLAGS := -D__KERNEL__
 
 KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
+		   -ffreestanding -fno-PIE \
 		   -fno-strict-aliasing -fno-common \
 		   -fno-stack-protector \
 		   -Werror-implicit-function-declaration \
@@ -205,6 +206,23 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Wno-builtin-declaration-mismatch -Wno-main -nostdinc \
 		   -I$(srctree)/lib/unic
 
+ifneq ($(shell $(CC) --version 2>&1 | head -n 1 | grep clang),)
+ifneq ($(CROSS_COMPILE),)
+CLANG_FLAGS	:= --target=$(notdir $(CROSS_COMPILE:%-=%))
+GCC_TOOLCHAIN_DIR := $(dir $(shell which $(CROSS_COMPILE)elfedit))
+CLANG_FLAGS	+= --prefix=$(GCC_TOOLCHAIN_DIR)$(notdir $(CROSS_COMPILE:%-=%))-
+GCC_TOOLCHAIN	:= $(realpath $(GCC_TOOLCHAIN_DIR)/..)
+endif
+ifneq ($(GCC_TOOLCHAIN),)
+CLANG_FLAGS	+= --gcc-toolchain=$(GCC_TOOLCHAIN)
+endif
+CLANG_FLAGS	+= -no-integrated-as
+KBUILD_CFLAGS	+= $(CLANG_FLAGS)
+KBUILD_CPPFLAGS	+= $(CLANG_FLAGS)
+KBUILD_AFLAGS	+= $(CLANG_FLAGS)
+export CLANG_FLAGS
+endif
+
 # Try to get the version from Git has
 GIT_VERSION_TAG	?= $(shell git rev-parse --short HEAD 2>/dev/null)
 BUILD_DATE	?= $(shell date "+%Y-%m-%d %H:%M:%S" 2>/dev/null)
@@ -212,7 +230,7 @@ KBUILD_CFLAGS	+= -DVER_TAG="\"($(GIT_VERSION_TAG)) - date $(BUILD_DATE)\""
 
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
-KBUILD_AFLAGS   := -D__ASSEMBLY__
+KBUILD_AFLAGS   := -D__ASSEMBLY__ -fno-PIE
 
 # Architecture-specific flags
 ifeq ($(ARCH), arm)
