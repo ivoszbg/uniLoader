@@ -16,7 +16,7 @@ int a127f_init(void)
 }
 
 #ifdef CONFIG_SIMPLE_FB
-static struct video_info a127f_fb = {
+static struct video_info a12s_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 720,
 	.height = 1600,
@@ -28,16 +28,16 @@ static struct video_info a127f_fb = {
 int a127f_drv(void)
 {
 #ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &a127f_fb);
+	REGISTER_DRIVER("simplefb", simplefb_probe, &a12s_fb);
 #endif
 	return 0;
 }
 
 struct board_data board_ops = {
-	.name = "samsung-a127f",
+	.name = "samsung-a12s",
 	.ops = {
-		.early_init = a127f_init,
-		.drivers_init = a127f_drv,
+		.early_init = a12s_init,
+		.drivers_init = a12s_drv,
 	},
 	.quirks = 0
 };
