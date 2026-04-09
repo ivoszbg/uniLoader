@@ -74,40 +74,40 @@ menu "Device Support"
 		  Say Y if you are using the generic QEMU emulation
 		  platform target - virt.
 
-	config SAMSUNG_A105F
+    config SAMSUNG_A3XELTE
+		bool "Support for Samsung Galaxy A3 (2016)"
+		default n
+		depends on EXYNOS_7580
+		help
+		  Say Y if you want to include support for Samsung Galaxy A3 (2016)
+
+    config SAMSUNG_A10
 		bool "Support for Samsung Galaxy A10"
 		default n
 		depends on EXYNOS_7885
 		help
 		   Say Y if you want to include support for Samsung Galaxy A10
 
-  config SAMSUNG_A127F
+    config SAMSUNG_A12S
 		bool "Support for Samsung Galaxy A12 Nacho"
 		default n
 		depends on EXYNOS_3830
 		help
 		  Say Y if you want to include support for Samsung Galaxy A12 Nacho
 
-	config SAMSUNG_A305F
+	config SAMSUNG_A30
 		bool "Support for Samsung Galaxy A30"
 		default n
 		depends on EXYNOS_7885
 		help
 		   Say Y if you want to include support for Samsung Galaxy A30
 
-	config SAMSUNG_A336B
+	config SAMSUNG_A33X
 		bool "Support for Samsung Galaxy A33"
 		default n
 		depends on EXYNOS_1280
 		help
 		  Say Y if you want to include support for Samsung Galaxy A33
-
-	config SAMSUNG_A3XELTE
-		bool "Support for Samsung Galaxy A3 2016"
-		default n
-		depends on EXYNOS_7580
-		help
-		  Say Y if you want to include support for Samsung Galaxy A3 2016
 
 	config SAMSUNG_BEYOND1LTE
 		bool "Support for Samsung Galaxy S10"
@@ -138,11 +138,11 @@ menu "Device Support"
 		  Say Y if you want to include support for Samsung Galaxy S22+
 
 	config SAMSUNG_GTA4XL
-		bool "Support for Samsung Galaxy Tab S6 Lite"
+		bool "Support for Samsung Galaxy Tab S6 Lite (2020)"
 		default n
 		depends on EXYNOS_9610
 		help
-		  Say Y if you want to include support for Samsung Galaxy Tab S6 Lite
+		  Say Y if you want to include support for Samsung Galaxy Tab S6 Lite (2020)
 
 	config SAMSUNG_HEROLTE
 		bool "Support for Samsung Galaxy S7"
@@ -152,18 +152,18 @@ menu "Device Support"
 		  Say Y if you want to include support for Samsung Galaxy S7
 
 	config SAMSUNG_J4LTE
-		bool "Support for Samsung Galaxy J4 2018"
+		bool "Support for Samsung Galaxy J4"
 		default n
 		depends on EXYNOS_7570
 		help
-		  Say Y if you want to include arm64 support for Samsung Galaxy J4 2018
+		  Say Y if you want to include arm64 support for Samsung Galaxy J4
 
 	config SAMSUNG_J5LTE
-		bool "Support for Samsung Galaxy J5 2015"
+		bool "Support for Samsung Galaxy J5 (2015)"
 		default n
 		depends on QC32_8916
 		help
-		  Say Y if you want to include arm32 support for Samsung Galaxy J5 2015
+		  Say Y if you want to include arm32 support for Samsung Galaxy J5 (2015)
 
 	config SAMSUNG_JACKPOTLTE
 		bool "Support for Samsung Galaxy A8 (2018)"
@@ -177,7 +177,7 @@ menu "Device Support"
 		default n
 		depends on EXYNOS_7420
 		help
-		  Say Y if you want to include support for Samsung Galaxy Note 5
+		  Say Y if you want to include support for Samsung Galaxy Note5
 
 	config SAMSUNG_R0Q
 		bool "Support for Samsung Galaxy S22"
