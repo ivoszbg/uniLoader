@@ -42,32 +42,33 @@ environment in case of a forced and buggy bootloader.
 - Virt
 
 ### Samsung
-- A105F  
-- A127F  
-- A305F  
-- A3XELTE  
-- BEYOND1LTE  
-- C1S  
-- HEROLTE  
-- G0S  
-- NOBLELTE  
-- JACKPOTLTE  
-- ZEROFLTE  
-- DREAMLTE  
-- STARLTE  
-- X1S  
-- J5LTE  
-- J4LTE  
-- GTA4XL  
-- R0Q  
+- A3XELTE
+- A10
+- A12S
+- A30
+- A33X
+- BEYOND1LTE
+- C1S
+- DREAMLTE
+- G0S
+- GTA4XL
+- HEROLTE
+- J5LTE
+- J4LTE
+- JACKPOTLTE
+- NOBLELTE
+- R0Q
 - R8S
+- STARLTE
+- X1S
+- ZEROFLTE
 
 ### Volla
 - Algiz
 
 ### Xiaomi
-- Begonia  
-- Blossom  
+- Begonia
+- Blossom
 - Camellia
 
 ---
