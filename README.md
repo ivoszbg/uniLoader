@@ -53,8 +53,8 @@ environment in case of a forced and buggy bootloader.
 - G0S
 - GTA4XL
 - HEROLTE
-- J5LTE
 - J4LTE
+- J5LTE
 - JACKPOTLTE
 - NOBLELTE
 - R0Q
