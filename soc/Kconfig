@@ -59,6 +59,12 @@ config QUALCOMM
 		help
 		  Say Y if your device uses Samsung Exynos850 SoC
 
+	config EXYNOS_5515
+		bool "Support for Exynos 5515"
+		select EXYNOS
+		help
+		  Say Y if your device uses Samsung Exynos5515 SoC
+
 	config EXYNOS_7420
 		bool "Support for Exynos 7420"
 		select EXYNOS
