@@ -50,6 +50,7 @@ environment in case of a forced and buggy bootloader.
 - C1S  
 - HEROLTE  
 - G0S  
+- LUCKY7
 - NOBLELTE  
 - JACKPOTLTE  
 - ZEROFLTE  

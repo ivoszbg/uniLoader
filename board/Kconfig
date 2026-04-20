@@ -172,6 +172,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy A8 (2018)
 
+	config SAMSUNG_LUCKY7
+		bool "Support for Samsung Galaxy Watch FE"
+		default n
+		depends on EXYNOS_5515
+		help
+		  Say Y if you want to include support for Samsung Galaxy Watch FE
+
 	config SAMSUNG_NOBLELTE
 		bool "Support for Samsung Galaxy Note5"
 		default n
