@@ -1,4 +1,4 @@
-name: Makefile CI
+name: Build all devices
 
 on:
   push:
@@ -12,16 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
 
-    - name: configure
-      run: ./configure
+    - name: Install build dependencies
+      run: sudo apt install -y bash build-essential gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu
 
-    - name: Install dependencies
-      run: make
+    - name: Create dummy kernel blob
+      run: dd if=/dev/zero of=blob/Image bs=1M count=1
 
-    - name: Run check
-      run: make check
+    - name: Create dummy ramdisk blob
+      run: dd if=/dev/zero of=blob/ramdisk bs=1M count=1
 
-    - name: Run distcheck
-      run: make distcheck
+    - name: Create dummy device tree blob
+      run: dd if=/dev/zero of=blob/dtb bs=1M count=1
+
+    - name: Run build_test.sh
+      run: bash .github/workflows/build_test.sh
