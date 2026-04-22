@@ -9,6 +9,7 @@ lib-$(CONFIG_NOTHING_TETRIS) += nothing/board-tetris.o
 lib-$(CONFIG_QEMU_BOARD_VIRT) += qemu/board-virt.o
 lib-$(CONFIG_SAMSUNG_A105F) += samsung/board-a105f.o
 lib-$(CONFIG_SAMSUNG_A127F) += samsung/board-a127f.o
+lib-$(CONFIG_SAMSUNG_A135F) += samsung/board-a135f.o
 lib-$(CONFIG_SAMSUNG_A305F) += samsung/board-a305f.o
 lib-$(CONFIG_SAMSUNG_A336B) += samsung/board-a336b.o
 lib-$(CONFIG_SAMSUNG_A3XELTE) += samsung/board-a3xelte.o

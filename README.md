@@ -42,7 +42,8 @@ environment in case of a forced and buggy bootloader.
 - Virt
 
 ### Samsung
-- A105F  
+- A105F
+- A135F  
 - A127F  
 - A305F  
 - A3XELTE  
