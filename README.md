@@ -1,13 +1,13 @@
 # uniLoader
 
-**uniLoader** is a minimalistic loader, capable of booting Linux kernels.  
+**uniLoader** is a minimalistic loader, capable of booting Linux kernels.
 It can be used as an intermediate bootloader, providing a clean booting
 environment in case of a forced and buggy bootloader.
 
 ---
 
 ## Supported Architectures
-- ARMv7  
+- ARMv7
 - ARMv8
 
 ---
@@ -42,33 +42,34 @@ environment in case of a forced and buggy bootloader.
 - Virt
 
 ### Samsung
-- A105F  
-- A127F  
-- A305F  
-- A3XELTE  
-- BEYOND1LTE  
-- C1S  
-- HEROLTE  
-- G0S  
+- A3XELTE
+- A10
+- A12S
+- A30
+- A33X
+- BEYOND1LTE
+- C1S
+- DREAMLTE
+- G0S
+- GTA4XL
+- HEROLTE
+- J4LTE
+- J5LTE
+- JACKPOTLTE
 - LUCKY7
-- NOBLELTE  
-- JACKPOTLTE  
-- ZEROFLTE  
-- DREAMLTE  
-- STARLTE  
-- X1S  
-- J5LTE  
-- J4LTE  
-- GTA4XL  
-- R0Q  
+- NOBLELTE
+- R0Q
 - R8S
+- STARLTE
+- X1S
+- ZEROFLTE
 
 ### Volla
 - Algiz
 
 ### Xiaomi
-- Begonia  
-- Blossom  
+- Begonia
+- Blossom
 - Camellia
 
 ---
