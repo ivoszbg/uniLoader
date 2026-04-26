@@ -41,6 +41,9 @@ environment in case of a forced and buggy bootloader.
 ### QEMU
 - Virt
 
+### Realme
+- RMX3511
+
 ### Samsung
 - A3XELTE
 - A10

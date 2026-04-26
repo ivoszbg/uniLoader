@@ -7,6 +7,7 @@ lib-$(CONFIG_ITEL_P682LPN) += itel/board-p682lpn.o
 lib-$(CONFIG_NOKIA_ESSENTIAL) += nokia/board-essential.o
 lib-$(CONFIG_NOTHING_TETRIS) += nothing/board-tetris.o
 lib-$(CONFIG_QEMU_BOARD_VIRT) += qemu/board-virt.o
+lib-$(CONFIG_REALME_RMX3511) += realme/board-rmx3511.o
 lib-$(CONFIG_SAMSUNG_A3XELTE) += samsung/board-a3xelte.o
 lib-$(CONFIG_SAMSUNG_A10) += samsung/board-a10.o
 lib-$(CONFIG_SAMSUNG_A12S) += samsung/board-a12s.o

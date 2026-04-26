@@ -74,6 +74,13 @@ menu "Device Support"
 		  Say Y if you are using the generic QEMU emulation
 		  platform target - virt.
 
+	config REALME_RMX3511
+		bool "Support for Realme C35"
+		default n
+		depends on UMS9230
+		help
+		  Say Y if you want to include support for Realme C35
+
     config SAMSUNG_A3XELTE
 		bool "Support for Samsung Galaxy A3 (2016)"
 	    default n
