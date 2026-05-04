@@ -235,6 +235,14 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy S6
 
+	config SONY_PSVITA
+		bool "Support for Sony PlayStation Vita"
+		default n
+		depends on SONY_KERMIT
+		help
+		  Say Y if you want to include support for Sony PlayStation
+		  Vita.
+
 	config VOLLA_ALGIZ
 		bool "Support for Volla Phone Quintus"
 		default n

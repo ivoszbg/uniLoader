@@ -67,6 +67,9 @@ environment in case of a forced and buggy bootloader.
 - X1S
 - ZEROFLTE
 
+### Sony
+- PSVITA
+
 ### Volla
 - Algiz
 
