@@ -26,6 +26,10 @@ config QUALCOMM
 	bool
 	default n
 
+config SONY
+	bool
+	default n
+
  choice
 	prompt "SoC Support"
 
@@ -215,5 +219,12 @@ config QUALCOMM
 		select UNISOC
 		help
 		  Say Y if your device uses UNISOC UMS9230
+
+	config SONY_KERMIT
+		bool "Support for Sony Kermit SoC"
+		select SONY
+		help
+		  Say Y if your device uses the custom-designed Sony Kermit
+		  SoC.
 
  endchoice
