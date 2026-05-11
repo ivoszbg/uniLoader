@@ -505,14 +505,8 @@ static int npf_parse_format_spec(char const *format, npf_format_spec_t *out_spec
 }
 
 static npf_uint_t divmod(npf_uint_t val, uint_fast8_t base, npf_uint_t *rem) {
-  npf_uint_t quotient = 0;
-  npf_uint_t remainder = val;
-  while (remainder >= base) {
-    remainder -= base;
-    quotient++;
-  }
-  *rem = remainder;
-  return quotient;
+  *rem = val % base;
+  return val / base;
 }
 
 static NPF_NOINLINE int npf_utoa_rev(
