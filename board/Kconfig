@@ -49,6 +49,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for the Lenovo Idea Tab Pro
 
+	config MOTOROLA_TUNDRA
+		bool "Support for Motorola Edge 30 fusion"
+		default n
+		depends on SM8350
+		help
+		  Say Y if you want to include support for Motorola Edge 30 fusion
+
 	config NOKIA_ESSENTIAL
 		bool "Support for Nokia 3"
 		default n
