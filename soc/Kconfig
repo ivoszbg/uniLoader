@@ -200,6 +200,16 @@ config SONY
 		select QUALCOMM
 		help
 		  Say Y if your device uses this Qualcomm SoC
+
+	config SM8650
+		bool "Support for QUALCOMM SM8650"
+		select QUALCOMM
+		help
+		  Say Y if your device uses this Qualcomm SoC
+
+		  WARNING: Due to Gunyah being used on this platform,
+		  stability is not guaranteed when booting mainline.
+		  It should be treated as a PoC SoC.
 	
 	config QEMU_SOC_VIRT
 		bool "Support for QEMU virt aarch64 SoC"
