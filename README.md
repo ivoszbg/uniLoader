@@ -68,6 +68,7 @@ environment in case of a forced and buggy bootloader.
 - ZEROFLTE
 
 ### Sony
+- PDX245
 - PSVITA
 
 ### Volla

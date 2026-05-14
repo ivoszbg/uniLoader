@@ -242,6 +242,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy S6
 
+	config SONY_PDX245
+		bool "Support for Sony Xperia 1 VI"
+		default n
+		depends on SM8650
+		help
+		  Say Y if you want to include support for Sony Xperia 1 VI
+
 	config SONY_PSVITA
 		bool "Support for Sony PlayStation Vita"
 		default n
