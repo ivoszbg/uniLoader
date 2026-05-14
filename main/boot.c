@@ -12,7 +12,7 @@
 void boot_kernel(void* dt, void* kernel, void* ramdisk)
 {
 #ifdef CONFIG_LIBFDT
-	patch_dtb(dt);
+	patch_dtb(&dt);
 #endif
 
 	printk(KERN_INFO, "Booting kernel...\n");
