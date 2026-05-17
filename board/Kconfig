@@ -130,6 +130,14 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy A33 5G
 
+    config SAMSUNG_A40
+        bool "Support for Samsung Galaxy A40 2019"
+        default n
+        depends on EXYNOS_7885
+        help
+          Say Y if you want to include support for Samsung Galaxy A40 2019
+
+
 	config SAMSUNG_BEYOND1LTE
 		bool "Support for Samsung Galaxy S10"
 		default n
