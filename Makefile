@@ -115,13 +115,6 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	  else if [ -x /bin/bash ]; then echo /bin/bash; \
 	  else echo sh; fi ; fi)
 
-# Host tools
-HOSTCC       = gcc
-HOSTCXX      = g++
-HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 \
-               -fomit-frame-pointer -Wno-builtin-declaration-mismatch
-HOSTCXXFLAGS = -O2
-
 # Beautify output
 # ---------------------------------------------------------------------------
 #
@@ -133,7 +126,7 @@ HOSTCXXFLAGS = -O2
 #         cmd_cc_o_c       = $(CC) $(c_flags) -c -o $@ $<
 #
 # If $(quiet) is empty, the whole command will be printed.
-# If it is set to "quiet_", only the short version will be printed. 
+# If it is set to "quiet_", only the short version will be printed.
 # If it is set to "silent_", nothing will be printed at all, since
 # the variable $(silent_cmd_cc_o_c) doesn't exist.
 #
@@ -170,15 +163,49 @@ $(srctree)/scripts/Kbuild.include: ;
 include $(srctree)/scripts/Kbuild.include
 
 # Make variables (CC, etc...)
-AS		= $(CROSS_COMPILE)as
-LD		= $(CROSS_COMPILE)ld
-CC		= $(CROSS_COMPILE)gcc
+ifneq ($(LLVM),)
+  ifeq ($(LLVM),1)
+    LLVM_PREFIX :=
+  else
+    LLVM_PREFIX := $(patsubst %/,%,$(LLVM))/
+  endif
+
+  AS		= $(LLVM_PREFIX)clang
+  LD		= $(LLVM_PREFIX)ld.lld
+  CC		= $(LLVM_PREFIX)clang
+  AR		= $(LLVM_PREFIX)llvm-ar
+  NM		= $(LLVM_PREFIX)llvm-nm
+  STRIP		= $(LLVM_PREFIX)llvm-strip
+  OBJCOPY	= $(LLVM_PREFIX)llvm-objcopy
+  OBJDUMP	= $(LLVM_PREFIX)llvm-objdump
+
+  HOSTCC	= $(LLVM_PREFIX)clang
+  HOSTCXX	= $(LLVM_PREFIX)clang++
+
+  TOOLCHAIN_CFLAGS = -ffreestanding
+  TOOLCHAIN_HOSTCFLAGS =
+  LIBGCC :=
+else
+  AS		= $(CROSS_COMPILE)as
+  LD		= $(CROSS_COMPILE)ld
+  CC		= $(CROSS_COMPILE)gcc
+  AR		= $(CROSS_COMPILE)ar
+  NM		= $(CROSS_COMPILE)nm
+  STRIP		= $(CROSS_COMPILE)strip
+  OBJCOPY	= $(CROSS_COMPILE)objcopy
+  OBJDUMP	= $(CROSS_COMPILE)objdump
+
+  HOSTCC	= gcc
+  HOSTCXX	= g++
+
+  TOOLCHAIN_CFLAGS = -Wno-builtin-declaration-mismatch
+  TOOLCHAIN_HOSTCFLAGS = -Wno-builtin-declaration-mismatch
+  LIBGCC := $(shell $(CC) $(KBUILD_CFLAGS) -print-libgcc-file-name)
+endif
+HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 \
+               -fomit-frame-pointer $(TOOLCHAIN_HOSTCFLAGS)
+HOSTCXXFLAGS = -O2
 CPP		= $(CC) -E
-AR		= $(CROSS_COMPILE)ar
-NM		= $(CROSS_COMPILE)nm
-STRIP		= $(CROSS_COMPILE)strip
-OBJCOPY		= $(CROSS_COMPILE)objcopy
-OBJDUMP		= $(CROSS_COMPILE)objdump
 AWK		= awk
 INSTALLKERNEL  := installkernel
 PERL		= perl
@@ -202,8 +229,9 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
-		   -Wno-builtin-declaration-mismatch -Wno-main -nostdinc \
-		   -I$(srctree)/lib/unic
+		   -Wno-main -nostdinc \
+		   -I$(srctree)/lib/unic \
+		   $(TOOLCHAIN_CFLAGS)
 
 # Try to get the version from Git has
 GIT_VERSION_TAG	?= $(shell git rev-parse --short HEAD 2>/dev/null)
@@ -215,6 +243,19 @@ KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 
 # Architecture-specific flags
+ifneq ($(LLVM),)
+  ifneq ($(CROSS_COMPILE),)
+    CLANG_FLAGS := --target=$(patsubst %-,%,$(CROSS_COMPILE))
+  else
+    ifeq ($(ARCH), arm)
+      CLANG_FLAGS := --target=arm-linux-gnueabi
+    else
+      CLANG_FLAGS := --target=aarch64-linux-gnu
+    endif
+  endif
+  KBUILD_CFLAGS += $(CLANG_FLAGS)
+  KBUILD_AFLAGS += $(CLANG_FLAGS)
+endif
 ifeq ($(ARCH), arm)
 KBUILD_CFLAGS += -march=armv7-a -mfloat-abi=soft -mtune=cortex-a9
 KBUILD_AFLAGS += -march=armv7-a -mfloat-abi=soft -mtune=cortex-a9
@@ -393,8 +434,6 @@ arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(linker-script-deps) FORCE
 #
 # CMDs for binary formats
 #
-LIBGCC := $(shell $(CC) $(KBUILD_CFLAGS) -print-libgcc-file-name)
-
 quiet_cmd_uniloader_link = LD      $@.o
       cmd_uniloader_link = $(LD) $(uniloader-main-y) \
                                  --start-group $(uniloader-libs) $(LIBGCC) --end-group \
@@ -420,7 +459,7 @@ ifdef CONFIG_COMPRESS_LZ4
 	$(call if_changed,lz4_uniloader)
 endif
 
-# The actual objects are generated when descending, 
+# The actual objects are generated when descending,
 # make sure no implicit rule kicks in
 $(uniloader-all): $(uniloader-all-dirs) ;
 

@@ -7,7 +7,7 @@
 .section .text
 #ifdef CONFIG_LINUX_KRNL_HEADER_IMG
 _head:
-	mov x1,_start
+	ldr x1, =_start
 	b      _start
 
 _stack_base:
