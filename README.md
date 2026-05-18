@@ -99,6 +99,17 @@ make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- dreamlte_defconfig
 make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu-
 ```
 
+### Build with Clang and LLVM toolchain
+```bash
+make ARCH=aarch64 LLVM=1 dreamlte_defconfig
+make ARCH=aarch64 LLVM=1
+```
+
+```bash
+make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=/bin dreamlte_defconfig
+make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=/bin
+```
+
 ---
 
 ## License
