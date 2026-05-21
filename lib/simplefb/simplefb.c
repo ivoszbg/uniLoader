@@ -43,6 +43,11 @@ static void draw_pixel(volatile char *fb, int x, int y, int width, int stride,
 		*(fb + location + 1) = c.g;
 		*(fb + location + 2) = c.r;
 		break;
+	case FB_FORMAT_RGB565:
+		*(volatile unsigned short *)(fb + location) = ((c.r >> 3) << 11) |
+							      ((c.g >> 2) << 5)  |
+							       (c.b >> 3);
+		break;
 	}
 }
 

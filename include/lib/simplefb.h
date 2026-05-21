@@ -21,6 +21,7 @@ typedef enum {
 	FB_FORMAT_RGB888,
 	FB_FORMAT_ARGB8888,
 	FB_FORMAT_BGRA8888,
+	FB_FORMAT_RGB565,
 } video_format;
 
 struct video_info {
