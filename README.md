@@ -18,6 +18,7 @@ environment in case of a forced and buggy bootloader.
 - N61AP
 
 ### Amazon
+- Checkers
 - PW3
 
 ### Blackview
