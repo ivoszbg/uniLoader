@@ -33,10 +33,10 @@ static void draw_pixel(volatile char *fb, int x, int y, int width, int stride,
 		*(fb + location + 3) = c.a;
 		break;
 	case FB_FORMAT_BGRA8888:
-		*(fb + location) = c.r;
-		*(fb + location + 1) = c.g;
-		*(fb + location + 2) = c.b;
-		*(fb + location + 3) = c.a;
+		*(fb + location) = c.a;
+		*(fb + location + 1) = c.r;
+		*(fb + location + 2) = c.g;
+		*(fb + location + 3) = c.b;
 		break;
 	case FB_FORMAT_RGB888:
 		*(fb + location) = c.b;
