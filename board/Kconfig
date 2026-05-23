@@ -14,6 +14,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for iPhone 6
 
+	config BLACKVIEW_TAB15PRO
+		bool "Support for Blackview Tab 15 Pro"
+		default n
+		depends on UMS9230
+		help
+		  Say Y if you want to include support for Blackview Tab 15 Pro
+
 	config GOOGLE_TAIMEN
 		bool "Support for Google Pixel 2 XL"
 		default n

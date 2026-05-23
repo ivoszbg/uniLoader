@@ -20,6 +20,9 @@ environment in case of a forced and buggy bootloader.
 ### Amazon
 - PW3
 
+### Blackview
+- Tab15Pro
+
 ### Google
 - Taimen
 
