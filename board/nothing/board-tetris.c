@@ -3,6 +3,7 @@
  * Copyright (c) 2025, Igor Belwon <igor.belwon@mentallysanemainliners.org>
  */
 #include <board.h>
+#include <string.h>
 #include <drivers/framework.h>
 #include <lib/debug.h>
 

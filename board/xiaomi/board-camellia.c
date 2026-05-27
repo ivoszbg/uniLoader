@@ -6,6 +6,7 @@
  */
 
 #include <board.h>
+#include <string.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 #include <lib/debug.h>
