@@ -249,6 +249,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy S6
 
+	config SONY_LILAC
+		bool "Support for Sony Xperia XZ1 Compact"
+		default n
+		depends on MSM8998
+		help
+		  Say Y if you want to include support for Sony Xperia XZ1 Compact
+
 	config SONY_PDX245
 		bool "Support for Sony Xperia 1 VI"
 		default n
