@@ -17,6 +17,8 @@ typedef struct _color {
 	unsigned char a;
 } color;
 
+#define FB_TEXT_TOP_PADDING	5
+
 typedef enum {
 	FB_FORMAT_RGB888,
 	FB_FORMAT_ARGB8888,

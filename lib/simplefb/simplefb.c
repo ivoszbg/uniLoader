@@ -128,7 +128,7 @@ void __simplefb_raw_print(const char *text, int text_x, int text_y,
 		if (current_y >= fb_info->height - SCALED_FONTH) {
 			clean_fbmem((char*)fb_info->address, fb_info->width, fb_info->height, fb_info->stride);
 			current_x = text_x;
-			current_y = 5;
+			current_y = FB_TEXT_TOP_PADDING;
 		}
 
 		int ix = font_index(text[i]);
