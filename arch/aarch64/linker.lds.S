@@ -89,4 +89,14 @@ SECTIONS
 #ifdef CONFIG_LINUX_KRNL_HEADER_IMG
 	_kernel_size = _stack_end - _start;
 #endif
+
+	/* size optimization for flat binaries */
+	/DISCARD/ : {
+		*(.eh_frame)
+		*(.eh_frame.*)
+		*(.note.gnu.property)
+		*(.note.gnu.build-id)
+		*(.comment)
+		*(.ARM.attributes)
+	}
 }
