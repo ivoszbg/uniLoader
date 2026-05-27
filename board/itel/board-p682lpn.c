@@ -87,7 +87,7 @@ int p682lpn_init(void)
 
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info p682lpn_fb = {
-	.format = FB_FORMAT_BGRA8888,
+	.format = FB_FORMAT_ABGR8888,
 	.width = 720,
 	.height = 1640,
 	.stride = 4,
