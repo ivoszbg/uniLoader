@@ -10,7 +10,7 @@
 
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info vita12k_fb = {
-	.format = FB_FORMAT_BGRA8888,
+	.format = FB_FORMAT_ABGR8888,
 	.width = 960,
 	.height = 544,
 	.stride = 4,
