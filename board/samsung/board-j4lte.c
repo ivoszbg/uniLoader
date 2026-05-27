@@ -20,7 +20,7 @@ int j4lte_init(void)
 
 #ifdef CONFIG_SIMPLE_FB
 static struct video_info j4lte_fb = {
-	.format = FB_FORMAT_BGRA8888,
+	.format = FB_FORMAT_ARGB8888,
 	.width = 720,
 	.height = 1280,
 	.stride = 4,
