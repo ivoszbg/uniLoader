@@ -85,4 +85,7 @@ SECTIONS
 #ifdef CONFIG_POSITION_INDEPENDENT
 	_reloc_size = _reloc_end - _reloc_start;
 #endif
+#ifdef CONFIG_LINUX_KRNL_HEADER_IMG
+	_kernel_size = _stack_end - _start;
+#endif
 }
