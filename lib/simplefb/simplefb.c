@@ -75,10 +75,9 @@ int get_font_scale_factor()
 		x = y;
 		y = (x + n / x) / 2;
 	}
-	int diag = x;
 
 	/* determine scale factor from pseudo-diagonal */
-	int scale = diag / 750;
+	int scale = x / 750;
 
 	/* clamp the result */
 	if (scale < 1)
