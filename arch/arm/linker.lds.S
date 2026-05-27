@@ -45,4 +45,14 @@ SECTIONS
 	}
 
 	_end = .;
+
+	/* size optimization for flat binaries. */
+	/DISCARD/ : {
+		*(.eh_frame)
+		*(.eh_frame.*)
+		*(.note.gnu.property)
+		*(.note.gnu.build-id)
+		*(.comment)
+		*(.ARM.attributes)
+	}
 }
