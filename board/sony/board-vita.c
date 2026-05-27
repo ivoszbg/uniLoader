@@ -4,11 +4,11 @@
  */
 
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/debug.h>
 #include <lib/simplefb.h>
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info vita12k_fb = {
 	.format = FB_FORMAT_ABGR8888,
 	.width = 960,
@@ -16,21 +16,15 @@ static struct video_info vita12k_fb = {
 	.stride = 4,
 	.address = (void *)0x20000000
 };
-#endif
 
-int vita_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	// for now only vita1k/vita2k is supported, PSTV would need more config :/
-	REGISTER_DRIVER("simplefb", simplefb_probe, &vita12k_fb);
-#endif
-	return 0;
-}
+/* for now only vita1k/vita2k is supported, PSTV would need more config :/ */
+static const struct device vita_devices[] = {
+	{ "simplefb", &vita12k_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "sony-psvita",
-	.ops = {
-		.drivers_init = vita_drv,
-	},
+	.devices = vita_devices,
+	.num_devices = ARRAY_SIZE(vita_devices),
 	.quirks = 0
 };

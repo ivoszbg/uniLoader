@@ -25,6 +25,12 @@ SECTIONS
 		*(.rodata.*)
 	}
 
+	.uniloader_drivers ALIGN(4) : {
+		__drivers_start = .;
+		KEEP(*(.uniloader_drivers))
+		__drivers_end = .;
+	}
+
 	.data ALIGN(4) : {
 		*(.data)
 		*(.data.*)

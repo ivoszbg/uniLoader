@@ -4,6 +4,7 @@
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
@@ -18,7 +19,6 @@ int zeroflte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info zeroflte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1440,
@@ -26,21 +26,17 @@ static struct video_info zeroflte_fb = {
 	.stride = 4,
 	.address = (void *)0xe2a00000
 };
-#endif
 
-int zeroflte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &zeroflte_fb);
-#endif
-	return 0;
-}
+static const struct device zeroflte_devices[] = {
+	{ "simplefb", &zeroflte_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-zeroflte",
 	.ops = {
 		.early_init = zeroflte_init,
-		.drivers_init = zeroflte_drv,
 	},
+	.devices = zeroflte_devices,
+	.num_devices = ARRAY_SIZE(zeroflte_devices),
 	.quirks = 0
 };

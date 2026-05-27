@@ -7,6 +7,7 @@
 
 #include <string.h>
 #include <drivers/framework.h>
+#include <lib/debug.h>
 #include <lib/video/font.h>
 #include <lib/simplefb.h>
 
@@ -158,7 +159,7 @@ void __simplefb_raw_print(const char *text, int text_x, int text_y,
 	last_y = current_y;
 }
 
-void simplefb_probe(void *data)
+static int simplefb_probe(void *data)
 {
 	fb_info = data;
 
@@ -166,4 +167,11 @@ void simplefb_probe(void *data)
 		 fb_info->stride);
 
 	fb_info->scale_f = get_font_scale_factor();
+
+	printk(KERN_INFO, "simplefb: ready (%dx%d)\n",
+	       fb_info->width, fb_info->height);
+
+	return 0;
 }
+
+DRIVER_REGISTER("simplefb", simplefb_probe);

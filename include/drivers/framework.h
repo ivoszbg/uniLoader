@@ -3,26 +3,31 @@
  * Drivers registration framework
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
-#ifndef DRIVERS_H_	/* Include guard */
-#define DRIVERS_H_
+#ifndef DRIVERS_FRAMEWORK_H_
+#define DRIVERS_FRAMEWORK_H_
 
 #include <stddef.h>
-#include <string.h>
 
-// Define the type for the probe function pointer
-typedef void (*probe_func_t)(void *data);
-
-extern probe_func_t find_driver_probe(const char *name);
-
-// Function registry entry
-struct driver_registry_entry {
-	const char *name;        // Driver name
-	probe_func_t probe;      // Function pointer to the probe function
+struct driver {
+	const char *name;
+	int (*probe)(void *plat_data);
 };
 
-#define REGISTER_DRIVER(name, probe_func, data)		\
-	do {						\
-		(probe_func)(data);			\
-	} while (0)
+struct device {
+	const char *driver_name;
+	void *plat_data;
+	const char *label;
+};
 
-#endif // DRIVERS_H_
+#define DRIVER_REGISTER(_name, _probe_fn)				\
+	static const struct driver __uniloader_drv_##_probe_fn		\
+		__attribute__((used, section(".uniloader_drivers"),	\
+			       aligned(__alignof__(struct driver)))) = {\
+			.name = (_name),				\
+			.probe = (_probe_fn),				\
+		}
+
+const struct driver *driver_find(const char *name);
+void driver_probe_all(const struct device *devices, size_t count);
+
+#endif /* DRIVERS_FRAMEWORK_H_ */

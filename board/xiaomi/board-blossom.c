@@ -1,4 +1,5 @@
 #include <board.h>
+#include <util.h>
 #include <string.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
@@ -40,16 +41,13 @@ static struct video_info blossom_fb = {
 	.address = (void *)0x7ec50000
 };
 
-int blossom_drv(void)
-{
-	REGISTER_DRIVER("simplefb", simplefb_probe, &blossom_fb);
-	return 0;
-}
+static const struct device blossom_devices[] = {
+	{ "simplefb", &blossom_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "xiaomi-blossom",
-	.ops = {
-		.drivers_init = blossom_drv,
-	},
+	.devices = blossom_devices,
+	.num_devices = ARRAY_SIZE(blossom_devices),
 	.quirks = 0
 };

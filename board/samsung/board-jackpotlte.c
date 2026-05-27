@@ -4,6 +4,7 @@
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
@@ -18,7 +19,6 @@ int jackpotlte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info jackpotlte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1080,
@@ -26,21 +26,17 @@ static struct video_info jackpotlte_fb = {
 	.stride = 4,
 	.address = (void *)0xec000000
 };
-#endif
 
-int jackpotlte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &jackpotlte_fb);
-#endif
-	return 0;
-}
+static const struct device jackpotlte_devices[] = {
+	{ "simplefb", &jackpotlte_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-jackpotlte",
 	.ops = {
 		.early_init = jackpotlte_init,
-		.drivers_init = jackpotlte_drv,
 	},
+	.devices = jackpotlte_devices,
+	.num_devices = ARRAY_SIZE(jackpotlte_devices),
 	.quirks = 0
 };

@@ -3,10 +3,10 @@
  * Copyright (c) 2026, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info tundra_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1080,
@@ -15,20 +15,16 @@ static struct video_info tundra_fb = {
 	.scale = 2,
 	.address = (void *)0xe1000000
 };
-#endif
 
-int tundra_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &tundra_fb);
-#endif
-	return 0;
-}
+static const struct device tundra_devices[] = {
+	{ "simplefb", &tundra_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "motorola-tundra",
 	.ops = {
-		.drivers_init = tundra_drv
 	},
+	.devices = tundra_devices,
+	.num_devices = ARRAY_SIZE(tundra_devices),
 	.quirks = 0
 };

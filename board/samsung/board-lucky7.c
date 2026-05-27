@@ -12,6 +12,7 @@
  * - include/linux/serial_s3c.h (Linux 7.0 mainline - Shane Nay)
  */
 #include <board.h>
+#include <util.h>
 #include <stdint.h>
 #include <string.h>
 #include <drivers/framework.h>
@@ -94,7 +95,6 @@ void uart_puts(const char *s)
 }
 #endif
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info lucky7_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 396,
@@ -102,21 +102,17 @@ static struct video_info lucky7_fb = {
 	.stride = 4,
 	.address = (void *)0x9e0cf000
 };
-#endif
 
-int lucky7_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &lucky7_fb);
-#endif
-	return 0;
-}
+static const struct device lucky7_devices[] = {
+	{ "simplefb", &lucky7_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-lucky7",
 	.ops = {
 		.early_init = lucky7_init,
-		.drivers_init = lucky7_drv,
 	},
+	.devices = lucky7_devices,
+	.num_devices = ARRAY_SIZE(lucky7_devices),
 	.quirks = 0
 };

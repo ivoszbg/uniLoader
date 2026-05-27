@@ -6,6 +6,7 @@
  */
 
 #include <board.h>
+#include <util.h>
 #include <string.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
@@ -40,16 +41,13 @@ static struct video_info camellia_fb = {
 	.address = (void *)0x7ba10000
 };
 
-int camellia_drv(void)
-{
-	REGISTER_DRIVER("simplefb", simplefb_probe, &camellia_fb);
-	return 0;
-}
+static const struct device camellia_devices[] = {
+	{ "simplefb", &camellia_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "xiaomi-camellia",
-	.ops = {
-		.drivers_init = camellia_drv,
-	},
+	.devices = camellia_devices,
+	.num_devices = ARRAY_SIZE(camellia_devices),
 	.quirks = 0
 };

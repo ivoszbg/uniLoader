@@ -4,6 +4,7 @@
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
@@ -18,7 +19,6 @@ int noblelte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info noblelte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1440,
@@ -26,21 +26,17 @@ static struct video_info noblelte_fb = {
 	.stride = 4,
 	.address = (void *)0xe2a00000
 };
-#endif
 
-int noblelte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &noblelte_fb);
-#endif
-	return 0;
-}
+static const struct device noblelte_devices[] = {
+	{ "simplefb", &noblelte_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-noblelte",
 	.ops = {
 		.early_init = noblelte_init,
-		.drivers_init = noblelte_drv,
 	},
+	.devices = noblelte_devices,
+	.num_devices = ARRAY_SIZE(noblelte_devices),
 	.quirks = 0
 };

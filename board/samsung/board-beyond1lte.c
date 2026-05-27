@@ -6,6 +6,7 @@
  */
 
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
@@ -20,7 +21,6 @@ int beyond1lte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info beyond1lte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1440,
@@ -28,21 +28,17 @@ static struct video_info beyond1lte_fb = {
 	.stride = 4,
 	.address = (void *)0xca000000
 };
-#endif
 
-int beyond1lte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &beyond1lte_fb);
-#endif
-	return 0;
-}
+static const struct device beyond1lte_devices[] = {
+	{ "simplefb", &beyond1lte_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-beyond1lte",
 	.ops = {
 		.early_init = beyond1lte_init,
-		.drivers_init = beyond1lte_drv,
 	},
+	.devices = beyond1lte_devices,
+	.num_devices = ARRAY_SIZE(beyond1lte_devices),
 	.quirks = 0
 };

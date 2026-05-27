@@ -3,6 +3,7 @@
  * Copyright (c) 2025, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <stdint.h>
 #include <string.h>
 #include <drivers/framework.h>
@@ -27,7 +28,6 @@ int herolte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info herolte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1440,
@@ -35,21 +35,17 @@ static struct video_info herolte_fb = {
 	.stride = 4,
 	.address = (void *)0xe2a00000
 };
-#endif
 
-int herolte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &herolte_fb);
-#endif
-	return 0;
-}
+static const struct device herolte_devices[] = {
+	{ "simplefb", &herolte_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-herolte",
 	.ops = {
 		.early_init = herolte_init,
-		.drivers_init = herolte_drv,
 	},
+	.devices = herolte_devices,
+	.num_devices = ARRAY_SIZE(herolte_devices),
 	.quirks = 0
 };

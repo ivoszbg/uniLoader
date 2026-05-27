@@ -436,7 +436,8 @@ arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(linker-script-deps) FORCE
 #
 quiet_cmd_uniloader_link = LD      $@.o
       cmd_uniloader_link = $(LD) $(uniloader-main-y) \
-                                 --start-group $(uniloader-libs) $(LIBGCC) --end-group \
+                                 --whole-archive $(uniloader-libs) --no-whole-archive \
+                                 --start-group $(LIBGCC) --end-group \
                                  -o $@.o \
                                  --script=arch/$(ARCH)/linker.lds
 

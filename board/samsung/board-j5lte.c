@@ -4,6 +4,7 @@
  */
 
 #include <board.h>
+#include <util.h>
 #include <string.h>
 #include <main/main.h>
 #include <drivers/framework.h>
@@ -28,7 +29,6 @@ int j5lte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info j5lte_fb = {
 	.format = FB_FORMAT_RGB888,
 	.width = 720,
@@ -36,21 +36,17 @@ static struct video_info j5lte_fb = {
 	.stride = 3,
 	.address = (void *)0x8e000000
 };
-#endif
 
-int j5lte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &j5lte_fb);
-#endif
-	return 0;
-}
+static const struct device j5lte_devices[] = {
+	{ "simplefb", &j5lte_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-j5lte",
 	.ops = {
 		.early_init = j5lte_init,
-		.drivers_init = j5lte_drv,
 	},
+	.devices = j5lte_devices,
+	.num_devices = ARRAY_SIZE(j5lte_devices),
 	.quirks = 0
 };

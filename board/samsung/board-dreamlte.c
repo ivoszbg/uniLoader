@@ -3,6 +3,7 @@
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <stdint.h>
 #include <string.h>
 #include <drivers/framework.h>
@@ -113,7 +114,6 @@ int dreamlte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info dreamlte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1440,
@@ -121,15 +121,10 @@ static struct video_info dreamlte_fb = {
 	.stride = 4,
 	.address = (void *)0xcc000000
 };
-#endif
 
-int dreamlte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &dreamlte_fb);
-#endif
-	return 0;
-}
+static const struct device dreamlte_devices[] = {
+	{ "simplefb", &dreamlte_fb, "fb" },
+};
 
 int dreamlte_late_init(void)
 {
@@ -142,8 +137,9 @@ struct board_data board_ops = {
 	.name = "samsung-dreamlte",
 	.ops = {
 		.early_init = dreamlte_init,
-		.drivers_init = dreamlte_drv,
 		.late_init = dreamlte_late_init,
 	},
+	.devices = dreamlte_devices,
+	.num_devices = ARRAY_SIZE(dreamlte_devices),
 	.quirks = 0
 };

@@ -4,6 +4,7 @@
  */
 
 #include <board.h>
+#include <util.h>
 #include <string.h>
 #include <drivers/framework.h>
 #include <lib/debug.h>
@@ -31,7 +32,6 @@ void tb373fu_disable_wdt(void)
 	return;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info tb373fu_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 2944,
@@ -39,15 +39,10 @@ static struct video_info tb373fu_fb = {
 	.stride = 4,
 	.address = (void *)0xfc16f000
 };
-#endif
 
-int tb373fu_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &tb373fu_fb);
-#endif
-	return 0;
-}
+static const struct device tb373fu_devices[] = {
+	{ "simplefb", &tb373fu_fb, "fb" },
+};
 
 int tb373fu_late_init(void)
 {
@@ -59,8 +54,9 @@ int tb373fu_late_init(void)
 struct board_data board_ops = {
 	.name = "lenovo-tb373fu",
 	.ops = {
-		.drivers_init = tb373fu_drv,
 		.late_init = tb373fu_late_init,
 	},
+	.devices = tb373fu_devices,
+	.num_devices = ARRAY_SIZE(tb373fu_devices),
 	.quirks = 0
 };

@@ -3,6 +3,7 @@
  * Copyright (c) 2025, Muhammad <thevancedgamer@mentallysanemainliners.org>
  */
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 #include <soc/exynos1280.h>
@@ -16,7 +17,6 @@ int a33x_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info a33x_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1080,
@@ -24,21 +24,17 @@ static struct video_info a33x_fb = {
 	.stride = 4,
 	.address = (void *)0xfa200000
 };
-#endif
 
-int a33x_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &a33x_fb);
-#endif
-	return 0;
-}
+static const struct device a33x_devices[] = {
+	{ "simplefb", &a33x_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-a33x",
 	.ops = {
 		.early_init = a33x_init,
-		.drivers_init = a33x_drv,
 	},
+	.devices = a33x_devices,
+	.num_devices = ARRAY_SIZE(a33x_devices),
 	.quirks = 0
 };
