@@ -3,6 +3,7 @@
  * Copyright (c) 2025, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <string.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
@@ -83,7 +84,6 @@ int g0s_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info g0s_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1080,
@@ -91,21 +91,17 @@ static struct video_info g0s_fb = {
 	.stride = 4,
 	.address = (void *)0xf6200000
 };
-#endif
 
-int g0s_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &g0s_fb);
-#endif
-	return 0;
-}
+static const struct device g0s_devices[] = {
+	{ "simplefb", &g0s_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-g0s",
 	.ops = {
 		.early_init = g0s_init,
-		.drivers_init = g0s_drv,
 	},
+	.devices = g0s_devices,
+	.num_devices = ARRAY_SIZE(g0s_devices),
 	.quirks = 0
 };

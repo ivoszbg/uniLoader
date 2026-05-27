@@ -4,6 +4,7 @@
  */
 
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
@@ -15,16 +16,13 @@ static struct video_info x6710_fb = {
 	.address = (void *)0x76a10000
 };
 
-int x6710_drv(void)
-{
-	REGISTER_DRIVER("simplefb", simplefb_probe, &x6710_fb);
-	return 0;
-}
+static const struct device x6710_devices[] = {
+	{ "simplefb", &x6710_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "infinix-x6710",
-	.ops = {
-		.drivers_init = x6710_drv,
-	},
+	.devices = x6710_devices,
+	.num_devices = ARRAY_SIZE(x6710_devices),
 	.quirks = 0
 };

@@ -3,6 +3,7 @@
  * Copyright (c) 2025, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <stdint.h>
 #include <string.h>
 #include <drivers/framework.h>
@@ -19,7 +20,6 @@ int a3xelte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info a3xelte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 720,
@@ -27,21 +27,17 @@ static struct video_info a3xelte_fb = {
 	.stride = 4,
 	.address = (void *)0x67000000
 };
-#endif
 
-int a3xelte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &a3xelte_fb);
-#endif
-	return 0;
-}
+static const struct device a3xelte_devices[] = {
+	{ "simplefb", &a3xelte_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-a3xelte",
 	.ops = {
 		.early_init = a3xelte_init,
-		.drivers_init = a3xelte_drv,
 	},
+	.devices = a3xelte_devices,
+	.num_devices = ARRAY_SIZE(a3xelte_devices),
 	.quirks = 0
 };

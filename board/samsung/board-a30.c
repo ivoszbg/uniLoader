@@ -6,6 +6,7 @@
  */
 
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 #include <soc/exynos7885.h>
@@ -18,7 +19,6 @@ int a30_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info a30_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1080,
@@ -26,21 +26,17 @@ static struct video_info a30_fb = {
 	.stride = 4,
 	.address = (void *)0xec000000
 };
-#endif
 
-int a30_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &a30_fb);
-#endif
-	return 0;
-}
+static const struct device a30_devices[] = {
+	{ "simplefb", &a30_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-a30",
 	.ops = {
 		.early_init = a30_init,
-		.drivers_init = a30_drv,
 	},
+	.devices = a30_devices,
+	.num_devices = ARRAY_SIZE(a30_devices),
 	.quirks = 0
 };

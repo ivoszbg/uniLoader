@@ -4,6 +4,7 @@
  */
 
 #include <board.h>
+#include <drivers/framework.h>
 #include <main/boot.h>
 #include <main/main.h>
 #include <lib/debug.h>
@@ -26,7 +27,8 @@ static void print_splash(void)
 void main(void* dt, void* kernel, void* ramdisk)
 {
 	INITCALL(board_ops.ops.early_init);
-	INITCALL(board_ops.ops.drivers_init);
+
+	driver_probe_all(board_ops.devices, board_ops.num_devices);
 
 	print_splash();
 

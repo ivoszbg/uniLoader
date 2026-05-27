@@ -3,6 +3,7 @@
  * Copyright (c) 2025, Alexandru Chimac <alex@chimac.ro>
  */
 #include <board.h>
+#include <util.h>
 #include <string.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
@@ -25,7 +26,6 @@ int essential_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info essential_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 736,
@@ -33,21 +33,17 @@ static struct video_info essential_fb = {
 	.stride = 4,
 	.address = (void *)0xbf370000
 };
-#endif
 
-int essential_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &essential_fb);
-#endif
-	return 0;
-}
+static const struct device essential_devices[] = {
+	{ "simplefb", &essential_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "nokia-essential",
 	.ops = {
 		.early_init = essential_init,
-		.drivers_init = essential_drv,
 	},
+	.devices = essential_devices,
+	.num_devices = ARRAY_SIZE(essential_devices),
 	.quirks = 0
 };

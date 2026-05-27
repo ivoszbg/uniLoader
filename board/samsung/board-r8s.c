@@ -4,6 +4,7 @@
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
@@ -18,7 +19,6 @@ int r8s_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info r8s_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1080,
@@ -26,21 +26,17 @@ static struct video_info r8s_fb = {
 	.stride = 4,
 	.address = (void *)0xf1000000
 };
-#endif
 
-int r8s_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &r8s_fb);
-#endif
-	return 0;
-}
+static const struct device r8s_devices[] = {
+	{ "simplefb", &r8s_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-r8s",
 	.ops = {
 		.early_init = r8s_init,
-		.drivers_init = r8s_drv,
 	},
+	.devices = r8s_devices,
+	.num_devices = ARRAY_SIZE(r8s_devices),
 	.quirks = 0
 };

@@ -4,6 +4,7 @@
  */
 
 #include <board.h>
+#include <util.h>
 #include <string.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
@@ -86,7 +87,6 @@ int p682lpn_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info p682lpn_fb = {
 	.format = FB_FORMAT_ABGR8888,
 	.width = 720,
@@ -94,21 +94,17 @@ static struct video_info p682lpn_fb = {
 	.stride = 4,
 	.address = (void *)0x9e000000
 };
-#endif
 
-int p682lpn_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &p682lpn_fb);
-#endif
-	return 0;
-}
+static const struct device p682lpn_devices[] = {
+	{ "simplefb", &p682lpn_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "itel-p682lpn",
 	.ops = {
 		.early_init = p682lpn_init,
-		.drivers_init = p682lpn_drv,
 	},
+	.devices = p682lpn_devices,
+	.num_devices = ARRAY_SIZE(p682lpn_devices),
 	.quirks = 0
 };

@@ -4,6 +4,7 @@
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
@@ -18,7 +19,6 @@ int j4lte_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info j4lte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 720,
@@ -26,21 +26,17 @@ static struct video_info j4lte_fb = {
 	.stride = 4,
 	.address = (void *)0x067000000
 };
-#endif
 
-int j4lte_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &j4lte_fb);
-#endif
-	return 0;
-}
+static const struct device j4lte_devices[] = {
+	{ "simplefb", &j4lte_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-j4lte",
 	.ops = {
 		.early_init = j4lte_init,
-		.drivers_init = j4lte_drv,
 	},
+	.devices = j4lte_devices,
+	.num_devices = ARRAY_SIZE(j4lte_devices),
 	.quirks = 0
 };
