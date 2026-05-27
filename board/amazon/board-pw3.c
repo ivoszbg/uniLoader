@@ -4,6 +4,7 @@
  */
 
 #include <board.h>
+#include <string.h>
 #include <main/main.h>
 #include <drivers/framework.h>
 
