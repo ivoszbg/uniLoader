@@ -4,23 +4,21 @@
  */
 #include "asmdefs.h"
 
-.section .text
 #ifdef CONFIG_LINUX_KRNL_HEADER_IMG
+#include "linux-kernel-image-header.h"
+#endif
+
+.section .text
+
+#if defined(CONFIG_LINUX_KRNL_HEADER_IMG) && !defined(CONFIG_POSITION_INDEPENDENT)
 _head:
-	ldr x1, =_start
-	b      _start
+	linux_image_header _start
 
 _stack_base:
 	.quad 0x0
 
 _stack_size:
 	.quad _stack_end
-	.quad 0
-	.quad 0
-	.quad 0
-	.quad 0
-	.ascii "ARM\x64"
-	.long 0
 
 .align 4
 #endif
