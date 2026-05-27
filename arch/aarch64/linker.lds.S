@@ -50,21 +50,22 @@ SECTIONS
 	}
 #endif
 
-	.rodata ALIGN(4) : {
+	.rodata ALIGN(8) : {
 		*(.rodata)
 		*(.rodata.*)
 	}
 
-	.data ALIGN(4) : {
+	.data ALIGN(8) : {
 		*(.data)
 		*(.data.*)
 	}
 
-	.bss ALIGN(4) : {
+	.bss ALIGN(8) : {
 		__bss_start = .;
 		*(.bss)
 		*(.bss.*)
 		*(COMMON)
+		. = ALIGN(8);
 		__bss_end = .;
 	}
 
