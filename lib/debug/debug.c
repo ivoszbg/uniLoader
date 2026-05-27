@@ -67,7 +67,7 @@ static inline void uart_output(const char *prefix, const char *message)
 static inline void fb_output(const char *prefix, const char *message, color text_color)
 {
 #ifdef CONFIG_SIMPLE_FB
-	const int y_pos = 5;
+	const int y_pos = FB_TEXT_TOP_PADDING;
 	const int prefix_width = strlen(prefix) * FONTW * get_font_scale_factor();
 
 	__simplefb_raw_print(prefix, 0, y_pos, text_color);
