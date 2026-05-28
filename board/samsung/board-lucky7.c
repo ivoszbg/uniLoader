@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <drivers/framework.h>
+#include <lib/console.h>
 #include <lib/simplefb.h>
 #include <lib/debug.h>
 
@@ -52,6 +53,12 @@ int lucky7_init(void)
 	/* Enable writing to the framebuffer */
 	writel(HW_TRIG_EN, (void *)(DECON_F_BASE + HW_SW_TRIG_CONTROL));
 
+	return 0;
+}
+
+#ifdef CONFIG_UART_DEBUG
+static void lucky7_uart_mux(void)
+{
 	/* Switch MUIC UART from Cellular Processor (CP) to Application Processor (AP) */
 	writel(0x1, (void *)(APBIF_PMU_ALIVE_BASE + USB20_PHY_CONFIGURATION));
 	writel(0x4, (void *)(SYSREG_APM_BASE + JTAG_OVER_USB));
@@ -62,11 +69,15 @@ int lucky7_init(void)
 	writel(0x0, (void *)(SYSREG_APM_BASE + SEL_TXD_USB_PHY));
 	writel(0x3, (void *)(SYSREG_APM_BASE + SEL_RXD_AP_UART_DEBUG));
 	writel(0x0, (void *)(SYSREG_APM_BASE + SEL_RXD_CP_UART));
-
-	return 0;
 }
 
-#ifdef CONFIG_UART_DEBUG
+/* route the UART to the AP before earlycon is usable */
+void early_console_init(void)
+{
+	lucky7_uart_mux();
+	earlycon_register();
+}
+
 void uart_putc(const char ch)
 {
 	/* Wait until TX is ready */
