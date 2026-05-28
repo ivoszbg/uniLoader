@@ -18,7 +18,7 @@ ENTRY(_start)
 	bic     r12, #(1<<2 | 1<<0)
 	mcr     p15, 0, r12, c1, c0, 0
 
-	ldr sp, =__stack_top
+	ldr sp, =__stack_bottom
 
 	/* Zero BSS section */
 	ldr r0, =__bss_start
