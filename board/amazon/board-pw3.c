@@ -13,7 +13,7 @@
 #define IMX_UTS_OFFSET		0xB4
 #define UTS_TXFULL		(1 << 4)
 
-#ifdef CONFIG_UART_DEBUG
+#ifdef CONFIG_EARLYCON
 void uart_putc(char ch)
 {
 	volatile uint32_t *uts_reg = (volatile

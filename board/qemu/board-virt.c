@@ -6,7 +6,7 @@
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
-#ifdef CONFIG_UART_DEBUG
+#ifdef CONFIG_EARLYCON
 volatile unsigned int* uart = (unsigned int*)0x9000000;
 
 void uart_putc(char ch)

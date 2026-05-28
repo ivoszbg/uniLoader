@@ -56,7 +56,7 @@ int lucky7_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_UART_DEBUG
+#ifdef CONFIG_EARLYCON
 static void lucky7_uart_mux(void)
 {
 	/* Switch MUIC UART from Cellular Processor (CP) to Application Processor (AP) */

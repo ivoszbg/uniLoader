@@ -29,7 +29,7 @@
 #define UARTDM_RXFS_BUF_SHIFT	7
 #define UARTDM_RXFS_BUF_MASK	0x7
 
-#ifdef CONFIG_UART_DEBUG
+#ifdef CONFIG_EARLYCON
 void uart_putc(char ch)
 {
 	/* wait until TX is ready */

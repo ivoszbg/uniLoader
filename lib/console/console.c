@@ -51,7 +51,7 @@ static const char *log_prefix(int level)
 		prefix[level] : "[UNKNOWN] ";
 }
 
-#ifdef CONFIG_UART_DEBUG
+#ifdef CONFIG_EARLYCON
 extern void uart_puts(const char *s);
 
 static void earlycon_write(int level, const char *prefix, const char *msg)
