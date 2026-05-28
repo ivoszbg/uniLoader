@@ -17,7 +17,7 @@
 #define WDT_MODE_KEY	0x22000000
 #define WDT_MODE_EN		(1 << 0)
 
-#ifdef CONFIG_UART_DEBUG
+#ifdef CONFIG_EARLYCON
 void uart_putc(char ch)
 {
 	/* wait until TX is ready */

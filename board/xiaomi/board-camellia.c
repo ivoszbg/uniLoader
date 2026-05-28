@@ -17,7 +17,7 @@
 #define UART_LSR_DR	0x01	/* Data ready */
 #define UART_LSR_THRE	0x20	/* TX holding register empty */
 
-#ifdef CONFIG_UART_DEBUG
+#ifdef CONFIG_EARLYCON
 void uart_putc(char ch)
 {
 	while (!(readl((void *)(UART_BASE + UART_LSR_BASE)) & UART_LSR_THRE))

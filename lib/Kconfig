@@ -5,11 +5,13 @@ menu "Libraries"
 		help
 		  Say Y if you want to have Framebuffer output.
 
-	config UART_DEBUG
-		bool "Support for UART debugging"
+	config EARLYCON
+		bool "Support for UART early console"
 		default n
 		help
-		  Say Y if you want to have UART output.
+		  Say Y if you want to have UART early console output. Keep
+		  in mind that your board files need to provide uart_puts
+		  functionality in order for this to work.
 
 	config LIBFDT
 		bool "Support for libfdt"
