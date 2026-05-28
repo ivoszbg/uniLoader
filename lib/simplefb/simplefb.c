@@ -6,7 +6,9 @@
  */
 
 #include <string.h>
+#include <util.h>
 #include <drivers/framework.h>
+#include <lib/console.h>
 #include <lib/debug.h>
 #include <lib/video/font.h>
 #include <lib/simplefb.h>
@@ -159,6 +161,32 @@ void __simplefb_raw_print(const char *text, int text_x, int text_y,
 	last_y = current_y;
 }
 
+static const color level_color[] = {
+	[KERN_EMERG]	= {255,   0,   0, 255},
+	[KERN_ALERT]	= {255, 165,   0, 255},
+	[KERN_CRIT]	= {255, 255,   0, 255},
+	[KERN_ERR]	= {255,   0,   0, 255},
+	[KERN_WARNING]	= {255, 255,   0, 255},
+	[KERN_NOTICE]	= {  0, 255,   0, 255},
+	[KERN_INFO]	= {255, 192,   0, 255},
+	[KERN_DEBUG]	= {128, 128, 128, 255},
+};
+static const color body_color = {128, 128, 128, 255};
+
+static void simplefb_console_write(int level, const char *prefix, const char *msg)
+{
+	color pc = (level >= 0 && level < (int)ARRAY_SIZE(level_color)) ?
+		level_color[level] : (color){255, 255, 255, 255};
+	int prefix_width = strlen(prefix) * FONTW * get_font_scale_factor();
+
+	__simplefb_raw_print(prefix, 0, FB_TEXT_TOP_PADDING, pc);
+	__simplefb_raw_print(msg, prefix_width, FB_TEXT_TOP_PADDING, body_color);
+}
+
+static const struct console simplefb_console = {
+	.write = simplefb_console_write,
+};
+
 static int simplefb_probe(void *data)
 {
 	fb_info = data;
@@ -168,6 +196,7 @@ static int simplefb_probe(void *data)
 
 	fb_info->scale_f = get_font_scale_factor();
 
+	console_register(&simplefb_console);
 	printk(KERN_INFO, "simplefb: ready (%dx%d)\n",
 	       fb_info->width, fb_info->height);
 

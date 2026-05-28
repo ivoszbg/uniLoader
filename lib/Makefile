@@ -4,7 +4,7 @@ lib-y += compiler-rt.o
 lib-$(CONFIG_SIMPLE_FB) += simplefb/simplefb.o
 
 # debug
-lib-y += debug/debug.o
+lib-y += console/console.o
 
 # unic (neatlibc still temporarily resides)
 lib-y += unic/string.o
