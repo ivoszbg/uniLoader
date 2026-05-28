@@ -29,6 +29,7 @@
 #define UARTDM_RXFS_BUF_SHIFT	7
 #define UARTDM_RXFS_BUF_MASK	0x7
 
+#ifdef CONFIG_UART_DEBUG
 void uart_putc(char ch)
 {
 	/* wait until TX is ready */
@@ -48,6 +49,7 @@ void uart_puts(const char *s)
 		s++;
 	}
 }
+#endif
 
 struct board_data board_ops = {
 	.name = "google-taimen",

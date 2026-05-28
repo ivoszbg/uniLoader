@@ -17,6 +17,7 @@
 #define WDT_MODE_KEY	0x22000000
 #define WDT_MODE_EN		(1 << 0)
 
+#ifdef CONFIG_UART_DEBUG
 void uart_putc(char ch)
 {
 	/* wait until TX is ready */
@@ -33,6 +34,7 @@ void uart_puts(const char *s)
 		s++;
 	}
 }
+#endif
 
 void tetris_disable_wdt(void)
 {
