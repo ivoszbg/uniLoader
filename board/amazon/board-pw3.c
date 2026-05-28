@@ -13,6 +13,7 @@
 #define IMX_UTS_OFFSET		0xB4
 #define UTS_TXFULL		(1 << 4)
 
+#ifdef CONFIG_UART_DEBUG
 void uart_putc(char ch)
 {
 	volatile uint32_t *uts_reg = (volatile
@@ -34,6 +35,7 @@ void uart_puts(const char *s)
 		s++;
 	}
 }
+#endif
 
 struct board_data board_ops = {
 	.name = "amazon-paperwhite3",

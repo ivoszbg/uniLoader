@@ -17,6 +17,7 @@
 #define UART_LSR_DR 	0x01 	/* Data ready */
 #define UART_LSR_THRE 	0x20 	/* TX holding register empty */
 
+#ifdef CONFIG_UART_DEBUG
 void uart_putc(char ch)
 {
 	while (!(readl((void *)(UART_BASE + UART_LSR_BASE)) & UART_LSR_THRE))
@@ -32,6 +33,7 @@ void uart_puts(const char *s)
 		s++;
 	}
 }
+#endif
 
 static struct video_info blossom_fb = {
 	.format = FB_FORMAT_ARGB8888,
