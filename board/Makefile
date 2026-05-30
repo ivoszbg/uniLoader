@@ -1,3 +1,4 @@
+lib-$(CONFIG_AMAZON_CHECKERS) += amazon/board-checkers.o
 lib-$(CONFIG_AMAZON_PW3) += amazon/board-pw3.o
 lib-$(CONFIG_APPLE_N61AP) += apple/board-n61ap.o
 lib-$(CONFIG_BLACKVIEW_TAB15PRO) += blackview/board-tab15pro.o

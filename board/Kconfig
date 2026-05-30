@@ -1,4 +1,12 @@
 menu "Device Support"
+	config AMAZON_CHECKERS
+		bool "Support for Amazon Echo Show 5 (1st gen)"
+		default n
+		depends on MT8163
+		help
+		  Say Y if you want to include support for Amazon Echo Show 5
+		  (1st gen)
+
 	config AMAZON_PW3
 		bool "Support for Amazon Kindle Paperwhite 3"
 		default n
