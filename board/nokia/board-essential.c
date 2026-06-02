@@ -36,6 +36,7 @@ static struct video_info essential_fb = {
 
 static const struct device essential_devices[] = {
 	{ "simplefb", &essential_fb, "fb" },
+	{ "mediatek,mt6795-systimer", (void *)0x10200670, "timer0" },
 };
 
 struct board_data board_ops = {
