@@ -10,6 +10,13 @@ menu "Drivers"
 		default n
 		help
 		    Say Y if you have a device with the Samsung Exynos SPEEDY bus.
-    
+
+	config MEDIATEK_MCUSYS
+		bool "Support for MediaTek MCUSYS"
+		depends on MEDIATEK
+		default n
+		help
+		  Say Y if you have a device with a MediaTek SoC and need to use
+		  hardware behind MCUSYS.
 
 endmenu
