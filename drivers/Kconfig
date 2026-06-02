@@ -19,4 +19,13 @@ menu "Drivers"
 		  Say Y if you have a device with a MediaTek SoC and need to use
 		  hardware behind MCUSYS.
 
+	menuconfig TIMER
+		bool "Timer support"
+		default n
+		help
+		  Say Y here to enable support for timer drivers. Enabling this
+		  option alone won't add any code to the resulting binary.
+
+source "drivers/timer/Kconfig"
+
 endmenu
