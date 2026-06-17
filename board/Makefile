@@ -8,6 +8,7 @@ lib-$(CONFIG_ITEL_P682LPN) += itel/board-p682lpn.o
 lib-$(CONFIG_LENOVO_TB373FU) += lenovo/board-tb373fu.o
 lib-$(CONFIG_MOTOROLA_TUNDRA) += motorola/board-tundra.o
 lib-$(CONFIG_NOKIA_ESSENTIAL) += nokia/board-essential.o
+lib-$(CONFIG_NOTHING_PONG) += nothing/board-pong.o
 lib-$(CONFIG_NOTHING_TETRIS) += nothing/board-tetris.o
 lib-$(CONFIG_QEMU_BOARD_VIRT) += qemu/board-virt.o
 lib-$(CONFIG_REALME_RMX3511) += realme/board-rmx3511.o
