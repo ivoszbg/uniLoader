@@ -39,6 +39,7 @@ environment in case of a forced and buggy bootloader.
 - Essential
 
 ### Nothing
+- Pong
 - Tetris
 
 ### QEMU

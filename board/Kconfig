@@ -70,6 +70,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Nokia 3
 
+	config NOTHING_PONG
+		bool "Support for Nothing Phone (2)"
+		default n
+		depends on SM8450
+		help
+		  Say Y if you want to include support for Nothing Phone (2)
+
 	config NOTHING_TETRIS
 		bool "Support for CMF Phone 1"
 		default n
