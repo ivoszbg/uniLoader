@@ -284,6 +284,9 @@ int fdt_setprop_namelen(void *fdt, int nodeoffset, const char *name,
 	void *prop_data;
 	int err;
 
+	if (len < 0)
+		return -FDT_ERR_BADVALUE;
+
 	err = fdt_setprop_placeholder_namelen(fdt, nodeoffset, name, namelen,
 					      len, &prop_data);
 	if (err)
@@ -299,6 +302,9 @@ int fdt_appendprop(void *fdt, int nodeoffset, const char *name,
 {
 	struct fdt_property *prop;
 	int err, oldlen, newlen;
+
+	if (len < 0)
+		return -FDT_ERR_BADVALUE;
 
 	FDT_RW_PROBE(fdt);
 
