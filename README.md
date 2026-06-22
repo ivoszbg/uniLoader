@@ -82,6 +82,7 @@ environment in case of a forced and buggy bootloader.
 - Begonia
 - Blossom
 - Camellia
+- Nezha
 
 ---
 

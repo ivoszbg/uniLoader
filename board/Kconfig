@@ -308,6 +308,13 @@ menu "Device Support"
 		depends on MT6833
 		help
 		  Say Y if you want to include support for Poco M3 Pro 5G
+
+	config XIAOMI_NEZHA
+		bool "Support for Xiaomi 17 Ultra"
+		default n
+		depends on SM8850
+		help
+		  Say Y if you want to include support for Xiaomi 17 Ultra
 endmenu
 
 menu "Device Specific Addresses"
