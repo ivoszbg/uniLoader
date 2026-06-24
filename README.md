@@ -75,6 +75,9 @@ environment in case of a forced and buggy bootloader.
 - PDX245
 - PSVITA
 
+### Tecno
+- LI7
+
 ### Volla
 - Algiz
 
