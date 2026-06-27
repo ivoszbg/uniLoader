@@ -40,6 +40,7 @@ environment in case of a forced and buggy bootloader.
 
 ### Nothing
 - Pong
+- Spacewar
 - Tetris
 
 ### QEMU
