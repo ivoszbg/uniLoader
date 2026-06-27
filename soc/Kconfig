@@ -189,6 +189,12 @@ config SONY
 		help
 		  Say Y if your device uses this Qualcomm SoC
 
+	config SM7325
+		bool "Support for QUALCOMM SM7325"
+		select QUALCOMM
+		help
+		 Say Y if your device uses this Qualcomm SoC
+
 	config SM8350
 		bool "Support for QUALCOMM SM8350"
 		select QUALCOMM
