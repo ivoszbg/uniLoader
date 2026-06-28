@@ -284,6 +284,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Sony PlayStation
 		  Vita.
+		  
+	config TECNO_LI7
+		bool "Support for Tecno Pova 6"
+		default n
+		depends on MT6789
+		help
+		  Say Y if you want to include support for Tecno Pova 6
 
 	config VOLLA_ALGIZ
 		bool "Support for Volla Phone Quintus"
