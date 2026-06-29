@@ -1,0 +1,10 @@
+if TIMER
+	config TIMER_MTK_CPUXGPT
+		bool "Timer initialization for MediaTek CPUXGPT"
+		depends on MEDIATEK_MCUSYS
+		default n
+		help
+		  Some Mediatek platforms have a buggy ATF that doesn't enable
+		  the ARM Architected Timers. Say Y here if you have a device
+		  with one of those platforms.
+endif

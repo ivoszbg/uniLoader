@@ -10,6 +10,22 @@ menu "Drivers"
 		default n
 		help
 		    Say Y if you have a device with the Samsung Exynos SPEEDY bus.
-    
+
+	config MEDIATEK_MCUSYS
+		bool "Support for MediaTek MCUSYS"
+		depends on MEDIATEK
+		default n
+		help
+		  Say Y if you have a device with a MediaTek SoC and need to use
+		  hardware behind MCUSYS.
+
+	menuconfig TIMER
+		bool "Timer support"
+		default n
+		help
+		  Say Y here to enable support for timer drivers. Enabling this
+		  option alone won't add any code to the resulting binary.
+
+source "drivers/timer/Kconfig"
 
 endmenu
