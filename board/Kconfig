@@ -116,13 +116,6 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Realme C35
 
-	config SAMSUNG_A3XELTE
-		bool "Support for Samsung Galaxy A3 (2016)"
-		default n
-		depends on EXYNOS_7580
-		help
-		  Say Y if you want to include support for Samsung Galaxy A3 (2016)
-
 	config SAMSUNG_A10
 		bool "Support for Samsung Galaxy A10"
 		default n
@@ -150,6 +143,13 @@ menu "Device Support"
 		depends on EXYNOS_1280
 		help
 		  Say Y if you want to include support for Samsung Galaxy A33 5G
+
+	config SAMSUNG_A3XELTE
+		bool "Support for Samsung Galaxy A3 (2016)"
+		default n
+		depends on EXYNOS_7580
+		help
+		  Say Y if you want to include support for Samsung Galaxy A3 (2016)
 
 	config SAMSUNG_BEYOND1LTE
 		bool "Support for Samsung Galaxy S10"
