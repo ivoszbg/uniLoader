@@ -14,11 +14,11 @@ environment in case of a forced and buggy bootloader.
 
 ## Supported Devices
 
-### Apple
-- N61AP
-
 ### Amazon
 - PW3
+
+### Apple
+- N61AP
 
 ### Blackview
 - Tab15Pro
@@ -29,11 +29,11 @@ environment in case of a forced and buggy bootloader.
 ### Huawei
 - Agassi2
 
-### itel
-- P682LPN
-
 ### Infinix
 - X6710
+
+### Itel
+- P682LPN
 
 ### Nokia
 - Essential
@@ -50,11 +50,11 @@ environment in case of a forced and buggy bootloader.
 - RMX3511
 
 ### Samsung
-- A3XELTE
 - A10
 - A12S
 - A30
 - A33X
+- A3XELTE
 - BEYOND1LTE
 - C1S
 - DREAMLTE
