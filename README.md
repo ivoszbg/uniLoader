@@ -35,6 +35,12 @@ environment in case of a forced and buggy bootloader.
 ### Itel
 - P682LPN
 
+### Lenovo
+- TB373FU
+
+### Motorola
+- Tundra
+
 ### Nokia
 - Essential
 
@@ -73,6 +79,7 @@ environment in case of a forced and buggy bootloader.
 - ZEROFLTE
 
 ### Sony
+- Lilac
 - PDX245
 - PSVITA
 
