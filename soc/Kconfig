@@ -183,6 +183,12 @@ config SONY
 		help
 		  Say Y if your device uses Mediatek MT6897 SoC
 
+	config MT8163
+		bool "Support for MediaTek MT8163"
+		select MEDIATEK
+		help
+		  Say Y if your device uses MediaTek MT8163 SoC
+
 	config QC32_8916
 		bool "Support for QUALCOMM MSM8916"
 		select QUALCOMM
