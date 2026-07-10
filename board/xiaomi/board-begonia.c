@@ -14,6 +14,7 @@ static struct video_info begonia_r_fb = {
     .width = 1088,
     .height = 2340,
     .stride = 4,
+    .scale = 2,
     .address = (void *)0x7d9b0000
 };
 
