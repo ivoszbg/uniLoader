@@ -146,6 +146,12 @@ config SONY
 		select MEDIATEK
 		help
 		  Say Y if your device uses Mediatek MT6765 SoC
+	
+	config MT6768
+		bool "Support for Mediatek MT6768"
+		select MEDIATEK
+		help
+		  Say Y if your device uses Mediatek MT6768 SoC
 
 	config MT6785
 		bool "Support for Mediatek MT6785"

@@ -331,6 +331,14 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Poco M3 Pro 5G
 
+	config XIAOMI_MOON
+		bool "Support for Xiaomi Moon devices"
+		default n
+		depends on MT6768
+		help
+		  Say Y if you want to include support for Xiaomi Moon devices:
+		  Xiaomi Poco M6 4G, Xiaomi Redmi 13 4G.
+
 	config XIAOMI_NEZHA
 		bool "Support for Xiaomi 17 Ultra"
 		default n
