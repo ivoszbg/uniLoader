@@ -264,6 +264,12 @@ config SONY
 		help
 		  Say Y if your device uses UNISOC UMS9230
 
+	config UMS9620
+		bool "Support for Unisoc T760/T820"
+		select UNISOC
+		help
+		  Say Y if your device uses UNISOC UMS9620
+
 	config SONY_KERMIT
 		bool "Support for Sony Kermit SoC"
 		select SONY
