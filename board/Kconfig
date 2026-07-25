@@ -345,6 +345,14 @@ menu "Device Support"
 		depends on SM8850
 		help
 		  Say Y if you want to include support for Xiaomi 17 Ultra
+
+	config ZTE_PINE
+		bool "Support for ZTE nubia Neo 2 5G"
+		default n
+		depends on UMS9620
+		help
+		  Say Y if you want to include support for ZTE nubia Neo 2 5G
+
 endmenu
 
 menu "Device Specific Addresses"
