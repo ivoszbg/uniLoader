@@ -5,6 +5,14 @@ menu "Drivers"
 		help
 		    Say Y if you have a device with the Samsung Exynos ACPM block.
 
+	config EXYNOS_DECON
+		bool "Support for Samsung Exynos DECON block"
+		depends on EXYNOS
+		default n
+		help
+		  Say Y here if you have an Exynos device that requires DECON
+		  initialization.
+
 	config EXYNOS_SPEEDY
 		bool "Support for Samsung Exynos SPEEDY bus"
 		default n

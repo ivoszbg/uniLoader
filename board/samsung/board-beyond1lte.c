@@ -11,15 +11,6 @@
 #include <lib/simplefb.h>
 
 #define DECON_F_BASE		0x19030000
-#define HW_SW_TRIG_CONTROL	0x70
-
-// Early initialization
-int beyond1lte_init(void)
-{
-	/* Allow framebuffer to be written to */
-	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
-	return 0;
-}
 
 static struct video_info beyond1lte_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -30,14 +21,12 @@ static struct video_info beyond1lte_fb = {
 };
 
 static const struct device beyond1lte_devices[] = {
+	{ "samsung,exynos9-decon", (void *)DECON_F_BASE, "decon" },
 	{ "simplefb", &beyond1lte_fb, "fb" },
 };
 
 struct board_data board_ops = {
 	.name = "samsung-beyond1lte",
-	.ops = {
-		.early_init = beyond1lte_init,
-	},
 	.devices = beyond1lte_devices,
 	.num_devices = ARRAY_SIZE(beyond1lte_devices),
 	.quirks = 0

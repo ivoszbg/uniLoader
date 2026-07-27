@@ -12,9 +12,6 @@
 #include <soc/exynos8895.h>
 #include <drivers/samsung/exynos-speedy.h>
 
-/* DECON Register MAP */
-#define HW_SW_TRIG_CONTROL		0x70
-
 /* MMIO MAP */
 #define DECON_F_BASE			0x12860000
 #define SPEEDY_BASE			0x15b50000
@@ -107,13 +104,6 @@ static void s2mps17_setup(void)
 	return;
 }
 
-int dreamlte_init(void)
-{
-	/* allow framebuffer to be written to */
-	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
-	return 0;
-}
-
 static struct video_info dreamlte_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1440,
@@ -123,6 +113,7 @@ static struct video_info dreamlte_fb = {
 };
 
 static const struct device dreamlte_devices[] = {
+	{ "samsung,exynos9-decon", (void *)DECON_F_BASE, "decon" },
 	{ "simplefb", &dreamlte_fb, "fb" },
 };
 
@@ -136,7 +127,6 @@ int dreamlte_late_init(void)
 struct board_data board_ops = {
 	.name = "samsung-dreamlte",
 	.ops = {
-		.early_init = dreamlte_init,
 		.late_init = dreamlte_late_init,
 	},
 	.devices = dreamlte_devices,
