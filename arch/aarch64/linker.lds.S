@@ -15,10 +15,14 @@ OUTPUT_FORMAT("elf64-littleaarch64")
 OUTPUT_ARCH(aarch64)
 TARGET(binary)
 
+#ifndef CONFIG_FIT_BOOT
 INPUT(KERNEL_PATH)
 INPUT(DTB_PATH)
 #ifndef CONFIG_RAMDISK_NO_COPY
 INPUT(RAMDISK_PATH)
+#endif // CONFIG_RAMDISK_NO_COPY
+#else
+INPUT(FIT_PATH)
 #endif
 
 SECTIONS
@@ -33,6 +37,7 @@ SECTIONS
 		*(.text.*)
 	}
 
+#ifndef CONFIG_FIT_BOOT
 	.kernel ALIGN(4096) : {
 		kernel = .;
 		KERNEL_PATH
@@ -42,11 +47,16 @@ SECTIONS
 		dtb = .;
 		DTB_PATH
 	}
-
 #ifndef CONFIG_RAMDISK_NO_COPY
 	.ramdisk ALIGN(4096) : {
 		ramdisk = .;
 		RAMDISK_PATH
+	}
+#endif // CONFIG_RAMDISK_NO_COPY
+#else
+	.fit ALIGN(4096) : {
+		fit = .;
+		FIT_PATH
 	}
 #endif
 
@@ -83,12 +93,18 @@ SECTIONS
 #endif
 	}
 
+#ifndef CONFIG_FIT_BOOT
 	kernel_size = SIZEOF(.kernel);
 #ifdef CONFIG_RAMDISK_NO_COPY
 	ramdisk_size = RAMDISK_SIZE;
 #else
 	ramdisk_size = SIZEOF(.ramdisk);
+#endif // CONFIG_RAMDISK_NO_COPY
+
+#else
+	fit_size = SIZEOF(.fit);
 #endif
+
 #ifdef CONFIG_POSITION_INDEPENDENT
 	_reloc_size = _reloc_end - _reloc_start;
 #endif

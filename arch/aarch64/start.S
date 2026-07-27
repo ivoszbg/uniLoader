@@ -43,6 +43,8 @@ ENTRY(_start)
 2:
 
 	/* Fall through */
+#ifndef CONFIG_FIT_BOOT
+	/* Legacy boot method */
 	adrp    x0, dtb             /* Load page of dtb */
 	add     x0, x0, #:lo12:dtb  /* Add offset within the page */
 	adrp    x1, kernel          /* Load page of kernel */
@@ -50,9 +52,16 @@ ENTRY(_start)
 #ifndef CONFIG_RAMDISK_NO_COPY
 	adrp    x2, ramdisk          /* Load page of kernel */
 	add     x2, x2, #:lo12:ramdisk /* Add offset within the page */
-#endif
-
+#endif // CONFIG_RAMDISK_NO_COPY
 	bl main
+#else
+	/* FIT boot method */
+	adrp	x0, fit             /* Load page of fit image */
+	add	x0, x0, #:lo12:fit  /* Add offset within the page */
+
+	bl fit_main
+#endif // CONFIG_FIT_BOOT
+
 END(_start)
 
 ENTRY(load_kernel_and_jump)
