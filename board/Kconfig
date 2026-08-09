@@ -355,6 +355,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Poco M3 Pro 5G
 
+	config XIAOMI_GINKGO
+		bool "Support for Xiaomi Redmi Note 8/8T"
+		default n
+		depends on SM6125
+		help
+		  Say Y if you want to include support for Xiaomi Redmi Note 8/8T
+
 	config XIAOMI_MOON
 		bool "Support for Xiaomi Moon devices"
 		default n
