@@ -183,6 +183,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy A3 (2016)
 
+	config SAMSUNG_A71
+		bool "Support for Samsung Galaxy A71"
+		default n
+		depends on SM7150
+		help
+		   Say Y if you want to include support for Samsung Galaxy A71
+
 	config SAMSUNG_BEYOND1LTE
 		bool "Support for Samsung Galaxy S10"
 		default n
