@@ -8,17 +8,6 @@
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
-#define DECON_F_BASE		0x148b0000
-#define HW_SW_TRIG_CONTROL	0x70
-
-// Early initialization
-int gta4xl_init(void)
-{
-	/* Allow framebuffer to be written to */
-	*(int*) (DECON_F_BASE + HW_SW_TRIG_CONTROL) = 0x1281;
-	return 0;
-}
-
 static struct video_info gta4xl_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1200,
@@ -33,9 +22,6 @@ static const struct device gta4xl_devices[] = {
 
 struct board_data board_ops = {
 	.name = "samsung-gta4xl",
-	.ops = {
-		.early_init = gta4xl_init,
-	},
 	.devices = gta4xl_devices,
 	.num_devices = ARRAY_SIZE(gta4xl_devices),
 	.quirks = 0
