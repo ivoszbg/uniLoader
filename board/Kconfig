@@ -218,6 +218,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy Tab S6 Lite (2020)
 
+	config MOTOROLA_TROIKA
+		bool "Support for Motorola One Action (troika)"
+		default n
+		depends on EXYNOS_9610
+		help
+		  Say Y if you want to include support for Motorola One Action.
+
 	config SAMSUNG_HEROLTE
 		bool "Support for Samsung Galaxy S7"
 		default n
