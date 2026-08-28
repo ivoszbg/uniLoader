@@ -391,6 +391,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Xiaomi 17 Ultra
 
+	config XIAOMI_SHENNONG
+		bool "Support for Xiaomi 14 Pro"
+		default n
+		depends on SM8650
+		help
+		  Say Y if you want to include support for Xiaomi 14 Pro
+
 	config ZTE_PINE
 		bool "Support for ZTE nubia Neo 2 5G"
 		default n
