@@ -9,6 +9,7 @@ lib-y += console/console.o
 # unic (neatlibc still temporarily resides)
 lib-y += unic/string.o
 
+# libfdt
 lib-$(CONFIG_LIBFDT) += \
 	libfdt/fdt.o \
 	libfdt/fdt_ro.o \
@@ -16,5 +17,9 @@ lib-$(CONFIG_LIBFDT) += \
 	libfdt/fdt_wip.o \
 	libfdt/fdt_sw.o \
 	libfdt/fdt_strerror.o
+
+# libfit
+lib-$(CONFIG_LIBFIT) += \
+	libfit/fit.o
 
 ccflags-y += -I$(srctree)/include/lib/libfdt

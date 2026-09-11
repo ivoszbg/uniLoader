@@ -32,6 +32,21 @@ menu "Building options"
 		  Select this if you want to use lz4 to compress the final uniLoader image.
 		  This is required on some new MediaTek devices.
 
+	config FIT_BOOT
+		bool "Embed a FIT image"
+		default n
+		depends on !EMBED_LINUX
+		help
+		  Select this if you want to embed a FIT image into your build and boot from
+		  it.
+
+	config FIT_PATH
+		string "Path to FIT image"
+		depends on FIT_BOOT
+		default blob/fit
+		help
+		  Path to the FIT image which will be embedded and used for booting.
+
 	config EMBED_LINUX
 		bool "Embed linux kernel and device tree"
 		default y
