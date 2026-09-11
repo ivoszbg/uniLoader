@@ -331,6 +331,13 @@ menu "Device Support"
 		  Say Y if you want to include support for Sony PlayStation
 		  Vita.
 		  
+	config TECLAST_T40PRO
+		bool "Support for Teclast T40 Pro"
+		default n
+		depends on UMS9230
+		help
+		  Say Y if you want to include support for Teclast T40 Pro
+
 	config TECNO_LI7
 		bool "Support for Tecno Pova 6"
 		default n
