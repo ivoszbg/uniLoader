@@ -133,6 +133,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for OnePlus 13R
 
+	config ONEPLUS_WAFFLE
+		bool "Support for OnePlus 12"
+		default n
+		depends on SM8650
+		help
+		  Say Y if you want to include support for OnePlus 12
+
 	config QEMU_BOARD_VIRT
 		bool "Support for QEMU virt platform (aarch64)"
 		default n
