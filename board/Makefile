@@ -8,6 +8,7 @@ lib-$(CONFIG_HTC_v36BML) += htc/board-v36bml.o
 lib-$(CONFIG_INFINIX_X6710) += infinix/board-x6710.o
 lib-$(CONFIG_ITEL_P682LPN) += itel/board-p682lpn.o
 lib-$(CONFIG_LENOVO_TB373FU) += lenovo/board-tb373fu.o
+lib-$(CONFIG_MOTOROLA_TROIKA) += motorola/board-troika.o
 lib-$(CONFIG_MOTOROLA_TUNDRA) += motorola/board-tundra.o
 lib-$(CONFIG_NOKIA_ESSENTIAL) += nokia/board-essential.o
 lib-$(CONFIG_NOTHING_PONG) += nothing/board-pong.o
