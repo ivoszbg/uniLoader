@@ -63,7 +63,7 @@ static void draw_pixel(volatile char *fb, int x, int y, int width, int stride,
 #define SCALED_FONTW (FONTW * fb_info->scale_f)
 #define SCALED_FONTH (FONTH * fb_info->scale_f)
 
-int get_font_scale_factor()
+int get_font_scale_factor(void)
 {
 	if (!fb_info)
 		return 1;
