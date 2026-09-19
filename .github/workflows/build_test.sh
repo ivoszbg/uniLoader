@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # CI calls this script from the project root, as such we don't really
 # need to care about changing the directory
@@ -14,8 +14,9 @@ echo "Using $procs cores for build."
 
 # Get all available device codenames
 for config in configs/*; do
-    split=(${config//[\/_]/ })
-    devices+=("${split[1]}")
+    split="${config##*/}";
+    split="${split%_*}"
+    devices+=("$split")
 done
 
 # And... build.
