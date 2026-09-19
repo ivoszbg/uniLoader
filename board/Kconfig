@@ -53,6 +53,13 @@ menu "Device Support"
 		  developers may want to leave this on to avoid holding down
 		  the power button every time.
 
+	config HUAWEI_LUA_L21
+		bool "Support for Huawei Y3 II 4G"
+		default n
+		depends on MT6735
+		help
+		  Say Y if you want to include support for Huawei Y3 II 4G
+
 	config HTC_v36BML
 		bool "Support for HTC Desire 628 Dual"
 		default n
