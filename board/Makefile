@@ -44,7 +44,6 @@ lib-$(CONFIG_SONY_PDX245) += sony/board-pdx245.o
 lib-$(CONFIG_SONY_PSVITA) += sony/board-vita.o
 lib-$(CONFIG_TECLAST_T40PRO) += teclast/board-t40pro.o
 lib-$(CONFIG_TECNO_LI7) += tecno/board-li7.o
-lib-$(CONFIG_VOLLA_ALGIZ) += volla/board-algiz.o
 lib-$(CONFIG_XIAOMI_BEGONIA) += xiaomi/board-begonia.o
 lib-$(CONFIG_XIAOMI_BLOSSOM) += xiaomi/board-blossom.o
 lib-$(CONFIG_XIAOMI_CAMELLIA) += xiaomi/board-camellia.o
