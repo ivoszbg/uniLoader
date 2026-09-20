@@ -123,6 +123,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Nokia 3
 
+	config NOTHING_FROGGERPRO
+		bool "Support for Nothing Phone (4a) Pro"
+		default n
+		depends on SM7750
+		help
+		  Say Y if you want to include support for Nothing Phone (4a) Pro
+
 	config NOTHING_PONG
 		bool "Support for Nothing Phone (2)"
 		default n
