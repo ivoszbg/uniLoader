@@ -34,6 +34,7 @@ struct video_info {
 	int stride;
 	int scale;
 	int scale_f;
+	int rotate;
 	void *address;
 };
 
