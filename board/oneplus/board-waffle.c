@@ -1,3 +1,8 @@
+/* SPDX-License-Identifier: GPL-2.0 */
+/*
+ * Copyright (c) 2026, DaDDevil <hexiaoshan520@gmail.com>
+ */
+
 #include <board.h>
 #include <util.h>
 #include <drivers/framework.h>
