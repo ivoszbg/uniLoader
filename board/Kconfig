@@ -239,6 +239,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy Tab S6 Lite (2020)
 
+	config SAMSUNG_GTS8WIFI
+		bool "Support for Samsung Galaxy Tab S8 (Wi-Fi)"
+		default n
+		depends on SM8450
+		help
+		  Say Y if you want to include support for Samsung Galaxy Tab S8 (Wi-Fi)
+
 	config SAMSUNG_HEROLTE
 		bool "Support for Samsung Galaxy S7"
 		default n
