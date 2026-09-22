@@ -339,18 +339,11 @@ menu "Device Support"
 		  Say Y if you want to include support for Teclast T40 Pro
 
 	config TECNO_LI7
-		bool "Support for Tecno Pova 6"
+		bool "Support for Tecno Pova 6 / 6 Neo"
 		default n
 		depends on MT6789
 		help
-		  Say Y if you want to include support for Tecno Pova 6
-
-	config TECNO_LI6
-		bool "Support for Tecno Pova 6 Neo"
-		default n
-		depends on MT6789
-		help
-		  Say Y if you want to include support for Tecno Pova 6 Neo
+		  Say Y if you want to include support for Tecno Pova 6 / 6 Neo
 
 	config VOLLA_ALGIZ
 		bool "Support for Volla Phone Quintus"
