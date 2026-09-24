@@ -353,11 +353,11 @@ menu "Device Support"
 		  Say Y if you want to include support for Teclast T40 Pro
 
 	config TECNO_LI7
-		bool "Support for Tecno Pova 6"
+		bool "Support for Tecno Pova 6 / 6 Neo"
 		default n
 		depends on MT6789
 		help
-		  Say Y if you want to include support for Tecno Pova 6
+		  Say Y if you want to include support for Tecno Pova 6 / 6 Neo
 
 	config XIAOMI_BEGONIA
 		bool "Support for Redmi Note 8 Pro"
