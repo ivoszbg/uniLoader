@@ -88,6 +88,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for the Lenovo Idea Tab Pro
 
+	config LENOVO_P1MA40
+		bool "Support for Lenovo Vibe P1ma40"
+		default n
+		depends on MT6735
+		help
+			Say Y if you want to include support for the Lenovo Vibe P1ma40
+
 	config MOTOROLA_TUNDRA
 		bool "Support for Motorola Edge 30 fusion"
 		default n
