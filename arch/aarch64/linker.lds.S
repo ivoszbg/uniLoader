@@ -90,10 +90,12 @@ SECTIONS
 	ramdisk_size = SIZEOF(.ramdisk);
 #endif
 #ifdef CONFIG_POSITION_INDEPENDENT
-	_reloc_size = _reloc_end - _reloc_start;
+	/* reloc.S copies from _start, after the relocation stub. */
+	_reloc_size = _reloc_end - _start;
 #endif
 #ifdef CONFIG_LINUX_KRNL_HEADER_IMG
-	_kernel_size = _stack_end - _start;
+	/* The Image size includes the header and relocation stub too. */
+	_kernel_size = _stack_end - TEXT_BASE;
 #endif
 
 	/* size optimization for flat binaries */
