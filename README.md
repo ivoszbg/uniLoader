@@ -53,7 +53,7 @@ environment in case of a forced and buggy bootloader. and this is in a work in p
 - A12S
 - A30
 - A33X
-- A14 4g (sm-a145f)
+- A14 4g (sm-a145f) - see Documentation/samsung-a145f.md
 - BEYOND1LTE
 - C1S
 - DREAMLTE
