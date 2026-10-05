@@ -315,14 +315,14 @@ menu "Device Specific Addresses"
 
 	config TEXT_BASE
 		hex "UniLoader Text Base"
+		default 0xa0000000 if SAMSUNG_A145F
 		default 0x0
-		default 0x90000000 if SAMSUNG_A145F
 
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
 		default 0x50000000 if NOTHING_TETRIS
 		default 0x050000000 if SAMSUNG_J4LTE
-		default 0x80080000 if SAMSUNG_A145F
+		default 0x80200000 if SAMSUNG_A145F
 		default 0x60000000 if VOLLA_ALGIZ
 		default 0x50000000 if XIAOMI_BEGONIA
 
