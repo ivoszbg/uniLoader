@@ -98,6 +98,12 @@ def main():
         a.add_argument("--" + n, required=True)
     a.add_argument("--dtbo-idx", type=int, help="default: ro.boot.dtbo_idx from getprop")
     o = a.parse_args()
+    missing = [f"--{n.replace('_','-')} {getattr(o, n)}" for n in
+               ("boot", "vendor_boot", "init_boot", "dtbo", "getprop")
+               if not os.path.isfile(getattr(o, n))]
+    if missing:
+        die("file not found: " + ", ".join(missing) + "\n  (backup layout: <backup>/partitions/*.img "
+            "and <backup>/info/getprop.txt - pass full paths)")
     gp = open(o.getprop, errors="replace").read()
     idx = o.dtbo_idx if o.dtbo_idx is not None else int(
         re.search(r"\[ro\.boot\.dtbo_idx\]: \[(\d+)\]", gp).group(1))

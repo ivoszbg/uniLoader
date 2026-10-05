@@ -39,9 +39,11 @@ uniLoader embeds a kernel, a device tree and a ramdisk. Build them from the
 stock images (never commit them, they are device specific):
 
 ```
+B=path/to/your/a145f-backup-folder      # contains partitions/ and info/
 python3 tools/samsung-a145f/make_a145f_blobs.py \
-  --boot boot.img --vendor-boot vendor_boot.img --init-boot init_boot.img \
-  --dtbo dtbo.img --getprop getprop.txt --out blob
+  --boot $B/partitions/boot.img --vendor-boot $B/partitions/vendor_boot.img \
+  --init-boot $B/partitions/init_boot.img --dtbo $B/partitions/dtbo.img \
+  --getprop $B/info/getprop.txt --out blob
 ```
 
 * `blob/Image`   - the kernel from `boot.img`
@@ -58,7 +60,7 @@ Serial numbers and similar identifiers are not copied.
 ```
 make a145f_defconfig CROSS_COMPILE=aarch64-linux-gnu-
 make CROSS_COMPILE=aarch64-linux-gnu- -j"$(nproc)"
-python3 tools/samsung-a145f/pack_boot_v4.py uniLoader --stock boot.img -o boot_uniloader.img
+python3 tools/samsung-a145f/pack_boot_v4.py uniLoader --stock $B/partitions/boot.img -o boot_uniloader.img
 ```
 
 The result is a header-v4 `boot.img` (no ramdisk) whose "kernel" is uniLoader.
