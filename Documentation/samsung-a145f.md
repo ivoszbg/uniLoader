@@ -68,10 +68,28 @@ It must fit the 64 MiB boot partition; the packer checks this.
 
 ## 4. Flash and recover
 
-Flash `boot_uniloader.img` as `boot` (Odin: put it in an AP tar, Download mode =
-hold Vol Up + Vol Down while plugging USB in). **Keep the stock `boot.img`**:
-flashing it back through Odin restores the phone. Download mode does not depend
-on the OS, so a bad boot image is recoverable.
+**Odin chooses the partition from the file name inside the tar, so it must be
+called `boot.img`.** Prepare both the new image and a restore tar first:
+
+```
+mkdir -p odin/new odin/stock
+cp boot_uniloader.img odin/new/boot.img
+head -c 67108864 $B/partitions/boot.img > odin/stock/boot.img   # stock, junk bytes trimmed
+(cd odin/new   && tar -H ustar -cf ../AP_uniloader.tar boot.img)
+(cd odin/stock && tar -H ustar -cf ../AP_stock.tar boot.img)
+```
+
+Check that verification is already off (flags `3` means disabled):
+
+```
+python3 -c "import struct,sys;d=open(sys.argv[1],'rb').read(256);print('vbmeta flags =',struct.unpack('>I',d[120:124])[0])" $B/partitions/vbmeta.img
+```
+
+Then reboot to Download mode (hold Vol Up + Vol Down while plugging in USB) and
+flash `odin/AP_uniloader.tar` in Odin's **AP** slot (Windows Odin3, or Samsung's
+Linux `odin4`; Heimdall often fails on recent Samsung phones). If anything goes
+wrong, flash `odin/AP_stock.tar` the same way. Download mode does not depend on
+the OS, so a bad boot image is recoverable.
 
 ## 5. Why the addresses are what they are
 
