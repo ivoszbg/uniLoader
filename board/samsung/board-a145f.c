@@ -2,11 +2,12 @@
 /*
  * Copyright (c) 2026, schoosh212 <superaviation001@gmail.com>
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
- * copyright (c) 2026, gunbileg naranbaatar <gunbileg2010@gmail.com>
+ * Copyright (c) 2026, gunbileg naranbaatar <gunbileg2010@gmail.com>
  */
 #include <board.h>
+#include <util.h>
 #include <drivers/framework.h>
-#include <lib/simplefb.h>.
+#include <lib/simplefb.h>
 #include <soc/exynos3830.h>
 #include <stdint.h>
 
@@ -17,29 +18,24 @@ int a145f_init(void)
 	return 0;
 }
 
-#ifdef CONFIG_SIMPLE_FB
 static struct video_info a145f_fb = {
 	.format = FB_FORMAT_ARGB8888,
 	.width = 1080,
 	.height = 2408,
 	.stride = 4,
-	.address = (void *)0xfa000000 /* Exynos 850 default physical RAM framebuffer allocation region */
+	.address = (void *)0xfa000000
 };
-#endif
 
-int a145f_drv(void)
-{
-#ifdef CONFIG_SIMPLE_FB
-	REGISTER_DRIVER("simplefb", simplefb_probe, &a145f_fb);
-#endif
-	return 0;
-}
+static const struct device a145f_devices[] = {
+	{ "simplefb", &a145f_fb, "fb" },
+};
 
 struct board_data board_ops = {
 	.name = "samsung-a145f",
 	.ops = {
 		.early_init = a145f_init,
-		.drivers_init = a145f_drv,
 	},
+	.devices = a145f_devices,
+	.num_devices = ARRAY_SIZE(a145f_devices),
 	.quirks = 0
 };
