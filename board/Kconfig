@@ -190,6 +190,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy A13
 
+	config SAMSUNG_A14M
+		bool "Support for Samsung Galaxy A14 (MediaTek Version)"
+		default n
+		depends on MT6768
+		help
+		   Say Y if you want to include support for Samsung Galaxy A14
+
 	config SAMSUNG_A21S
 		bool "Support for Samsung Galaxy A21S"
 		default n
