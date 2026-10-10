@@ -478,7 +478,7 @@ $(uniloader-all-dirs): scripts_basic
 
 # Directories & files removed with 'make clean'
 CLEAN_DIRS  +=
-CLEAN_FILES += uniLoader uniLoader.o uniLoader.gz arch/$(ARCH)/linker.lds
+CLEAN_FILES += uniLoader uniLoader.o uniLoader.gz uniLoader.lz4 arch/$(ARCH)/linker.lds
 
 # Directories & files removed with 'make mrproper'
 MRPROPER_DIRS  += include/config include/generated
