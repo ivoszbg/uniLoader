@@ -105,6 +105,7 @@ CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 KERNEL_PATH	?= $(CONFIG_KERNEL_PATH:"%"=%)
 DT_PATH		?= $(CONFIG_DT_PATH:"%"=%)
 RAMDISK_PATH	?= $(CONFIG_RAMDISK_PATH:"%"=%)
+FIT_PATH	?= $(CONFIG_FIT_PATH:"%"=%)
 TEXT_BASE	?= $(CONFIG_TEXT_BASE:"%"=%)
 
 KCONFIG_CONFIG	?= .config
@@ -406,7 +407,11 @@ uniloader-libs := $(patsubst %,%/lib.a, $(uniloader-lib-dirs))
 uniloader-all := $(uniloader-objs) $(uniloader-libs)
 
 # Linker script dependencies
-linker-script-deps := $(KERNEL_PATH) $(RAMDISK_PATH)
+ifndef CONFIG_FIT_BOOT
+linker-script-deps := $(KERNEL_PATH) $(RAMDISK_PATH) $(DT_PATH)
+else
+linker-script-deps := $(FIT_PATH)
+endif
 
 # ===========================================================================
 # Build targets
@@ -416,6 +421,7 @@ linker-script-deps := $(KERNEL_PATH) $(RAMDISK_PATH)
 all: arch/$(ARCH)/linker.lds uniLoader
 
 # Generate linker script from template
+ifndef CONFIG_FIT_BOOT
 quiet_cmd_cpp_lds = LDS     $@
       cmd_cpp_lds = $(CPP)  -include include/generated/autoconf.h $< \
                             -DTEXT_BASE=$(TEXT_BASE) \
@@ -423,6 +429,13 @@ quiet_cmd_cpp_lds = LDS     $@
                             -DDTB_PATH=$(DT_PATH) \
                             -DRAMDISK_PATH=$(RAMDISK_PATH) \
                             -P -o $@
+else
+quiet_cmd_cpp_lds = LDS     $@
+      cmd_cpp_lds = $(CPP)  -include include/generated/autoconf.h $< \
+                            -DTEXT_BASE=$(TEXT_BASE) \
+                            -DFIT_PATH=$(FIT_PATH) \
+                            -P -o $@
+endif
 
 ifdef CONFIG_RAMDISK_NO_COPY
 	  cmd_cpp_lds += -DRAMDISK_SIZE=$(shell stat -c%s $(RAMDISK_PATH))

@@ -25,7 +25,7 @@ static void print_splash(void)
 	printk(KERN_INFO, "welcome to uniLoader %s on %s\n", VER_TAG, board_ops.name);
 }
 
-void main(void* dt, void* kernel, void* ramdisk)
+static void hw_init(void)
 {
 	early_console_init();
 	INITCALL(board_ops.ops.early_init);
@@ -35,6 +35,30 @@ void main(void* dt, void* kernel, void* ramdisk)
 	print_splash();
 
 	INITCALL(board_ops.ops.late_init);
+}
+
+#ifdef CONFIG_FIT_BOOT
+
+void boot_kernel_fit(void* fit);
+
+void fit_main(void* fit)
+{
+	hw_init();
+
+	printk(KERN_INFO, "Booting using FIT image at 0x%p\n", fit);
+
+	boot_kernel_fit(fit);
+
+	// todo: reset the board?
+	printk(KERN_EMERG, "Something wrong happened, we shouldn't be here. Hanging....\n");
+	HANG();
+}
+#else
+void main(void* dt, void* kernel, void* ramdisk)
+{
+	hw_init();
+
+	printk(KERN_INFO, "Booting using legacy image method\n");
 
 	boot_kernel(dt, kernel, ramdisk);
 
@@ -42,3 +66,4 @@ void main(void* dt, void* kernel, void* ramdisk)
 	printk(KERN_EMERG, "Something wrong happened, we shouldn't be here. Hanging....\n");
 	HANG();
 }
+#endif
