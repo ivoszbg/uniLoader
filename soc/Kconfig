@@ -207,6 +207,12 @@ config SONY
 		help
 		  Say Y if your device uses this Qualcomm SoC
 
+	config QC32_8974
+		bool "Support for QUALCOMM MSM8974"
+		select QUALCOMM
+		help
+		  Say Y if your device uses this Qualcomm SoC
+
 	config SM6125
 		bool "Support for QUALCOMM SM6125"
 		select QUALCOMM
