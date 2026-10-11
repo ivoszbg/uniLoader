@@ -9,7 +9,7 @@
 #if CONFIG_FDT_BUF_ADDR
 #define fdt_buf ((char *)CONFIG_FDT_BUF_ADDR)
 #else
-static char fdt_buf[CONFIG_FDT_BUF_SIZE];
+static char fdt_buf[CONFIG_FDT_BUF_SIZE] __attribute__((aligned(8)));
 #endif
 
 void patch_dtb(void** dt)
