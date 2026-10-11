@@ -52,6 +52,7 @@ END(_kernel_start)
 
 ENTRY_ALIAS(_kernel_end)
 
+.align 2
 ENTRY_ALIAS(kernel_size)
 	.word _kernel_end - _kernel_start
 
@@ -65,6 +66,7 @@ END(_ramdisk_start)
 
 ENTRY_ALIAS(_ramdisk_end)
 
+.align 2
 ENTRY_ALIAS(ramdisk_size)
 	.word _ramdisk_end - _ramdisk_start
 
