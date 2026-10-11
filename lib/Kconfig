@@ -25,4 +25,11 @@ menu "Libraries"
 		depends on LIBFDT
 		help
 		  This option specifies the size (in bytes) of the buffer used for DTB modifying. The default value of 500 KB should be sufficient even for downstream device trees.
+
+	config LIBFIT
+		bool "Support for libfit"
+		default y
+		depends on LIBFDT
+		help
+		  Say Y if you want to have libfit features.
 endmenu

@@ -7,8 +7,22 @@
 #ifndef BOOT_H_
 #define BOOT_H_
 
+#ifdef CONFIG_FIT_BOOT
+
+#include <lib/libfit/fit.h>
+
+#define GET_KERNEL_SIZE()	fit_get_kernel_size()
+#define GET_RAMDISK_SIZE()	fit_get_ramdisk_size()
+
+#else
+
 extern unsigned long kernel_size;
 extern unsigned long ramdisk_size;
+
+#define GET_KERNEL_SIZE()	kernel_size
+#define GET_RAMDISK_SIZE()	ramdisk_size
+
+#endif
 
 #ifdef __aarch64__
 extern void load_kernel_and_jump(void* dtb, void* x1, void* x2, void* x3,
