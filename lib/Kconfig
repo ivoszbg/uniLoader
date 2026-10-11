@@ -25,4 +25,14 @@ menu "Libraries"
 		depends on LIBFDT
 		help
 		  This option specifies the size (in bytes) of the buffer used for DTB modifying. The default value of 500 KB should be sufficient even for downstream device trees.
+
+	config FDT_BUF_ADDR
+		hex "Address of the buffer for the Flattened Device Tree"
+		default 0x0
+		depends on LIBFDT
+		help
+		  If set, the patched DTB is placed at this address instead of a
+		  static buffer inside uniLoader. Use this if the kernel overwrites
+		  uniLoader before reading the DTB, like an ARMv7 zImage that
+		  decompresses over it.
 endmenu
