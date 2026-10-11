@@ -7,6 +7,13 @@ menu "Device Support"
 		  Say Y if you want to include support for Amazon Echo Show 5
 		  (1st gen)
 
+	config AMAZON_KODIAK
+		bool "Support for Amazon Fire Phone"
+		default n
+		depends on QC32_8974
+		help
+		  Say Y if you want to include support for Amazon Fire Phone
+
 	config AMAZON_PW3
 		bool "Support for Amazon Kindle Paperwhite 3"
 		default n
