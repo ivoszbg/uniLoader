@@ -10,7 +10,11 @@
 int ramdisk_handler_patch_dtb(const void *fdt, void *buf, int bufsize)
 {
 	int ret, dtb_chosen_offset;
+#ifdef __aarch64__
 	void *ramdisk_end = (void*)CONFIG_RAMDISK_ENTRY + (unsigned long)&ramdisk_size;
+#elif __arm__
+	void *ramdisk_end = (void*)CONFIG_RAMDISK_ENTRY + ramdisk_size;
+#endif
 
 	printk(KERN_INFO, "trying to open fdt...\n");
 	ret = fdt_open_into(fdt, buf, bufsize);
