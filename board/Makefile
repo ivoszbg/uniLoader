@@ -19,6 +19,7 @@ lib-$(CONFIG_ONEPLUS_GIULIA) += oneplus/board-giulia.o
 lib-$(CONFIG_ONEPLUS_WAFFLE) += oneplus/board-waffle.o
 lib-$(CONFIG_QEMU_BOARD_VIRT) += qemu/board-virt.o
 lib-$(CONFIG_REALME_RMX3511) += realme/board-rmx3511.o
+lib-$(CONFIG_REALME_RMX5303) += realme/board-rmx5303.o
 lib-$(CONFIG_SAMSUNG_A3XELTE) += samsung/board-a3xelte.o
 lib-$(CONFIG_SAMSUNG_A10) += samsung/board-a10.o
 lib-$(CONFIG_SAMSUNG_A12S) += samsung/board-a12s.o
