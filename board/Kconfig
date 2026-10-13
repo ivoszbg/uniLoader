@@ -176,6 +176,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Realme C35
 
+	config REALME_RMX5303
+		bool "Support for Realme C71"
+		default n
+		depends on UMS9230
+		help
+		  Say Y if you want to include support for Realme C71
+
 	config SAMSUNG_A10
 		bool "Support for Samsung Galaxy A10"
 		default n
