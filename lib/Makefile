@@ -1,4 +1,6 @@
 lib-y += compiler-rt.o
+lib-y += inflate.o
+CFLAGS_inflate.o = -O2
 
 # simplefb
 lib-$(CONFIG_SIMPLE_FB) += simplefb/simplefb.o

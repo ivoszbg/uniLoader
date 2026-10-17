@@ -66,6 +66,83 @@ menu "Building options"
 		help
 		  Select this if the bootloader copies the ramdisk itself
 
+	config EMBED_XNU
+		bool "Embed XNU kernel (darwin-on-arm) and Apple device tree"
+		default n
+		help
+		  Select this if you want uniLoader to load a darwin-on-arm XNU
+		  kernel with an Apple-format flattened device tree. Takes
+		  precedence over EMBED_LINUX.
+
+if EMBED_XNU
+
+config XNU_BLOB_LZ4
+		bool "Embedded XNU blob is a raw LZ4 block"
+		default n
+
+config XNU_ENTRY_OFFSET
+		hex "Offset of __start inside the flat XNU image"
+		default 0xdf8e0
+
+config XNU_PHYS_BASE
+		hex "Physical base XNU is told about (kernel loads at +0x1000)"
+		default 0x22000000
+
+config XNU_VIRT_BASE
+		hex "Virtual base XNU maps physical memory at"
+		default 0x80000000
+
+config XNU_MEMSIZE
+		hex "Memory size handed to XNU (must not cover the framebuffer)"
+		default 0x35E00000
+
+config XNU_FB_BASE
+		hex "Framebuffers physical address left running by S-Boot"
+		default 0x57E05000
+
+config XNU_FB_WIDTH
+		int "Framebuffer scanout width in pixels"
+		default 540
+
+config XNU_FB_HEIGHT
+		int "Framebuffer scanout height in pixels"
+		default 960
+
+config XNU_CMDLINE
+		string "Kernel command line (boot args)"
+		default "-v keepsyms=1 kprintf=1 debug=0x14e"
+
+config XNU_CACHESLICE_TOP
+		hex "Highest physical address the embedded DSC slices may use"
+		default 0x55E00000
+		help
+		  BRING-UP (J1): cacheslice decode must stay below the top of
+		  the kernel's RAM window (CONFIG_XNU_MEMSIZE) or the kernel
+		  cannot map/feed the tail pages.  Larger amounts of RAM (e.g.
+		  QEMU virt) raise this.
+
+config XNU_EMBED_CACHESLICE
+	bool "Embed the dyld shared cache in the loader image"
+	default y
+		help
+		  The dyld shared cache is ~154 MiB.  Boards that read it from
+		  the SD card (j1xlte) do not need an embedded copy: turn this
+		  off to keep the loader - and therefore boot.img - small.
+		  Leave it on for boards that boot purely from the embedded
+		  payload (QEMU virt), where it is the only source of the cache.
+
+config XNU_RAMDISK_PA
+		hex "Fixed physical address to decode the RDSC ramdisk at"
+		default 0x0
+		help
+		  BRING-UP (QEMU): if non-zero, decode the RDSC ramdisk at this
+		  fixed address instead of top-of-RAM.  A top-of-RAM ramdisk
+		  pushes topOfKernelData (hence the kernel's first_avail) up,
+		  collapsing the free-page pool; with a large ramdisk the pool
+		  can hit zero before the first exec UPL (infinite VM_PAGE_WAIT).
+
+endif
+
 endmenu
 
 source "drivers/Kconfig"

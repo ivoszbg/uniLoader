@@ -240,7 +240,7 @@ KBUILD_CFLAGS	+= -DVER_TAG="\"($(GIT_VERSION_TAG)) - date $(BUILD_DATE)\""
 
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
-KBUILD_AFLAGS   := -D__ASSEMBLY__
+KBUILD_AFLAGS   := -D__ASSEMBLY__ -include $(srctree)/include/generated/autoconf.h
 
 # Architecture-specific flags
 ifneq ($(LLVM),)
