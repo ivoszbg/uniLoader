@@ -10,5 +10,6 @@
 #define offsetof(type, field)	((int) (&((type *) 0)->field))
 
 typedef unsigned long size_t;
+typedef long int ptrdiff_t;
 
 #endif // STDDEF_H_

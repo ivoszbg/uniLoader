@@ -30,6 +30,7 @@
 
 #include "libdeflate.h"
 
+#include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>	/* for size_t */
 #include <stdint.h>

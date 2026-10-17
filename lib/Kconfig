@@ -13,6 +13,12 @@ menu "Libraries"
 		  in mind that your board files need to provide uart_puts
 		  functionality in order for this to work.
 
+	config LIBDEFLATE
+		bool "Support for libdeflate"
+		default y
+		help
+		  Say Y if you want to have libdeflate features.
+
 	config LIBFDT
 		bool "Support for libfdt"
 		default y

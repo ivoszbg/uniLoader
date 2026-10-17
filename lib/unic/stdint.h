@@ -29,4 +29,7 @@ typedef long long int64_t;
 
 #define CHAR_BIT 8
 
+#define UINT16_MAX 0xFFFF
+#define UINT32_MAX 0xFFFFFFFF
+
 #endif // INTTYPES_H

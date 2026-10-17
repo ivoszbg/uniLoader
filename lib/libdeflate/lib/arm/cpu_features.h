@@ -66,25 +66,10 @@ static inline u32 get_arm_cpu_features(void) { return 0; }
 #endif
 
 /* NEON */
-#if defined(__ARM_NEON) || (defined(_MSC_VER) && defined(ARCH_ARM64))
-#  define HAVE_NEON(features)	1
-#  define HAVE_NEON_NATIVE	1
-#else
 #  define HAVE_NEON(features)	((features) & ARM_CPU_FEATURE_NEON)
 #  define HAVE_NEON_NATIVE	0
-#endif
-/*
- * With both gcc and clang, NEON intrinsics require that the main target has
- * NEON enabled already.  Exception: with gcc 6.1 and later (r230411 for arm32,
- * r226563 for arm64), hardware floating point support is sufficient.
- */
-#if (defined(__GNUC__) || defined(__clang__) || defined(_MSC_VER)) && \
-	(HAVE_NEON_NATIVE || (GCC_PREREQ(6, 1) && defined(__ARM_FP)))
-#  define HAVE_NEON_INTRIN	1
-#  include <arm_neon.h>
-#else
+
 #  define HAVE_NEON_INTRIN	0
-#endif
 
 /* PMULL */
 #ifdef __ARM_FEATURE_CRYPTO
@@ -112,47 +97,8 @@ static inline u32 get_arm_cpu_features(void) { return 0; }
 #else
 #  define HAVE_CRC32(features)	((features) & ARM_CPU_FEATURE_CRC32)
 #endif
-#if defined(ARCH_ARM64) && \
-	(defined(__GNUC__) || defined(__clang__) || defined(_MSC_VER))
-#  define HAVE_CRC32_INTRIN	1
-#  if defined(__GNUC__) || defined(__clang__)
-#    include <arm_acle.h>
-#  endif
-   /*
-    * Use an inline assembly fallback for clang 15 and earlier, which only
-    * defined the crc32 intrinsics when crc32 is enabled in the main target.
-    */
-#  if defined(__clang__) && !CLANG_PREREQ(16, 0, 16000000) && \
-	!defined(__ARM_FEATURE_CRC32)
-#    undef __crc32b
-#    define __crc32b(a, b)					\
-	({ uint32_t res;					\
-	   __asm__("crc32b %w0, %w1, %w2"			\
-		   : "=r" (res) : "r" (a), "r" (b));		\
-	   res; })
-#    undef __crc32h
-#    define __crc32h(a, b)					\
-	({ uint32_t res;					\
-	   __asm__("crc32h %w0, %w1, %w2"			\
-		   : "=r" (res) : "r" (a), "r" (b));		\
-	   res; })
-#    undef __crc32w
-#    define __crc32w(a, b)					\
-	({ uint32_t res;					\
-	   __asm__("crc32w %w0, %w1, %w2"			\
-		   : "=r" (res) : "r" (a), "r" (b));		\
-	   res; })
-#    undef __crc32d
-#    define __crc32d(a, b)					\
-	({ uint32_t res;					\
-	   __asm__("crc32x %w0, %w1, %2"			\
-		   : "=r" (res) : "r" (a), "r" (b));		\
-	   res; })
-#    pragma clang diagnostic ignored "-Wgnu-statement-expression"
-#  endif
-#else
+
 #  define HAVE_CRC32_INTRIN	0
-#endif
 
 /* SHA3 (needed for the eor3 instruction) */
 #ifdef __ARM_FEATURE_SHA3
