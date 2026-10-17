@@ -134,6 +134,15 @@ menu "Device Support"
 		  Say Y if you are using the generic QEMU emulation
 		  platform target - virt.
 
+	config QEMU_BOARD_VIRT_ARM
+		bool "Support for QEMU virt platform (arm32)"
+		default n
+		depends on QEMU_SOC_VIRT
+		help
+		  Say Y to build uniLoader for the ARM32 QEMU "virt" machine
+		  (cortex-a7).  Diagnostics go out the emulated PL011 at
+		  0x09000000 since "virt" has no framebuffer.
+
 	config REALME_RMX3511
 		bool "Support for Realme C35"
 		default n
@@ -238,6 +247,13 @@ menu "Device Support"
 		depends on QC32_8916
 		help
 		  Say Y if you want to include arm32 support for Samsung Galaxy J5 (2015)
+
+	config SAMSUNG_J1XLTE
+		bool "Support for Samsung Galaxy J1 (2016)"
+		default n
+		depends on EXYNOS_3475
+		help
+		  Say Y if you want to include arm32 support for Samsung Galaxy J1 (2016)
 
 	config SAMSUNG_JACKPOTLTE
 		bool "Support for Samsung Galaxy A8 (2018)"
@@ -390,10 +406,12 @@ menu "Device Specific Addresses"
 
 	config TEXT_BASE
 		hex "UniLoader Text Base"
+		default 0x20008000 if SAMSUNG_J1XLTE
 		default 0x0
 
 	config PAYLOAD_ENTRY
 		hex "Payload Entry Address"
+		default 0x24000000 if SAMSUNG_J1XLTE
 		default 0x50000000 if NOTHING_TETRIS
 		default 0x050000000 if SAMSUNG_J4LTE
 		default 0x60000000 if VOLLA_ALGIZ
@@ -401,6 +419,7 @@ menu "Device Specific Addresses"
 
 	config RAMDISK_ENTRY
 		hex "Ramdisk Entry Address"
+		default 0x22000000 if SAMSUNG_J1XLTE
 		default 0x40000000 if NOTHING_TETRIS
 		default 0x51100000 if VOLLA_ALGIZ
 		default 0x48000000 if XIAOMI_BEGONIA
