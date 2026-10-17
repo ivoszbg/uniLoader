@@ -11,6 +11,53 @@ menu "Drivers"
 		help
 		    Say Y if you have a device with the Samsung Exynos SPEEDY bus.
 
+	config EXYNOS_USBHOST3475
+		bool "Support for bare-metal EHCI host on Exynos 3475"
+		depends on SAMSUNG_J1XLTE
+		default n
+		help
+		  Say Y to probe a USB mass-storage device on the SM-J120F's
+		  OTG host port (PHY+EHCI enumeration, MBR dump).
+
+	config EXYNOS_SDMMC3475
+		bool "Support for bare-metal dw_mmc SD host on Exynos 3475"
+		depends on SAMSUNG_J1XLTE
+		default n
+		help
+		  Say Y to identify the SM-J120F's removable SD card (dwmmc2)
+		  and report its total size.  Read-only: only identify/CSD
+		  commands, no data phase, no writes, never touches eMMC.
+
+	config EXYNOS_SD_FAT
+		bool "Read-only FAT32 filesystem on the SD card"
+		depends on EXYNOS_SDMMC3475
+		default n
+		help
+		  Say Y to parse the SD card's MBR + FAT32 boot sector and expose
+		  sd_fat_read() for loading embedded boot blobs (Image/dtb/
+		  ramdisk/cacheslice) without a full memory block layer.
+
+	config EXYNOS_SD_BOOT
+		bool "Boot XNU from the SD card (raw blobs)"
+		depends on EXYNOS_SD_FAT && EMBED_XNU
+		default n
+		help
+		  Say Y to load plain (uncompressed) Image/dtb/ramdisk straight
+		  from the FAT32 SD card into their final physical addresses and
+		  jump into XNU, skipping the embedded .payload LZ4/RDSC decode
+		  path.  Falls back to the embedded payload if no card is present.
+
+	config J1UART_MIRROR
+		bool "Append j1uart=1 to the SD-path kernel command line"
+		depends on EXYNOS_SD_BOOT
+		default n
+		help
+		  Emulator-only diagnostic: the XNU console mirror
+		  (pe_exynos_console_putc, j1uart bootarg) duplicates every
+		  kprintf character to UART2, which the J1 bring-up QEMU
+		  machine exposes on -serial.  The phone defconfig leaves
+		  this off so the panel console stays the only sink.
+
 	config MEDIATEK_MCUSYS
 		bool "Support for MediaTek MCUSYS"
 		depends on MEDIATEK
