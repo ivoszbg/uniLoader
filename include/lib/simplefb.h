@@ -37,6 +37,7 @@ struct video_info {
 	void *address;
 };
 
+extern void simplefb_mark(unsigned int step);
 extern void __simplefb_raw_print(const char *text, int text_x, int text_y,
 				 color text_color);
 

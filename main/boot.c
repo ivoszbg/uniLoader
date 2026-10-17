@@ -11,10 +11,17 @@
 
 void boot_kernel(void* dt, void* kernel, void* ramdisk)
 {
+#ifdef CONFIG_EMBED_XNU
+	printk(KERN_INFO, "Booting XNU (payload entry 0x%x)...\n",
+	       CONFIG_PAYLOAD_ENTRY);
+	/* The embedded device tree is Apple-format; no FDT patching. */
+	arch_load_kernel(kernel, dt, ramdisk);
+#else
 #ifdef CONFIG_LIBFDT
 	patch_dtb(&dt);
 #endif
 
 	printk(KERN_INFO, "Booting kernel...\n");
 	arch_load_kernel(kernel, dt, ramdisk);
+#endif
 }

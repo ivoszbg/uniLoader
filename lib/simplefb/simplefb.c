@@ -15,6 +15,64 @@
 
 struct video_info *fb_info;
 
+/*
+ * Boot progress bar painted into the framebuffer, outside the console's
+ * text area.  simplefb draws text starting at y = FB_TEXT_TOP_PADDING (5)
+ * downwards, so pixel rows 0..4 are never touched by text.
+ *
+ * Every stage repaints the WHOLE bar as a run of solid 40x5 blocks rather
+ * than adding a single pixel, because (a) one pixel per stage is impossible
+ * to count in a phone photo and (b) clean_fbmem() wipes the entire
+ * framebuffer on overflow, so a partial bar would be destroyed by the
+ * hundreds of clears during the 154 MB cacheslice read.  The last repaint
+ * therefore always shows the last stage actually reached.
+ *
+ * Number of lit blocks = last stage reached:
+ *   1 tag  2 Image  3 dtb  4 "sdlog tail"  5 append entered
+ *   6 append done  7 "args ok"  8 "cmd=[..]"  9 ramdisk  10 cacheslice
+ *   11 about to jump into XNU
+ *
+ * This lives next to the console because it needs fb_info->address; a
+ * caller outside this file would have to materialise the panel address
+ * itself.
+ */
+#define SIMPLEFB_MARK_BLOCK	40	/* pixels per stage block */
+#define SIMPLEFB_MARK_MAX	11
+
+void simplefb_mark(unsigned int step)
+{
+	volatile char *fb;
+	int stride, width, s, i, y;
+
+	if (!fb_info)
+		return;
+
+	fb = (volatile char *)fb_info->address;
+	width = fb_info->width;
+	stride = fb_info->stride;
+
+	if (step > SIMPLEFB_MARK_MAX)
+		step = SIMPLEFB_MARK_MAX;
+
+	for (s = 0; s <= (int)step; s++) {
+		for (i = 0; i < SIMPLEFB_MARK_BLOCK; i++) {
+			long int x = s * (SIMPLEFB_MARK_BLOCK + 1) + i;
+
+			if (x >= width)
+				break;
+			for (y = 0; y < 5; y++) {
+				long int loc = (x * stride) +
+					       (y * width * stride);
+
+				fb[loc + 0] = 0xf0;	/* b */
+				fb[loc + 1] = 0xf0;	/* g */
+				fb[loc + 2] = 0xf0;	/* r */
+				fb[loc + 3] = 0xff;	/* a */
+			}
+		}
+	}
+}
+
 static void clean_fbmem(void *fb, int width, int height, int stride)
 {
 	memset(fb, 0x0, (width * height * stride));
