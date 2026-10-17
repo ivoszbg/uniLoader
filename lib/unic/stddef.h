@@ -7,7 +7,7 @@
 #define STDDEF_H_
 
 #define NULL			((void *) 0)
-#define offsetof(type, field)	((int) (&((type *) 0)->field))
+#define offsetof(type, field) 	((size_t)(&((type *)0)->field))
 
 typedef unsigned long size_t;
 typedef long int ptrdiff_t;
