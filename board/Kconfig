@@ -22,6 +22,13 @@ menu "Device Support"
 		  Say Y if you want to include support for Amaozn Kindle
 		  Paperwhite 3
 
+	config AMAZON_SUNSTONE
+		bool "Support for Amazon Fire Max 11"
+		default n
+		depends on MT8188
+		help
+		  Say Y if you want to include support for Amazon Fire Max 11
+
 	config APPLE_N61AP
 		bool "Support for Apple iPhone 6"
 		default n
