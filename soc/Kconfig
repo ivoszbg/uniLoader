@@ -87,6 +87,12 @@ config SONY
 		help
 		  Say Y if your device uses Samsung Exynos7580 SoC
 
+	config EXYNOS_7870
+		bool "Support for Exynos 7870"
+		select EXYNOS
+		help
+		  Say Y if your device uses Samsung Exynos7870 SoC
+
 	config EXYNOS_7885
 		bool "Support for Exynos 7885"
 		select EXYNOS
