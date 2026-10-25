@@ -43,6 +43,7 @@ lib-$(CONFIG_SAMSUNG_J5LTE) += samsung/board-j5lte.o
 lib-$(CONFIG_SAMSUNG_JACKPOTLTE) += samsung/board-jackpotlte.o
 lib-$(CONFIG_SAMSUNG_LUCKY7) += samsung/board-lucky7.o
 lib-$(CONFIG_SAMSUNG_NOBLELTE) += samsung/board-noblelte.o
+lib-$(CONFIG_SAMSUNG_ON7XELTE) += samsung/board-on7xelte.o
 lib-$(CONFIG_SAMSUNG_R0Q) += samsung/board-r0q.o
 lib-$(CONFIG_SAMSUNG_R8S) += samsung/board-r8s.o
 lib-$(CONFIG_SAMSUNG_STARLTE) += samsung/board-starlte.o

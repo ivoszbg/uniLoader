@@ -337,6 +337,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy Note5
 
+	config SAMSUNG_ON7XELTE
+		bool "Support for Samsung Galaxy J7 Prime"
+		default n
+		depends on EXYNOS_7870
+		help
+		  Say Y if you want to include support for Samsung Galaxy J7 Prime
+
 	config SAMSUNG_R0Q
 		bool "Support for Samsung Galaxy S22"
 		default n
