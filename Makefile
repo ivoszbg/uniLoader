@@ -61,11 +61,11 @@ $(CURDIR)/Makefile Makefile: ;
 
 ifneq ($(KBUILD_OUTPUT),)
 # Invoke a second make in the output directory, passing relevant variables
-# check that the output directory actually exists
+# create the output directory if needed and check that we can enter it
 saved-output := $(KBUILD_OUTPUT)
-KBUILD_OUTPUT := $(shell cd $(KBUILD_OUTPUT) && /bin/pwd)
+KBUILD_OUTPUT := $(shell mkdir -p $(KBUILD_OUTPUT) && cd $(KBUILD_OUTPUT) && /bin/pwd)
 $(if $(KBUILD_OUTPUT),, \
-     $(error output directory "$(saved-output)" does not exist))
+     $(error output directory "$(saved-output)" could not be created))
 
 PHONY += $(MAKECMDGOALS) sub-make
 
@@ -149,7 +149,17 @@ endif
 # If the user is running make -s (silent mode), suppress echoing of
 # commands
 
-ifneq ($(findstring s,$(MAKEFLAGS)),)
+# make 4.0 and later keep the single letter options (such as -s) in the first
+# word of MAKEFLAGS. Newer versions also list the command line variables after
+# the options, e.g. the KBUILD_SRC=/path passed to the sub-make on O= builds,
+# so only look at the first word. Otherwise any 's' in them (a path like
+# /home/user/src/uniLoader, say) would be mistaken for -s and silence the build.
+ifeq ($(filter 3.%,$(MAKE_VERSION)),)
+  silence := $(findstring s,$(firstword -$(MAKEFLAGS)))
+else
+  silence := $(findstring s,$(filter-out --%,$(MAKEFLAGS)))
+endif
+ifneq ($(silence),)
   quiet=silent_
 endif
 
@@ -415,20 +425,32 @@ linker-script-deps := $(KERNEL_PATH) $(RAMDISK_PATH)
 # This allows a user to issue only 'make' to build uniLoader
 all: arch/$(ARCH)/linker.lds uniLoader
 
+# Paths to the embedded blobs (kernel, dtb, ramdisk) are given relative to the
+# source tree (e.g. blob/Image), but when building with O= the linker script
+# is generated and linked from the output directory, so anchor them to
+# $(srctree). Absolute paths are used as they are.
+src-path = $(if $(filter /%,$(1)),$(1),$(if $(KBUILD_SRC),$(srctree)/)$(1))
+
 # Generate linker script from template
+# The paths are passed as string literals so that components such as "linux"
+# in an absolute path do not get expanded as predefined macros by the
+# preprocessor.
 quiet_cmd_cpp_lds = LDS     $@
       cmd_cpp_lds = $(CPP)  -include include/generated/autoconf.h $< \
                             -DTEXT_BASE=$(TEXT_BASE) \
-                            -DKERNEL_PATH=$(KERNEL_PATH) \
-                            -DDTB_PATH=$(DT_PATH) \
-                            -DRAMDISK_PATH=$(RAMDISK_PATH) \
+                            -DKERNEL_PATH=\"$(call src-path,$(KERNEL_PATH))\" \
+                            -DDTB_PATH=\"$(call src-path,$(DT_PATH))\" \
+                            -DRAMDISK_PATH=\"$(call src-path,$(RAMDISK_PATH))\" \
                             -P -o $@
 
 ifdef CONFIG_RAMDISK_NO_COPY
-	  cmd_cpp_lds += -DRAMDISK_SIZE=$(shell stat -c%s $(RAMDISK_PATH))
+      cmd_cpp_lds += -DRAMDISK_SIZE=$(shell stat -c%s $(call src-path,$(RAMDISK_PATH)))
 endif
 
+# The output directory for the linker script does not exist yet when
+# building out of tree
 arch/$(ARCH)/linker.lds: arch/$(ARCH)/linker.lds.S $(linker-script-deps) FORCE
+	$(Q)mkdir -p $(dir $@)
 	$(call if_changed,cpp_lds)
 
 #
