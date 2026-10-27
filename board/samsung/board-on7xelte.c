@@ -9,7 +9,7 @@
 #include <lib/simplefb.h>
 
 static struct video_info on7xelte_fb = {
-	.format = FB_FORMAT_ABGR8888,
+	.format = FB_FORMAT_ARGB8888,
 	.width = 1080,
 	.height = 1920,
 	.stride = 4,
