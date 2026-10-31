@@ -14,6 +14,7 @@ lib-$(CONFIG_LENOVO_TB373FU) += lenovo/board-tb373fu.o
 lib-$(CONFIG_LENOVO_P1MA40) += lenovo/board-p1ma40.o
 lib-$(CONFIG_MOTOROLA_TUNDRA) += motorola/board-tundra.o
 lib-$(CONFIG_NOKIA_ESSENTIAL) += nokia/board-essential.o
+lib-$(CONFIG_NOTHING_FROGGERPRO) += nothing/board-froggerpro.o
 lib-$(CONFIG_NOTHING_PONG) += nothing/board-pong.o
 lib-$(CONFIG_NOTHING_SPACEWAR) += nothing/board-spacewar.o
 lib-$(CONFIG_NOTHING_TETRIS) += nothing/board-tetris.o
