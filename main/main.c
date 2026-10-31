@@ -11,6 +11,7 @@
 #include <lib/debug.h>
 
 extern struct board_data board_ops;
+void *board_dtb;
 
 static void print_splash(void)
 {
@@ -27,6 +28,7 @@ static void print_splash(void)
 
 void main(void* dt, void* kernel, void* ramdisk)
 {
+	board_dtb = dt;
 	early_console_init();
 	INITCALL(board_ops.ops.early_init);
 

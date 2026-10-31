@@ -9,6 +9,8 @@
 #include <stddef.h>
 #include <drivers/framework.h>
 
+extern void *board_dtb;
+
 struct board_ops {
 	int (*early_init)(void);
 	int (*late_init)(void);
