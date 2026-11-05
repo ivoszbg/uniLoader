@@ -288,6 +288,12 @@ config SONY
 		  Say Y if you are using the generic QEMU emulation
 		  platform target - virt.
 
+	config MSM8953
+		bool "Support for Qualcomm MSM8953"
+		select QUALCOMM
+		help
+		  Say Y if your device uses Qualcomm MSM8953
+
 	config MSM8998
 		bool "Support for Qualcomm Snapdragon 835"
 		select QUALCOMM
