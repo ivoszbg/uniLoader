@@ -446,6 +446,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Poco M3 Pro 5G
 
+	config XIAOMI_DAISY
+		bool "Support for Xiaomi Mi A2 Lite"
+		default n
+		depends on MSM8953
+		help
+		  Say Y if you want to include support for Xiaomi Mi A2 Lite
+
 	config XIAOMI_GINKGO
 		bool "Support for Xiaomi Redmi Note 8/8T"
 		default n
