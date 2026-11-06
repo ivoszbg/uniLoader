@@ -38,7 +38,9 @@ subdir-ym	:= $(sort $(subdir-y))
 subdir-obj-y := $(filter %/built-in.o, $(obj-y))
 
 # $(obj-dirs) is a list of directories that contain object files
-obj-dirs := $(dir $(subdir-obj-y))
+# This includes the directories of objects given as dir/file.o in obj-y and
+# lib-y, so they can be created when building in a separate output directory
+obj-dirs := $(filter-out ./,$(sort $(dir $(subdir-obj-y) $(obj-y) $(lib-y))))
 
 # Replace multi-part objects by their individual parts, look at local dir only
 real-objs-y := $(foreach m, $(filter-out $(subdir-obj-y), $(obj-y)), $(if $(strip $($(m:.o=-objs)) $($(m:.o=-y))),$($(m:.o=-objs)) $($(m:.o=-y)),$(m))) $(extra-y)
