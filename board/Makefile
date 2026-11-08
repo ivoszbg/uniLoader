@@ -37,6 +37,7 @@ lib-$(CONFIG_SAMSUNG_BEYOND1LTE) += samsung/board-beyond1lte.o
 lib-$(CONFIG_SAMSUNG_C1S) += samsung/board-c1s.o
 lib-$(CONFIG_SAMSUNG_DREAMLTE) += samsung/board-dreamlte.o
 lib-$(CONFIG_SAMSUNG_G0S) += samsung/board-g0s.o
+lib-$(CONFIG_SAMSUNG_GTA3XL) += samsung/board-gta3xl.o
 lib-$(CONFIG_SAMSUNG_GTA4XL) += samsung/board-gta4xl.o
 lib-$(CONFIG_SAMSUNG_GTS8WIFI) += samsung/board-gts8wifi.o
 lib-$(CONFIG_SAMSUNG_HEROLTE) += samsung/board-herolte.o

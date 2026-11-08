@@ -295,6 +295,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy S22+
 
+	config SAMSUNG_GTA3XL
+		bool "Support for Samsung Galaxy Tab A 10.1 (2019)"
+		default n
+		depends on EXYNOS_7885
+		help
+		  Say Y if you want to include support for Samsung Galaxy Tab A 10.1 (2019)
+
 	config SAMSUNG_GTA4XL
 		bool "Support for Samsung Galaxy Tab S6 Lite (2020)"
 		default n
