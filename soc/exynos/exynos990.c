@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 /*
- * Copyright (c) 2022, halal-beef <78730004+halal-beef@users.noreply.github.com>
+ * Copyright (c) 2022, Umer Uddin <umer.uddin@mentallysanemainliners.org>
  */
 
 #include <soc/exynos990.h>
