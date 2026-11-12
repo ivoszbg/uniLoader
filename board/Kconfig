@@ -351,6 +351,13 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for Samsung Galaxy Watch FE
 
+	config SAMSUNG_M31
+		bool "Support for Samsung Galaxy M31"
+		default n
+		depends on EXYNOS_9610
+		help
+		  Say Y if you want to include support for Samsung Galaxy M31
+
 	config SAMSUNG_NOBLELTE
 		bool "Support for Samsung Galaxy Note5"
 		default n
