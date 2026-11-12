@@ -42,6 +42,12 @@ ENTRY(_start)
 	b       1b
 2:
 
+	/* Enable FPU */
+	mrs x0, cpacr_el1
+	orr x0, x0, #(3 << 20)
+	msr cpacr_el1, x0
+	isb
+
 	/* Fall through */
 	adrp    x0, dtb             /* Load page of dtb */
 	add     x0, x0, #:lo12:dtb  /* Add offset within the page */
