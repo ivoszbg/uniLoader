@@ -10,34 +10,7 @@
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
-#define SP805_WDT_BASE        0xE8A06000U
-
-#define SP805_WDTCONTROL      0x008U
-#define SP805_WDTLOCK         0xC00U
-
-#define SP805_WDT_UNLOCK_KEY  0x1ACCE551U
-#define SP805_WDT_LOCK_KEY    0x00000001U
-
-void agassi2_disable_wdt(void)
-{
-	volatile unsigned int *wdt_control =
-		(volatile unsigned int *)(SP805_WDT_BASE + SP805_WDTCONTROL);
-	volatile unsigned int *wdt_lock =
-		(volatile unsigned int *)(SP805_WDT_BASE + SP805_WDTLOCK);
-
-	*wdt_lock = SP805_WDT_UNLOCK_KEY;
-	*wdt_control = 0;
-	*wdt_lock = SP805_WDT_LOCK_KEY;
-	(void)*wdt_lock;
-}
-
-int agassi2_late_init(void)
-{
-#ifdef CONFIG_HUAWEI_AGASSI2_DISABLE_WDT
-	agassi2_disable_wdt();
-#endif
-	return 0;
-}
+#define WDT_BASE        0xE8A06000U
 
 static struct video_info agassi2_fb = {
 	.format = FB_FORMAT_ARGB8888,
@@ -49,14 +22,12 @@ static struct video_info agassi2_fb = {
 };
 
 static const struct device agassi2_devices[] = {
+	{ "arm,sp805-wdt", (void *)WDT_BASE, "wdt0" },
 	{ "simplefb", &agassi2_fb, "fb" },
 };
 
 struct board_data board_ops = {
 	.name = "huawei-agassi2",
-	.ops = {
-		.late_init = agassi2_late_init,
-	},
 	.devices = agassi2_devices,
 	.num_devices = ARRAY_SIZE(agassi2_devices),
 	.quirks = 0
