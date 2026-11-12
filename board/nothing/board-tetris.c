@@ -15,8 +15,6 @@
 #define UART_LSR_THRE 		0x20 /* TX holding register empty */
 
 #define WDT_BASE		0x1c00a000
-#define WDT_MODE_KEY		0x22000000
-#define WDT_MODE_EN		(1 << 0)
 
 #ifdef CONFIG_EARLYCON
 void uart_putc(char ch)
@@ -37,36 +35,12 @@ void uart_puts(const char *s)
 }
 #endif
 
-void tetris_disable_wdt(void)
-{
-	uint32_t reg;
-
-	reg = readl((void*)WDT_BASE);
-	if (reg & WDT_MODE_EN)
-	{
-		reg &= ~WDT_MODE_EN;
-		reg |= WDT_MODE_KEY;
-		writel(reg, (void*)WDT_BASE);
-		printk(KERN_INFO, "%s: disabled watchdog timer.\n", __func__);
-	}
-	else
-		printk(KERN_ERR, "%s: watchdog is already disabled.\n", __func__);
-
-	return;
-}
-
-int tetris_late_init(void)
-{
-#ifdef CONFIG_NOTHING_TETRIS_DISABLE_WDT
-	tetris_disable_wdt();
-#endif
-	return 0;
-}
+static const struct device tetris_devices[] = {
+	{ "mediatek,wdt", (void *)WDT_BASE, "wdt0" },
+};
 
 struct board_data board_ops = {
 	.name = "cmf-phone-1",
-	.ops = {
-		.late_init = tetris_late_init,
-	},
+	.devices = tetris_devices,
 	.quirks = 0
 };
