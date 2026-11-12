@@ -27,5 +27,6 @@ menu "Drivers"
 		  option alone won't add any code to the resulting binary.
 
 source "drivers/timer/Kconfig"
+source "drivers/watchdog/Kconfig"
 
 endmenu

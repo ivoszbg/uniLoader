@@ -1,0 +1,25 @@
+menuconfig WATCHDOG
+	bool "Watchdog support"
+	default n
+	help
+	  Say Y here to enable support for watchdog drivers. Enabling this
+	  option alone won't add any code to the resulting binary.
+
+if WATCHDOG
+	config WDT_DISABLE_ON_BOOT
+		bool "Disable watchdog timer on boot"
+		default y
+		help
+		  Say Y if you want to disable the watchdog timer on startup.
+		  While this is obviously useful for end-users, developers may
+		  want to leave this on to avoid holding down the power button
+		  every time.
+
+	config WDT_MEDIATEK
+		bool "Generic MediaTek watchdog driver"
+		default n
+		help
+		  Most aarch64 MediaTek platforms use this style of watchdog
+		  timer.
+
+endif
