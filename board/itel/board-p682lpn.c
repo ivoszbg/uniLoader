@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 /*
- * Copyright (c) 2025, RadGoodNow (jekurbo@proton.me)
+ * Copyright (c) 2025, RadGoodNow <jekurbo@proton.me>
  */
 
 #include <board.h>

@@ -4,6 +4,7 @@
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  * Copyright (c) 2026, Henri Ommer <henrio6@users.noreply.github.com>
  */
+
 #include <board.h>
 #include <util.h>
 #include <drivers/framework.h>

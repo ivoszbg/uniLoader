@@ -26,8 +26,6 @@ static const struct device pdx245_devices[] = {
 
 struct board_data board_ops = {
 	.name = "sony-pdx245",
-	.ops = {
-	},
 	.devices = pdx245_devices,
 	.num_devices = ARRAY_SIZE(pdx245_devices),
 	.quirks = 0

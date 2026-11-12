@@ -22,8 +22,6 @@ static const struct device lua_l21_devices[] = {
 
 struct board_data board_ops = {
 	.name = "huawei-lua-l21",
-	.ops = {
-	},
 	.devices = lua_l21_devices,
 	.num_devices = ARRAY_SIZE(lua_l21_devices),
 	.quirks = 0

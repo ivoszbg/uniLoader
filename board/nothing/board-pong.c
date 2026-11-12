@@ -25,8 +25,6 @@ static const struct device pong_devices[] = {
 
 struct board_data board_ops = {
 	.name = "nothing-pong",
-	.ops = {
-	},
 	.devices = pong_devices,
 	.num_devices = ARRAY_SIZE(pong_devices),
 	.quirks = 0

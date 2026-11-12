@@ -2,12 +2,17 @@
 /*
  * Copyright (c) 2025, Alexandru Chimac <alex@chimac.ro>
  */
+
 #include <board.h>
 #include <util.h>
 #include <string.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 
+// Timer
+#define SYSTIMER_BASE 0x10200670
+
+// Watchdog
 #define TOPRGU_BASE 0x10212000
 #define WDT_MODE_KEY 0x22000000
 #define WDT_MODE_EN (1 << 0)
@@ -36,7 +41,7 @@ static struct video_info essential_fb = {
 
 static const struct device essential_devices[] = {
 	{ "simplefb", &essential_fb, "fb" },
-	{ "mediatek,mt6795-systimer", (void *)0x10200670, "timer0" },
+	{ "mediatek,mt6795-systimer", (void *)SYSTIMER_BASE, "timer0" },
 };
 
 struct board_data board_ops = {

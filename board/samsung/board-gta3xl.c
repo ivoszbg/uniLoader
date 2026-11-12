@@ -3,6 +3,7 @@
  * Copyright (c) 2026, Umer Uddin <umer.uddin@mentallysanemainliners.org>
  * Copyright (c) 2026, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
+
 #include <board.h>
 #include <util.h>
 #include <drivers/framework.h>

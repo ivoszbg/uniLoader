@@ -34,7 +34,5 @@ void uart_puts(const char *s)
 
 struct board_data board_ops = {
 	.name = "xiaomi-moon",
-	.devices = NULL,
-	.num_devices = 0,
 	.quirks = 0
 };

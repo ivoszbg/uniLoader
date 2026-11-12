@@ -11,6 +11,7 @@
  * - drivers/tty/serial/samsung_tty.c (Linux 7.0 mainline - Simtec)
  * - include/linux/serial_s3c.h (Linux 7.0 mainline - Shane Nay)
  */
+
 #include <board.h>
 #include <util.h>
 #include <stdint.h>

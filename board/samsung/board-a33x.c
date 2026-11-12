@@ -2,6 +2,7 @@
 /*
  * Copyright (c) 2025, Muhammad <thevancedgamer@mentallysanemainliners.org>
  */
+
 #include <board.h>
 #include <util.h>
 #include <drivers/framework.h>

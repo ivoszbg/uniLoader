@@ -23,8 +23,6 @@ static const struct device tab15pro_devices[] = {
 
 struct board_data board_ops = {
 	.name = "blackview-tab15pro",
-	.ops = {
-	},
 	.devices = tab15pro_devices,
 	.num_devices = ARRAY_SIZE(tab15pro_devices),
 	.quirks = 0

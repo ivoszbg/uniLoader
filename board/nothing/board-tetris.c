@@ -2,6 +2,7 @@
 /*
  * Copyright (c) 2025, Igor Belwon <igor.belwon@mentallysanemainliners.org>
  */
+
 #include <board.h>
 #include <string.h>
 #include <drivers/framework.h>
@@ -9,12 +10,12 @@
 
 #define UART_BASE		0x11001000
 
-#define UART_LSR_BASE	0x14
-#define UART_LSR_DR 	0x01 	/* Data ready */
-#define UART_LSR_THRE 	0x20 	/* TX holding register empty */
+#define UART_LSR_BASE		0x14
+#define UART_LSR_DR 		0x01 /* Data ready */
+#define UART_LSR_THRE 		0x20 /* TX holding register empty */
 
 #define WDT_BASE		0x1c00a000
-#define WDT_MODE_KEY	0x22000000
+#define WDT_MODE_KEY		0x22000000
 #define WDT_MODE_EN		(1 << 0)
 
 #ifdef CONFIG_EARLYCON

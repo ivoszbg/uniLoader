@@ -2,6 +2,7 @@
 /*
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
+
 #include <board.h>
 #include <util.h>
 #include <stdint.h>
@@ -102,7 +103,7 @@ static void s2mps17_setup(void)
 
 	return;
 
- handle_err:
+handle_err:
 	printk(KERN_ERR, "s2mps17: err\n");
 	return;
 }
