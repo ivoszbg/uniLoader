@@ -25,26 +25,7 @@ void uart_puts(const char *s)
 }
 #endif
 
-void enable_fpu(void)
-{
-	unsigned long cpacr;
-	__asm__ volatile ("mrs %0, cpacr_el1" : "=r" (cpacr));
-	cpacr |= (3UL << 20);
-	__asm__ volatile ("msr cpacr_el1, %0" :: "r" (cpacr));
-}
-
-int virt_init(void)
-{
-	// TODO: We can implement a framebuffer with QEMU. This would however
-	// require more setup.
-	enable_fpu();
-	return 0;
-}
-
 struct board_data board_ops = {
 	.name = "qemu-virt",
-	.ops = {
-		.early_init = virt_init,
-	},
 	.quirks = 0
 };
