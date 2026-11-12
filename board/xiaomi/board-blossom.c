@@ -1,6 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
  * Copyright (c) 2026 Ryo "evilMyQueen" Yamada <evilMyQueen@mainlining.org>
+ *
+ * This is a generic uniLoader port for Xiaomi Blossom devices:
+ * Poco C3, C31
+ * Redmi 9A, 9I, 9AT, 10A, 9A Sport, 9I Sport, 9 Active, 9 India,
+ * 9C and 9C NFC
+ *
+ * Works with R vendor only.
  */
 
 #include <board.h>
@@ -9,13 +16,6 @@
 #include <drivers/framework.h>
 #include <lib/simplefb.h>
 #include <lib/debug.h>
-
-/* This is a generic uniLoader port for Xiaomi Blossom devices:
- * Poco C3, C31
- * Redmi 9A, 9I, 9AT, 10A, 9A Sport, 9I Sport, 9 Active, 9 India,
- * 9C and 9C NFC
- *
- * Works with R vendor only */
 
 #define UART_BASE 0x11002000
 #define UART_LSR_BASE	0x14

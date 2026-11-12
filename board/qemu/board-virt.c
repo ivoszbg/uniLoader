@@ -2,6 +2,7 @@
 /*
  * Copyright (c) 2025, Igor Belwon <igor.belwon@mentallysanemainliners.org>
  */
+
 #include <board.h>
 #include <drivers/framework.h>
 #include <lib/simplefb.h>

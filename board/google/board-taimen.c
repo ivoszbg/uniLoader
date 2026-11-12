@@ -2,6 +2,7 @@
 /*
  * Copyright (c) 2025, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
+
 #include <board.h>
 #include <string.h>
 #include <drivers/framework.h>

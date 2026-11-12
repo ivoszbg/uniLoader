@@ -10,12 +10,12 @@
 
 // Used on miui 12.5.8.0 firmware
 static struct video_info begonia_r_fb = {
-    .format = FB_FORMAT_ARGB8888,
-    .width = 1088,
-    .height = 2340,
-    .stride = 4,
-    .scale = 2,
-    .address = (void *)0x7d9b0000
+	.format = FB_FORMAT_ARGB8888,
+	.width = 1088,
+	.height = 2340,
+	.stride = 4,
+	.scale = 2,
+	.address = (void *)0x7d9b0000
 };
 
 static const struct device begonia_r_devices[] = {
@@ -23,10 +23,8 @@ static const struct device begonia_r_devices[] = {
 };
 
 struct board_data board_ops = {
-    .name = "xiaomi-begonia",
-    .ops = {
-    },
+	.name = "xiaomi-begonia",
 	.devices = begonia_r_devices,
 	.num_devices = ARRAY_SIZE(begonia_r_devices),
-    .quirks = 0
+	.quirks = 0
 };

@@ -16,35 +16,35 @@
 // Early initialization
 int p1ma40_init(void)
 {
-    unsigned long wdg_reg;
+	unsigned long wdg_reg;
 
-    // Disable watchdog
-    wdg_reg = readl((volatile unsigned int *) TOPRGU_BASE);
-    wdg_reg &= ~WDT_MODE_EN;
-    wdg_reg |= WDT_MODE_KEY;
-    writel(wdg_reg, (void *) TOPRGU_BASE);
+	// Disable watchdog
+	wdg_reg = readl((volatile unsigned int *) TOPRGU_BASE);
+	wdg_reg &= ~WDT_MODE_EN;
+	wdg_reg |= WDT_MODE_KEY;
+	writel(wdg_reg, (void *) TOPRGU_BASE);
 
-    return 0;
+	return 0;
 }
 
 static struct video_info p1ma40_fb = {
-    .format = FB_FORMAT_ABGR8888,
-    .width = 736,
-    .height = 1280,
-    .stride = 4,
-    .address = (void *)0xbf330000
+	.format = FB_FORMAT_ABGR8888,
+	.width = 736,
+	.height = 1280,
+	.stride = 4,
+	.address = (void *)0xbf330000
 };
 
 static const struct device p1ma40_devices[] = {
-    { "simplefb", &p1ma40_fb, "fb" },
+	{ "simplefb", &p1ma40_fb, "fb" },
 };
 
 struct board_data board_ops = {
-    .name = "lenovo-p1ma40",
-    .ops = {
-        .early_init = p1ma40_init,
-    },
-    .devices = p1ma40_devices,
-    .num_devices = ARRAY_SIZE(p1ma40_devices),
-    .quirks = 0
+	.name = "lenovo-p1ma40",
+	.ops = {
+		.early_init = p1ma40_init,
+	},
+	.devices = p1ma40_devices,
+	.num_devices = ARRAY_SIZE(p1ma40_devices),
+	.quirks = 0
 };

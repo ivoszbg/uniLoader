@@ -23,8 +23,6 @@ static const struct device spacewar_devices[] = {
 
 struct board_data board_ops = {
 	.name = "nothing-spacewar",
-	.ops = {
-	},
 	.devices = spacewar_devices,
 	.num_devices = ARRAY_SIZE(spacewar_devices),
 	.quirks = 0

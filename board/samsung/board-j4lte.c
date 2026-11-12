@@ -3,6 +3,7 @@
  * Copyright (c) 2023, predefine <predefine@yandex.ru>
  * Copyright (c) 2024, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
+
 #include <board.h>
 #include <util.h>
 #include <drivers/framework.h>

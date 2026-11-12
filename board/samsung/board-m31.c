@@ -2,6 +2,7 @@
 /*
  * Copyright (c) 2026, FelcoX <parbindarsingh@outlook.com>
  */
+
 #include <board.h>
 #include <util.h>
 #include <drivers/framework.h>

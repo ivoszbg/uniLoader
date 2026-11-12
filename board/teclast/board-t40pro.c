@@ -23,8 +23,6 @@ static const struct device t40pro_devices[] = {
 
 struct board_data board_ops = {
 	.name = "teclast-t40pro",
-	.ops = {
-	},
 	.devices = t40pro_devices,
 	.num_devices = ARRAY_SIZE(t40pro_devices),
 	.quirks = 0

@@ -24,8 +24,6 @@ static const struct device giulia_devices[] = {
 
 struct board_data board_ops = {
 	.name = "oneplus-giulia",
-	.ops = {
-	},
 	.devices = giulia_devices,
 	.num_devices = ARRAY_SIZE(giulia_devices),
 	.quirks = 0

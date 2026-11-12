@@ -22,8 +22,6 @@ static const struct device v36bml_devices[] = {
 
 struct board_data board_ops = {
 	.name = "htc-v36bml_dugl",
-	.ops = {
-	},
 	.devices = v36bml_devices,
 	.num_devices = ARRAY_SIZE(v36bml_devices),
 	.quirks = 0

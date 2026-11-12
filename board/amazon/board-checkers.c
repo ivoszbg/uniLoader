@@ -17,14 +17,12 @@ static struct video_info checkers_fb = {
 	.scale = 1,
 };
 
-
 static const struct device checkers_devices[] = {
 	{ "simplefb", &checkers_fb, "fb" },
 };
 
 struct board_data board_ops = {
 	.name = "amazon-checkers",
-	.ops = {},
 	.devices = checkers_devices,
 	.num_devices = ARRAY_SIZE(checkers_devices),
 	.quirks = 0,

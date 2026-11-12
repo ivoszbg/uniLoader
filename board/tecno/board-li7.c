@@ -23,8 +23,6 @@ static const struct device li7_devices[] = {
 
 struct board_data board_ops = {
 	.name = "tecno-li7",
-	.ops = {
-	},
 	.devices = li7_devices,
 	.num_devices = ARRAY_SIZE(li7_devices),
 	.quirks = 0

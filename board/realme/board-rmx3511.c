@@ -22,8 +22,6 @@ static const struct device rmx3511_devices[] = {
 
 struct board_data board_ops = {
 	.name = "realme-rmx3511",
-	.ops = {
-	},
 	.devices = rmx3511_devices,
 	.num_devices = ARRAY_SIZE(rmx3511_devices),
 	.quirks = 0

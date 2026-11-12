@@ -23,8 +23,6 @@ static const struct device gts8wifi_devices[] = {
 
 struct board_data board_ops = {
 	.name = "samsung-gts8wifi",
-	.ops = {
-	},
 	.devices = gts8wifi_devices,
 	.num_devices = ARRAY_SIZE(gts8wifi_devices),
 	.quirks = 0

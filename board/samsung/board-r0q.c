@@ -19,8 +19,6 @@ static const struct device r0q_devices[] = {
 
 struct board_data board_ops = {
 	.name = "samsung-r0q",
-	.ops = {
-	},
 	.devices = r0q_devices,
 	.num_devices = ARRAY_SIZE(r0q_devices),
 	.quirks = 0

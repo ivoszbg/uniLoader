@@ -23,8 +23,6 @@ static const struct device pine_devices[] = {
 
 struct board_data board_ops = {
 	.name = "zte-pine",
-	.ops = {
-	},
 	.devices = pine_devices,
 	.num_devices = ARRAY_SIZE(pine_devices),
 	.quirks = 0

@@ -23,8 +23,6 @@ static const struct device waffle_devices[] = {
 
 struct board_data board_ops = {
 	.name = "oneplus-waffle",
-	.ops = {
-	},
 	.devices = waffle_devices,
 	.num_devices = ARRAY_SIZE(waffle_devices),
 	.quirks = 0

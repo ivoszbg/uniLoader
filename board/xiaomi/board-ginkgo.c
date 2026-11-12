@@ -23,8 +23,6 @@ static const struct device ginkgo_devices[] = {
 
 struct board_data board_ops = {
 	.name = "xiaomi-ginkgo",
-	.ops = {
-	},
 	.devices = ginkgo_devices,
 	.num_devices = ARRAY_SIZE(ginkgo_devices),
 	.quirks = 0

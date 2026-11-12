@@ -2,6 +2,7 @@
 /*
  * Copyright (c) 2026, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
+
 #include <board.h>
 #include <util.h>
 #include <drivers/framework.h>
@@ -22,8 +23,6 @@ static const struct device tundra_devices[] = {
 
 struct board_data board_ops = {
 	.name = "motorola-tundra",
-	.ops = {
-	},
 	.devices = tundra_devices,
 	.num_devices = ARRAY_SIZE(tundra_devices),
 	.quirks = 0
