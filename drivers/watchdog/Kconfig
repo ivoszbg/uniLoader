@@ -22,4 +22,9 @@ if WATCHDOG
 		  Most aarch64 MediaTek platforms use this style of watchdog
 		  timer.
 
+	config WDT_SP805
+		bool "ARM SP805 watchdog driver"
+		default n
+		help
+		  ARM Primecell SP805 Watchdog timer.
 endif
