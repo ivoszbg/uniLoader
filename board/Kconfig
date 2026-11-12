@@ -151,16 +151,6 @@ menu "Device Support"
 		help
 		  Say Y if you want to include support for CMF Phone 1
 
-	config NOTHING_TETRIS_DISABLE_WDT
-		bool "Disable the watchdog timer on startup"
-		default y
-		depends on NOTHING_TETRIS
-		help
-		  Say Y if you want to disable the watchdog timer on startup
-		  on this board. While this is obviously useful for end-users,
-		  developers may want to leave this on to avoid holding down
-		  the power button every time.
-
 	config ONEPLUS_GIULIA
 		bool "Support for OnePlus 13R"
 		default n
