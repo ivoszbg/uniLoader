@@ -31,15 +31,6 @@ void agassi2_disable_wdt(void)
 	(void)*wdt_lock;
 }
 
-int agassi2_early_init(void)
-{
-	unsigned long cpacr;
-	__asm__ volatile ("mrs %0, cpacr_el1" : "=r" (cpacr));
-	cpacr |= (3UL << 20);
-	__asm__ volatile ("msr cpacr_el1, %0" :: "r" (cpacr));
-	return 0;
-}
-
 int agassi2_late_init(void)
 {
 #ifdef CONFIG_HUAWEI_AGASSI2_DISABLE_WDT
@@ -64,7 +55,6 @@ static const struct device agassi2_devices[] = {
 struct board_data board_ops = {
 	.name = "huawei-agassi2",
 	.ops = {
-		.early_init = agassi2_early_init,
 		.late_init = agassi2_late_init,
 	},
 	.devices = agassi2_devices,
