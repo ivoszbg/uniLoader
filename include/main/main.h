@@ -3,6 +3,8 @@
  * Copyright (c) 2022, Ivaylo Ivanov <ivo.ivanov.ivanov1@gmail.com>
  */
 
+extern void *board_dtb;
+
 #ifndef MAIN_H_   /* Include guard */
 #define MAIN_H_
 
